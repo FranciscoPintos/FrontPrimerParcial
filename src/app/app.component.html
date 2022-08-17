@@ -1,12 +1,16 @@
-<h1 style="text-align:center">
-  Bienvenido a {{ title }}
-</h1>
+<mat-toolbar>
+  <h1 style="text-align:center">
+    <span>  Bienvenido a {{ title }}</span>
+  </h1>
+</mat-toolbar>
+
 
 <div style="text-align:center">
   <a routerLink="/pais">Lista de paises</a>
   <br/>
   <a routerLink="/nuevopais">Agregar pais</a>
   <div>
+    <mat-slider min="1" max="100" step="1" value="50"></mat-slider>
     <router-outlet></router-outlet>
   </div>
 </div>
