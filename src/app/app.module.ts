@@ -3,10 +3,10 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { PaisComponent } from './pais/pais.component';
+import { PaisComponent } from './components/pais/pais.component';
 import {HttpClientModule} from "@angular/common/http";
 import {ServicepaisService} from "./service/servicepais.service";
-import { PaisAgregarComponent } from './pais/pais-agregar/pais-agregar.component';
+import { PaisAgregarComponent } from './components/pais/pais-agregar/pais-agregar.component';
 import {FormsModule} from "@angular/forms";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatSliderModule} from "@angular/material/slider";

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {Pais} from "../model/pais";
-import {ServicepaisService} from "../service/servicepais.service";
+import {Pais} from "../../models/pais";
+import {ServicepaisService} from "../../service/servicepais.service";
 
 @Component({
   selector: 'app-pais',
