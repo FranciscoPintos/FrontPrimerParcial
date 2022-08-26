@@ -15,7 +15,12 @@ export class LoginService {
   }
 
   findPersona(usuario: string): Observable<Usuario[]> {
-    return this.httpClient.get<any>('/stock-nutrinatalia/persona')
+    return this.httpClient.get<any>('/stock-nutrinatalia/persona', {
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+      }
+    })
       .pipe(map(data => data['lista']))
   }
 
