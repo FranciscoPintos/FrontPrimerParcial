@@ -1,0 +1,70 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      <h1>Filtros</h1>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="myForm">
+      <section>
+        <mat-form-field appearance="fill">
+          <mat-label>Seleccionar una fecha de inicio</mat-label>
+          <input matInput [matDatepicker]="from" />
+          <mat-hint>DD/MM/AAAA</mat-hint>
+          <mat-datepicker-toggle matSuffix [for]="from"></mat-datepicker-toggle>
+          <mat-datepicker #from></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Seleccionar una fecha final</mat-label>
+          <input formControlName="cliente" matInput [matDatepicker]="to" />
+          <mat-hint>DD/MM/AAAA</mat-hint>
+          <mat-datepicker-toggle matSuffix [for]="to"></mat-datepicker-toggle>
+          <mat-datepicker #to></mat-datepicker>
+        </mat-form-field>
+      </section>
+      <section>
+        <mat-form-field appearance="fill">
+          <mat-label>Empleado</mat-label>
+          <mat-select formControlName="empleado">
+            <mat-option value="empleado1">Empleado 1</mat-option>
+            <mat-option value="empleado2">Empleado 2</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Cliente</mat-label>
+          <mat-select formControlName="cliente">
+            <mat-option value="cliente1">Cliente 1</mat-option>
+            <mat-option value="cliente2">Cliente 2</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </section>
+      <section>
+        <mat-form-field appearance="fill">
+          <mat-label>Categoria</mat-label>
+          <mat-select formControlName="categoria">
+            <mat-option
+              *ngFor="let item of categorias"
+              [value]="item.idCategoria"
+              >{{ item.descripcion }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Subcategoria</mat-label>
+          <mat-select formControlName="subcategoria">
+            <mat-option
+              *ngFor="let item of subCategorias"
+              [value]="item.idTipoProducto"
+              >{{ item.descripcion }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+      </section>
+      <section nfxLayout="row" fxLayoutAlign="center center">
+        <button (click)="buscar()" mat-raised-button color="primary">
+          Buscar
+        </button>
+      </section>
+    </form>
+  </mat-card-content>
+</mat-card>
