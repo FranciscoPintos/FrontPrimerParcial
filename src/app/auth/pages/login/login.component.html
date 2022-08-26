@@ -6,7 +6,7 @@
     <mat-card-subtitle>Iniciar Sesion</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content  >
-    <form (submit)="login($event)" [formGroup]="myForm">
+    <form [formGroup]="myForm">
       <section >
         <mat-form-field
           style="width: 100%"
@@ -39,7 +39,7 @@
       </section>
 
       <section nfxLayout="row" fxLayoutAlign="center center">
-        <button mat-raised-button color="primary">Iniciar Sesion</button>
+        <button (click)="login()" mat-raised-button color="primary">Iniciar Sesion</button>
       </section>
 
     </form>
