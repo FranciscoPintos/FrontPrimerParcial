@@ -82,7 +82,17 @@ export class LoginComponent implements OnInit {
         })
       }
 
-    });
+    },
+      error => {
+        console.log(error);
+        Swal.fire({
+          title: 'Error Comunicandose con el Servidor',
+          text: error.message,
+          icon: 'error',
+          confirmButtonText: 'Cool'
+        })
+      }
+    );
   }
 
 }
