@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
 
   }
 
-  login(event: any) {
+  login() {
     const myUserName = this.myForm.value.userName;
     const myPassword = this.myForm.value.password;
     console.log(this.myForm.value);
