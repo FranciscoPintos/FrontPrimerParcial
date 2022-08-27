@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { map, Observable } from 'rxjs';
 import { Categoria } from '../../interfaces/categoria.interface';
 import { SubCategoria } from '../../interfaces/subcategoria.interface';
 
@@ -12,10 +13,10 @@ import { CategoriaService } from '../../services/categoria.service';
 })
 export class ListadoFichaClinicaPageComponent implements OnInit {
   myForm!: FormGroup;
-  categorias: Categoria[] = [];
-  subCategorias: SubCategoria[] = []
-
+  categorias$!: Observable<Categoria[]>;
+  subCategorias$!: Observable<SubCategoria[]>;
   constructor(private fb: FormBuilder, private categoriaService: CategoriaService) { }
+
 
   ngOnInit(): void {
     this.myForm = this.fb.group({
@@ -23,24 +24,19 @@ export class ListadoFichaClinicaPageComponent implements OnInit {
       toDate: [Date.now()],
       empleado: [''],
       cliente: [''],
-      categoria: [''],
+      categoria: [1],
       subcategoria: [''],
     });
-    this.categoriaService.getCategorias().subscribe(data => {
-      this.categorias = data;
-      this.myForm.patchValue({
-        categoria: this.categorias[0].descripcion
-      });
-    }
-    );
+    this.categorias$ = this.categoriaService.getCategorias();
+    this.subCategorias$ = this.categoriaService.getSubCategorias();
 
-    this.categoriaService.getSubCategorias().subscribe(data => {
-      this.subCategorias = data;
-      this.myForm.patchValue({
-        subcategoria: this.subCategorias[0].descripcion
-      });
-    }
-    );
+    this.myForm.get('categoria')!.valueChanges.subscribe(idCategoria => {
+      console.log(idCategoria);
+      this.subCategorias$ = this.categoriaService.getSubCategoriasByCategoriaId(idCategoria);
+    });
+
+
+    this.myForm.valueChanges.subscribe(console.log);
   }
 
   buscar() {
