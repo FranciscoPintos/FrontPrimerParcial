@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PaisComponent } from './components/pais/pais.component';
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { ServicepaisService } from "./service/servicepais.service";
 import { PaisAgregarComponent } from './components/pais/pais-agregar/pais-agregar.component';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
@@ -15,11 +15,8 @@ import { MatIconModule } from "@angular/material/icon";
 import { LoginComponent } from './components/login/login.component';
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatCardModule } from "@angular/material/card";
-import { FichaClinicaModule } from './ficha-clinica/ficha-clinica.module';
-import { MatNativeDateModule } from '@angular/material/core';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { MatSelectModule } from '@angular/material/select';
+import { AuthModule } from './auth/auth.module';
+import { BaseUrlInterceptor } from './interceptors/base-url.interceptor';
 
 @NgModule({
   declarations: [
@@ -37,10 +34,11 @@ import { MatSelectModule } from '@angular/material/select';
     MatNativeDateModule,
     MatSelectModule,
     FormsModule,
-    ReactiveFormsModule,
+    AuthModule,
+    FlexLayoutModule,,
 
   ],
-  providers: [ServicepaisService,],
-  bootstrap: [AppComponent]
+  providers: [ServicepaisService, { provide: HTTP_INTERCEPTORS, useClass: BaseUrlInterceptor, multi: true }],
+  bootstrap: [AppComponent],
 })
 export class AppModule { }
