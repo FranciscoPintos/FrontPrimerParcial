@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { map, Observable } from 'rxjs';
+import { count, map, Observable } from 'rxjs';
+import Swal from 'sweetalert2';
 import { Categoria } from '../../interfaces/categoria.interface';
 import { SubCategoria } from '../../interfaces/subcategoria.interface';
 
@@ -25,10 +26,10 @@ export class ListadoFichaClinicaPageComponent implements OnInit {
       empleado: [''],
       cliente: [''],
       categoria: [1],
-      subcategoria: [''],
+      subcategoria: [],
     });
     this.categorias$ = this.categoriaService.getCategorias();
-    this.subCategorias$ = this.categoriaService.getSubCategorias();
+    this.subCategorias$ = this.categoriaService.getSubCategoriasByCategoriaId(1);
 
     this.myForm.get('categoria')!.valueChanges.subscribe(idCategoria => {
       console.log(idCategoria);
