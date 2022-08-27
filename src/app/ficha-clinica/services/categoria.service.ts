@@ -17,6 +17,11 @@ export class CategoriaService {
   getSubCategorias() {
     return this.httpClient.get(`${base_url}/stock-nutrinatalia/tipoProducto`).pipe(map((data: any) => data['lista']));
   }
+  getSubCategoriasByCategoriaId(idCategoria: number) {
+    const url = `${base_url}/stock-nutrinatalia/tipoProducto?ejemplo={"idCategoria":{"idCategoria": ${idCategoria}}}`;
+    return this.httpClient.get(encodeURI(url))
+      .pipe(map((data: any) => data['lista']));
+  }
 
 
 }
