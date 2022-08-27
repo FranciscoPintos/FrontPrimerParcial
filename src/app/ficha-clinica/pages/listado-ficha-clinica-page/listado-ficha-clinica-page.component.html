@@ -9,19 +9,21 @@
       <section>
         <mat-form-field appearance="fill">
           <mat-label>Seleccionar una fecha de inicio</mat-label>
-          <input matInput [matDatepicker]="from" />
+          <input matInput [matDatepicker]="fromDate" formControlName="fromDate" />
           <mat-hint>DD/MM/AAAA</mat-hint>
-          <mat-datepicker-toggle matSuffix [for]="from"></mat-datepicker-toggle>
-          <mat-datepicker #from></mat-datepicker>
+          <mat-datepicker-toggle matSuffix [for]="fromDate"></mat-datepicker-toggle>
+          <mat-datepicker #fromDate></mat-datepicker>
         </mat-form-field>
+
         <mat-form-field appearance="fill">
           <mat-label>Seleccionar una fecha final</mat-label>
-          <input formControlName="cliente" matInput [matDatepicker]="to" />
+          <input formControlName="toDate" matInput [matDatepicker]="toDate" />
           <mat-hint>DD/MM/AAAA</mat-hint>
-          <mat-datepicker-toggle matSuffix [for]="to"></mat-datepicker-toggle>
-          <mat-datepicker #to></mat-datepicker>
+          <mat-datepicker-toggle matSuffix [for]="toDate"></mat-datepicker-toggle>
+          <mat-datepicker #toDate></mat-datepicker>
         </mat-form-field>
       </section>
+
       <section>
         <mat-form-field appearance="fill">
           <mat-label>Empleado</mat-label>
@@ -30,6 +32,7 @@
             <mat-option value="empleado2">Empleado 2</mat-option>
           </mat-select>
         </mat-form-field>
+
         <mat-form-field appearance="fill">
           <mat-label>Cliente</mat-label>
           <mat-select formControlName="cliente">
@@ -43,7 +46,7 @@
           <mat-label>Categoria</mat-label>
           <mat-select formControlName="categoria">
             <mat-option
-              *ngFor="let item of categorias"
+              *ngFor="let item of categorias$ | async; let i = index"
               [value]="item.idCategoria"
               >{{ item.descripcion }}</mat-option
             >
@@ -53,8 +56,9 @@
           <mat-label>Subcategoria</mat-label>
           <mat-select formControlName="subcategoria">
             <mat-option
-              *ngFor="let item of subCategorias"
+              *ngFor="let item of subCategorias$ | async; let i = index"
               [value]="item.idTipoProducto"
+
               >{{ item.descripcion }}</mat-option
             >
           </mat-select>
