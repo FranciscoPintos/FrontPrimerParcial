@@ -1,0 +1,33 @@
+export interface Usuario {
+  idPersona: number;
+  nombre: string;
+  apellido: string;
+  email: string;
+  telefono: string;
+  seguroMedico: any;
+  seguroMedicoNumero: any;
+  ruc: string;
+  cedula: string;
+  tipoPersona: string;
+  usuarioLogin: any;
+  idLocalDefecto: any;
+  flagVendedor: string;
+  flagTaxfree: any;
+  flagExcepcionChequeoVenta: any;
+  observacion: any;
+  direccion: any;
+  idCiudad: any;
+  tipoCliente: string;
+  fechaHoraAprobContrato: any;
+  soloUsuariosDelSistema: any;
+  soloPersonasTaxfree: any;
+  nombreCompleto: string;
+  limiteCredito: number;
+  fechaNacimiento: Date;
+  soloProximosCumpleanhos: any;
+  todosLosCampos: any;
+  incluirLimiteDeCredito: any;
+  deuda: any;
+  saldo: any;
+  creditos: any;
+}
