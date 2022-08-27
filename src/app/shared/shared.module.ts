@@ -7,6 +7,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 const MATERIAL_MODULES = [
   MatCardModule,
@@ -14,7 +15,11 @@ const MATERIAL_MODULES = [
   MatDatepickerModule,
   MatNativeDateModule,
   MatSelectModule,
-  MatButtonModule
+  MatButtonModule,
+  MatNativeDateModule,
+  MatSelectModule,
+  MatInputModule,
+
 ];
 
 const FORM_MODULES = [
@@ -27,11 +32,13 @@ const FORM_MODULES = [
   imports: [
     CommonModule,
     ...FORM_MODULES,
-    ...MATERIAL_MODULES
+    ...MATERIAL_MODULES,
+    FlexLayoutModule
   ],
   exports: [
     ...FORM_MODULES,
-    ...MATERIAL_MODULES
+    ...MATERIAL_MODULES,
+    FlexLayoutModule
   ]
 })
 export class SharedModule { }

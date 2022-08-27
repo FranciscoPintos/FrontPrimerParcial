@@ -7,16 +7,17 @@ import { PaisComponent } from './components/pais/pais.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { ServicepaisService } from "./service/servicepais.service";
 import { PaisAgregarComponent } from './components/pais/pais-agregar/pais-agregar.component';
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { FormsModule } from "@angular/forms";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatSliderModule } from "@angular/material/slider";
-import { MatToolbarModule } from "@angular/material/toolbar";
-import { MatIconModule } from "@angular/material/icon";
 import { LoginComponent } from './components/login/login.component';
-import { MatFormFieldModule } from "@angular/material/form-field";
-import { MatCardModule } from "@angular/material/card";
 import { AuthModule } from './auth/auth.module';
 import { BaseUrlInterceptor } from './interceptors/base-url.interceptor';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
+import { SharedModule } from './shared/shared.module';
+import { MatInputModule } from '@angular/material/input';
+import { FichaClinicaModule } from './ficha-clinica/ficha-clinica.module';
 
 @NgModule({
   declarations: [
@@ -30,12 +31,11 @@ import { BaseUrlInterceptor } from './interceptors/base-url.interceptor';
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatSelectModule,
     FormsModule,
+
+    //Modulos Propios
     AuthModule,
-    FlexLayoutModule,,
+    FichaClinicaModule
 
   ],
   providers: [ServicepaisService, { provide: HTTP_INTERCEPTORS, useClass: BaseUrlInterceptor, multi: true }],
