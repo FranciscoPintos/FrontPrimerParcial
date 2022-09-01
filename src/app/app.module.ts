@@ -9,9 +9,9 @@ import { PaisAgregarComponent } from './shared/components/pais/pais-agregar/pais
 import { FormsModule } from "@angular/forms";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './shared/components/login/login.component';
-import { AuthModule } from './auth/auth.module';
+import { AuthModule } from './features/auth/auth.module';
 import { BaseUrlInterceptor } from './shared/interceptors/base-url.interceptor';
-import { FichaClinicaModule } from './ficha-clinica/ficha-clinica.module';
+import { FichaClinicaModule } from './features/ficha-clinica/ficha-clinica.module';
 import { FiltroComponent } from './shared/components/filtro/filtro.component';
 
 @NgModule({

@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { PaisComponent } from "./shared/components/pais/pais.component";
 import { PaisAgregarComponent } from "./shared/components/pais/pais-agregar/pais-agregar.component";
 import { LoginComponent } from "./shared/components/login/login.component";
-import { ListadoFichaClinicaPageComponent } from './ficha-clinica/pages/listado-ficha-clinica-page/listado-ficha-clinica-page.component';
+import { ListadoFichaClinicaPageComponent } from './features/ficha-clinica/pages/listado-ficha-clinica-page/listado-ficha-clinica-page.component';
 
 
 const routes: Routes = [
