@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
-import { base_url } from 'src/app/base_url';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +16,7 @@ export class CategoriaService {
   getSubCategorias() {
     return this.httpClient.get(`/stock-nutrinatalia/tipoProducto`).pipe(map((data: any) => data['lista']));
   }
+
   getSubCategoriasByCategoriaId(idCategoria: number) {
     const url = `/stock-nutrinatalia/tipoProducto?ejemplo={"idCategoria":{"idCategoria": ${idCategoria}}}`;
     return this.httpClient.get(encodeURI(url))

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {Pais} from "../../models/pais";
-import {ServicepaisService} from "../../service/servicepais.service";
+import {Pais} from "../../../models/pais";
+import {ServicepaisService} from "../../../service/servicepais.service";
 
 @Component({
   selector: 'app-pais',
@@ -15,10 +15,10 @@ export class PaisComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.servicioPais.getPaises().subscribe(
-      entity => this.paises = entity.lista,
-      error =>console.log('no se pudieron conseguir los paises')
-    );
+    // this.servicioPais.getPaises().subscribe(
+    //   entity => this.paises = entity.lista,
+    //   error =>console.log('no se pudieron conseguir los paises')
+    // );
 
   }
 

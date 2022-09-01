@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup, NgForm} from "@angular/forms";
-import {Persona} from "../../models/persona";
+import {Persona} from "../../../models/persona";
 
 @Component({
   selector: 'app-login',

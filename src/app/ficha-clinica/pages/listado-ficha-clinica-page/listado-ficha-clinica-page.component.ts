@@ -4,12 +4,12 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { count, map, Observable } from 'rxjs';
 import { Ficha } from 'src/app/models/ficha';
+import { CategoriaService } from 'src/app/services/categoria.service';
 import Swal from 'sweetalert2';
 import { Categoria } from '../../interfaces/categoria.interface';
 import { FichaClinica } from '../../interfaces/ficha_clinica.inteface';
 import { SubCategoria } from '../../interfaces/subcategoria.interface';
 
-import { CategoriaService } from '../../services/categoria.service';
 
 
 
