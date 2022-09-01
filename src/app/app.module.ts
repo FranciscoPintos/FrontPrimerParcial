@@ -18,13 +18,15 @@ import { MatSelectModule } from '@angular/material/select';
 import { SharedModule } from './shared/shared.module';
 import { MatInputModule } from '@angular/material/input';
 import { FichaClinicaModule } from './ficha-clinica/ficha-clinica.module';
+import { FiltroComponent } from './components/filtro/filtro.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PaisComponent,
     PaisAgregarComponent,
-    LoginComponent
+    LoginComponent,
+    FiltroComponent
   ],
   imports: [
     BrowserModule,

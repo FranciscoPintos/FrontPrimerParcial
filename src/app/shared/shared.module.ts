@@ -6,8 +6,14 @@ import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 const MATERIAL_MODULES = [
   MatCardModule,
@@ -19,7 +25,12 @@ const MATERIAL_MODULES = [
   MatNativeDateModule,
   MatSelectModule,
   MatInputModule,
-
+  MatToolbarModule,
+  MatIconModule,
+  MatSidenavModule,
+  MatListModule,
+  MatTableModule,
+  MatPaginatorModule
 ];
 
 const FORM_MODULES = [
