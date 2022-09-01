@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {Pais} from "../../../../models/pais";
-import {ServicepaisService} from "../../../../service/servicepais.service";
+import {Pais} from "../../../models/pais";
+import {ServicepaisService} from "../../../services/servicepais.service";
 
 @Component({
   selector: 'app-pais-agregar',
