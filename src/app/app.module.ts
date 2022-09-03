@@ -17,6 +17,13 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSliderModule } from "@angular/material/slider";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatCardModule } from "@angular/material/card";
+import { CrearModificarServicioComponent } from './crear-modificar-servicio/crear-modificar-servicio.component';
+import { MatDatepickerModule } from "@angular/material/datepicker";
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -24,7 +31,8 @@ import { MatIconModule } from '@angular/material/icon';
     PaisComponent,
     PaisAgregarComponent,
     LoginComponent,
-    FiltroComponent
+    FiltroComponent,
+    CrearModificarServicioComponent
   ],
   imports: [
     BrowserModule,
@@ -34,6 +42,15 @@ import { MatIconModule } from '@angular/material/icon';
     FormsModule,
 
     //Modulos Propios
+    MatSliderModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatFormFieldModule,
+    MatCardModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatInputModule,
+    MatFormFieldModule,
     AuthModule,
     FichaClinicaModule,
     MatSidenavModule,
