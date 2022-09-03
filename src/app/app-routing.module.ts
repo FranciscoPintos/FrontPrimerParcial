@@ -6,6 +6,7 @@ import { PaisAgregarComponent } from "./shared/components/pais/pais-agregar/pais
 import { ListadoFichaClinicaPageComponent } from './features/ficha-clinica/pages/listado-ficha-clinica-page/listado-ficha-clinica-page.component';
 import { LoginComponent } from './features/auth/pages/login/login.component';
 import { CategoriaPageComponent } from './shared/pages/categoria-page/categoria-page.component';
+import { SubCategoriaPageComponent } from './shared/pages/sub-categoria-page/sub-categoria-page.component';
 
 
 const routes: Routes = [
@@ -28,6 +29,10 @@ const routes: Routes = [
   {
     path: 'categorias',
     component: CategoriaPageComponent
+  },
+  {
+    path: 'subcategorias',
+    component: SubCategoriaPageComponent
   },
 
 ];

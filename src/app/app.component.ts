@@ -28,6 +28,11 @@ export class AppComponent {
       title: 'Categorias'
     },
     {
+      icon: 'home',
+      route: '/subcategorias',
+      title: 'SubCategorias'
+    },
+    {
       icon: 'logout',
       route: '/login',
       title: 'Cerrar Sesion'
