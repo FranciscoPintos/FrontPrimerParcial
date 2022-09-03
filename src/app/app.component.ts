@@ -23,6 +23,11 @@ export class AppComponent {
       title: 'Fichas de Clinica'
     },
     {
+      icon: 'home',
+      route: '/categorias',
+      title: 'Categorias'
+    },
+    {
       icon: 'logout',
       route: '/login',
       title: 'Cerrar Sesion'

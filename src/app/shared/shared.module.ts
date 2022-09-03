@@ -17,6 +17,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { AddDialogComponent } from './components/add-dialog/add-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { EditDialogComponent } from './components/edit-dialog/edit-dialog.component';
+import { CategoriaPageComponent } from './pages/categoria-page/categoria-page.component';
 
 const MATERIAL_MODULES = [
   MatCardModule,
@@ -45,7 +46,8 @@ const FORM_MODULES = [
 @NgModule({
   declarations: [
     AddDialogComponent,
-    EditDialogComponent
+    EditDialogComponent,
+    CategoriaPageComponent
   ],
   imports: [
     CommonModule,
