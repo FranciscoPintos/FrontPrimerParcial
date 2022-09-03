@@ -12,18 +12,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSliderModule } from "@angular/material/slider";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatIconModule } from "@angular/material/icon";
-import { LoginComponent } from './components/login/login.component';
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatCardModule } from "@angular/material/card";
 import { AuthModule } from './auth/auth.module';
 import { BaseUrlInterceptor } from './interceptors/base-url.interceptor';
+import {ReservaModule} from "./reserva/reserva.module";
 
 @NgModule({
   declarations: [
     AppComponent,
     PaisComponent,
     PaisAgregarComponent,
-    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -38,6 +37,7 @@ import { BaseUrlInterceptor } from './interceptors/base-url.interceptor';
     MatCardModule,
     AuthModule,
     FlexLayoutModule,
+    ReservaModule,
   ],
   providers: [ServicepaisService, { provide: HTTP_INTERCEPTORS, useClass: BaseUrlInterceptor, multi: true }],
   bootstrap: [AppComponent],

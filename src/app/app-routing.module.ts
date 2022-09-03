@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { PaisComponent } from "./components/pais/pais.component";
 import { PaisAgregarComponent } from "./components/pais/pais-agregar/pais-agregar.component";
 import { LoginComponent } from './auth/pages/login/login.component';
-
+import {ReservasComponent} from "./reserva/pages/reservas/reservas.component";
 
 
 const routes: Routes = [
@@ -19,6 +19,10 @@ const routes: Routes = [
     path: 'login',
     component: LoginComponent
   },
+  {
+    path:'reserva',
+    component: ReservasComponent
+  }
 
 
 ];
