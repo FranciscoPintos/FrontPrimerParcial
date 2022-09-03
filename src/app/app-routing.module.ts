@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { PaisComponent } from "./components/pais/pais.component";
 import { PaisAgregarComponent } from "./components/pais/pais-agregar/pais-agregar.component";
 import { LoginComponent } from './auth/pages/login/login.component';
+import { CrearModificarServicioComponent } from './crear-modificar-servicio/crear-modificar-servicio.component';
 
 
 
@@ -19,8 +20,10 @@ const routes: Routes = [
     path: 'login',
     component: LoginComponent
   },
-
-
+  {
+    path: 'modservicio',
+    component: CrearModificarServicioComponent
+  },
 ];
 
 

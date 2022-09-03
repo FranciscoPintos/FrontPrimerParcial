@@ -17,13 +17,18 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatCardModule } from "@angular/material/card";
 import { AuthModule } from './auth/auth.module';
 import { BaseUrlInterceptor } from './interceptors/base-url.interceptor';
+import { CrearModificarServicioComponent } from './crear-modificar-servicio/crear-modificar-servicio.component';
+import { MatDatepickerModule } from "@angular/material/datepicker";
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
     AppComponent,
     PaisComponent,
     PaisAgregarComponent,
-    LoginComponent
+    LoginComponent,
+    CrearModificarServicioComponent
   ],
   imports: [
     BrowserModule,
@@ -36,6 +41,10 @@ import { BaseUrlInterceptor } from './interceptors/base-url.interceptor';
     MatIconModule,
     MatFormFieldModule,
     MatCardModule,
+	MatDatepickerModule,
+	MatNativeDateModule,
+	MatInputModule,
+	MatFormFieldModule,
     AuthModule,
     FlexLayoutModule,
   ],
