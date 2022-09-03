@@ -1,0 +1,70 @@
+<h1 mat-dialog-title>Agregar Ficha Clinica</h1>
+<div mat-dialog-content  class="mat-typography">
+  <p>Ingrese los datos</p>
+  <form [formGroup]="myForm">
+    <mat-form-field ngDefaultControl formControlName="motivoConsulta" appearance="fill">
+      <mat-label>Cual es el motivoConsulta de la consulta?</mat-label>
+      <input matInput />
+    </mat-form-field>
+    <mat-form-field ngDefaultControl formControlName="diagnostico" appearance="fill">
+      <mat-label>Cual es el diagnostico?</mat-label>
+      <input matInput />
+    </mat-form-field>
+    <mat-form-field ngDefaultControl formControlName="observacion" appearance="fill">
+      <mat-label>Cual es la observacion?</mat-label>
+      <input matInput />
+    </mat-form-field>
+    <section>
+      <mat-form-field style="width: 100%" appearance="fill">
+        <mat-label>Empleado</mat-label>
+        <mat-select formControlName="idEmpleado">
+          <mat-option
+            *ngFor="let item of usuarios$ | async; let i = index"
+            [value]="item.idPersona"
+          >
+            {{ item.nombre }} {{ item.apellido }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field style="width: 100%" appearance="fill">
+        <mat-label>Cliente</mat-label>
+        <mat-select formControlName="idCliente">
+          <mat-option
+            *ngFor="let item of usuarios$ | async; let i = index"
+            [value]="item.idPersona"
+          >
+            {{ item.nombre }} {{ item.apellido }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </section>
+
+    <section>
+      <mat-form-field style="width: 100%" appearance="fill">
+        <mat-label>Categoria</mat-label>
+        <mat-select formControlName="categoria">
+          <mat-option
+            *ngFor="let item of categorias$ | async; let i = index"
+            [value]="item.idCategoria"
+            >{{ item.descripcion }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field style="width: 100%" appearance="fill">
+        <mat-label>Subcategoria</mat-label>
+        <mat-select formControlName="subcategoria">
+          <mat-option
+            *ngFor="let item of subCategorias$ | async; let i = index"
+            [value]="item.idTipoProducto"
+            >{{ item.descripcion }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+    </section>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancelar</button>
+  <button mat-button (click)="addFichaClinica()" cdkFocusInitial>Agregar</button>
+</div>

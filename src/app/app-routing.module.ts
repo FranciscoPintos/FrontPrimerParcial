@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { PaisComponent } from "./components/pais/pais.component";
-import { PaisAgregarComponent } from "./components/pais/pais-agregar/pais-agregar.component";
-import { LoginComponent } from './auth/pages/login/login.component';
+import { PaisComponent } from "./shared/components/pais/pais.component";
+import { PaisAgregarComponent } from "./shared/components/pais/pais-agregar/pais-agregar.component";
+import { ListadoFichaClinicaPageComponent } from './features/ficha-clinica/pages/listado-ficha-clinica-page/listado-ficha-clinica-page.component';
+import { LoginComponent } from './features/auth/pages/login/login.component';
+import { CategoriaPageComponent } from './shared/pages/categoria-page/categoria-page.component';
+import { SubCategoriaPageComponent } from './shared/pages/sub-categoria-page/sub-categoria-page.component';
 import { CrearModificarServicioComponent } from './crear-modificar-servicio/crear-modificar-servicio.component';
-
-
 
 const routes: Routes = [
   {
@@ -21,6 +22,17 @@ const routes: Routes = [
     component: LoginComponent
   },
   {
+    path: 'ficha_clinica',
+    component: ListadoFichaClinicaPageComponent
+  },
+  {
+    path: 'categorias',
+    component: CategoriaPageComponent
+  },
+  {
+    path: 'subcategorias',
+    component: SubCategoriaPageComponent
+  },
     path: 'modservicio',
     component: CrearModificarServicioComponent
   },

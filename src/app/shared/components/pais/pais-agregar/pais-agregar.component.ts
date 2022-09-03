@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Pais} from "../../../models/pais";
-import {ServicepaisService} from "../../../service/servicepais.service";
+import {ServicepaisService} from "../../../services/servicepais.service";
 
 @Component({
   selector: 'app-pais-agregar',
@@ -15,12 +15,12 @@ export class PaisAgregarComponent implements OnInit {
   ngOnInit(): void {
   }
   guardar(): void{
-    this.servicioPais.agregarPais(this.pais).subscribe(
-      () => {
-        this.mensaje='Agregado exitosamente'
-      },
-      error => console.log("error: "+error)
-    );
+    // this.servicioPais.agregarPais(this.pais).subscribe(
+    //   () => {
+    //     this.mensaje='Agregado exitosamente'
+    //   },
+    //   error => console.log("error: "+error)
+    // );
   }
 
 }

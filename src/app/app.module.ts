@@ -1,22 +1,25 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { PaisComponent } from './components/pais/pais.component';
+import { PaisComponent } from './shared/components/pais/pais.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
-import { ServicepaisService } from "./service/servicepais.service";
-import { PaisAgregarComponent } from './components/pais/pais-agregar/pais-agregar.component';
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { ServicepaisService } from "./shared/services/servicepais.service";
+import { PaisAgregarComponent } from './shared/components/pais/pais-agregar/pais-agregar.component';
+import { FormsModule } from "@angular/forms";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LoginComponent } from './shared/components/login/login.component';
+import { AuthModule } from './features/auth/auth.module';
+import { BaseUrlInterceptor } from './shared/interceptors/base-url.interceptor';
+import { FichaClinicaModule } from './features/ficha-clinica/ficha-clinica.module';
+import { FiltroComponent } from './shared/components/filtro/filtro.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatListModule } from '@angular/material/list';
+import { MatIconModule } from '@angular/material/icon';
 import { MatSliderModule } from "@angular/material/slider";
-import { MatToolbarModule } from "@angular/material/toolbar";
-import { MatIconModule } from "@angular/material/icon";
-import { LoginComponent } from './components/login/login.component';
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatCardModule } from "@angular/material/card";
-import { AuthModule } from './auth/auth.module';
-import { BaseUrlInterceptor } from './interceptors/base-url.interceptor';
 import { CrearModificarServicioComponent } from './crear-modificar-servicio/crear-modificar-servicio.component';
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatNativeDateModule } from '@angular/material/core';
@@ -28,25 +31,35 @@ import { MatInputModule } from '@angular/material/input';
     PaisComponent,
     PaisAgregarComponent,
     LoginComponent,
+    FiltroComponent,
     CrearModificarServicioComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule,
     BrowserAnimationsModule,
+    FormsModule,
+
+    //Modulos Propios
     MatSliderModule,
     MatToolbarModule,
     MatIconModule,
     MatFormFieldModule,
     MatCardModule,
-	MatDatepickerModule,
-	MatNativeDateModule,
-	MatInputModule,
-	MatFormFieldModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatInputModule,
+    MatFormFieldModule,
     AuthModule,
-    FlexLayoutModule,
+    FichaClinicaModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatListModule,
+    MatIconModule
+
+
+
   ],
   providers: [ServicepaisService, { provide: HTTP_INTERCEPTORS, useClass: BaseUrlInterceptor, multi: true }],
   bootstrap: [AppComponent],
