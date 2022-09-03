@@ -33,6 +33,7 @@ const routes: Routes = [
     path: 'subcategorias',
     component: SubCategoriaPageComponent
   },
+  {
     path: 'modservicio',
     component: CrearModificarServicioComponent
   },
