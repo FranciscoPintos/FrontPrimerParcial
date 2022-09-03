@@ -1,11 +1,14 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Observable } from 'rxjs';
 import { Usuario } from 'src/app/features/auth/interfaces/usuario';
 import { LoginService } from 'src/app/features/auth/services/login.service';
+import { AddDialogComponent } from 'src/app/shared/components/add-dialog/add-dialog.component';
+import { EditDialogComponent } from 'src/app/shared/components/edit-dialog/edit-dialog.component';
 import { CategoriaService } from 'src/app/shared/services/categoria.service';
 import { Categoria } from '../../interfaces/categoria.interface';
 import { FichaClinica } from '../../interfaces/ficha_clinica.inteface';
@@ -33,6 +36,7 @@ export class ListadoFichaClinicaPageComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
     private categoriaService: CategoriaService,
+    public dialog: MatDialog,
     private fichaClinicasService: FichaClinicaService,
     private userService: LoginService) { }
 
@@ -96,6 +100,38 @@ export class ListadoFichaClinicaPageComponent implements OnInit {
 
   reset() {
     this.myForm.reset();
+  }
+
+  openDialog(isEdit: boolean, ficha_clinica?: any): void {
+    if (!isEdit) {
+      const dialogRef = this.dialog.open(AddDialogComponent, {
+        width: '100%',
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+        if (result != null) {
+          this.fichaClinicasService.addFichaClinica(result).subscribe((data: any) => {
+            console.log(data);
+          });
+        }
+      });
+    } else {
+      const dialogRef = this.dialog.open(EditDialogComponent, {
+        width: '100%',
+        data: ficha_clinica
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+        if (result != null) {
+          this.fichaClinicasService.addFichaClinica(result).subscribe((data: any) => {
+            console.log(data);
+          });
+        }
+      });
+
+    }
+
   }
 
 
@@ -174,11 +210,4 @@ export class ListadoFichaClinicaPageComponent implements OnInit {
 
     //?ejemplo={"fechaDesdeCadena":"20190901","fechaHastaCadena":"20190901","idEmpleado":{idPersona:7},"idCliente":{idPersona:7},"idTipoProducto":{idTipoProducto:1},"idSubCategoria":1}
   }
-}
-interface QueryFilterFichaClinica {
-  fechaDesdeCadena?: string;
-  fechaHastaCadena?: string;
-  idEmpleado?: { idEmpleado: number };
-  idCliente?: { idCliente: number };
-  idTipoProducto?: { idTipoProducto: number };
 }

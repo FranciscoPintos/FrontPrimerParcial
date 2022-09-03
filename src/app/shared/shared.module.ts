@@ -14,6 +14,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { AddDialogComponent } from './components/add-dialog/add-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { EditDialogComponent } from './components/edit-dialog/edit-dialog.component';
 
 const MATERIAL_MODULES = [
   MatCardModule,
@@ -30,7 +33,8 @@ const MATERIAL_MODULES = [
   MatSidenavModule,
   MatListModule,
   MatTableModule,
-  MatPaginatorModule
+  MatPaginatorModule,
+  MatDialogModule
 ];
 
 const FORM_MODULES = [
@@ -39,7 +43,10 @@ const FORM_MODULES = [
 ];
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    AddDialogComponent,
+    EditDialogComponent
+  ],
   imports: [
     CommonModule,
     ...FORM_MODULES,
