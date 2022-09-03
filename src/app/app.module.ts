@@ -13,6 +13,10 @@ import { AuthModule } from './features/auth/auth.module';
 import { BaseUrlInterceptor } from './shared/interceptors/base-url.interceptor';
 import { FichaClinicaModule } from './features/ficha-clinica/ficha-clinica.module';
 import { FiltroComponent } from './shared/components/filtro/filtro.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatListModule } from '@angular/material/list';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -31,7 +35,13 @@ import { FiltroComponent } from './shared/components/filtro/filtro.component';
 
     //Modulos Propios
     AuthModule,
-    FichaClinicaModule
+    FichaClinicaModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatListModule,
+    MatIconModule
+
+
 
   ],
   providers: [ServicepaisService, { provide: HTTP_INTERCEPTORS, useClass: BaseUrlInterceptor, multi: true }],

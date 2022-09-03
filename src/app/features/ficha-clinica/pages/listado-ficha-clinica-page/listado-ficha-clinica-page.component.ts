@@ -134,6 +134,9 @@ export class ListadoFichaClinicaPageComponent implements OnInit {
 
   }
 
+  deleteElement(element: any) {
+  }
+
 
   applyFilter() {
     const formValue = this.myForm.value;
