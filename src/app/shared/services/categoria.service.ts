@@ -14,7 +14,7 @@ export class CategoriaService {
   }
 
   getSubCategorias() {
-    return this.httpClient.get(`/stock-nutrinatalia/tipoProducto`).pipe(map((data: any) => data['lista']));
+    return this.httpClient.get(`stock-nutrinatalia/tipoProducto`).pipe(map((data: any) => data['lista']));
   }
 
   getSubCategoriasByCategoriaId(idCategoria: number) {
