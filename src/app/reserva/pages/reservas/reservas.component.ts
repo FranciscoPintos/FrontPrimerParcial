@@ -8,8 +8,9 @@ import {ReservasService} from "../../services/reservas.service";
 import {MatPaginator, MatPaginatorIntl} from "@angular/material/paginator";
 import {coerceStringArray} from "@angular/cdk/coercion";
 import {LoginService} from "../../../auth/services/login.service";
-import {MatDialog} from "@angular/material/dialog";
+import { MatDialog } from '@angular/material/dialog';
 import Swal from "sweetalert2";
+import {AddReservaComponent} from "../../../components/add-reserva/add-reserva.component";
 
 
 @Component({
@@ -36,7 +37,7 @@ export class ReservasComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator = new MatPaginator(new MatPaginatorIntl(), ChangeDetectorRef.prototype);
 
   constructor(private fb: FormBuilder, private reservasService: ReservasService
-  ,private personaService:LoginService) { }
+  ,private personaService:LoginService,   public dialog: MatDialog) { }
   ngOnInit(): void {
     this.cargarRerservas();
     this.cargarEmpleados();
@@ -85,6 +86,24 @@ export class ReservasComponent implements OnInit {
     this.cargarRerservas();
     this.myForm.reset();
     this.range.reset();
+  }
+  openDialog(isEdit: boolean, reserva?: any): void {
+    if (!isEdit) {
+      const dialogRef = this.dialog.open(AddReservaComponent, {
+        width: '100%',
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+        if (result != null) {
+          //hacer post
+        }
+      });
+    } else {
+      //la misma cosa para edit
+      console.log("ddg")
+    }
+
   }
 
 

@@ -17,12 +17,22 @@ import { MatCardModule } from "@angular/material/card";
 import { AuthModule } from './auth/auth.module';
 import { BaseUrlInterceptor } from './interceptors/base-url.interceptor';
 import {ReservaModule} from "./reserva/reserva.module";
+import { AddReservaComponent } from './components/add-reserva/add-reserva.component';
+import {MatOptionModule} from "@angular/material/core";
+import {MatSelectModule} from "@angular/material/select";
+import {MatDatepicker, MatDatepickerModule} from "@angular/material/datepicker";
+import {MatInputModule} from "@angular/material/input";
+import {MatTableDataSource, MatTableModule} from "@angular/material/table";
+import {MatButtonToggleModule} from "@angular/material/button-toggle";
+import {MatButtonModule} from "@angular/material/button";
+import {MatCheckboxModule} from "@angular/material/checkbox";
 
 @NgModule({
   declarations: [
     AppComponent,
     PaisComponent,
     PaisAgregarComponent,
+    AddReservaComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,6 +48,16 @@ import {ReservaModule} from "./reserva/reserva.module";
     AuthModule,
     FlexLayoutModule,
     ReservaModule,
+    MatOptionModule,
+    MatSelectModule,
+    ReactiveFormsModule,
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatTableModule,
+    MatButtonToggleModule,
+    MatButtonModule,
+    MatCheckboxModule
   ],
   providers: [ServicepaisService, { provide: HTTP_INTERCEPTORS, useClass: BaseUrlInterceptor, multi: true }],
   bootstrap: [AppComponent],

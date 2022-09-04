@@ -14,6 +14,7 @@ import {MatSelectModule} from "@angular/material/select";
 import {MatTableModule} from "@angular/material/table";
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import {MatPaginatorModule} from "@angular/material/paginator";
+import {MatDialogModule} from "@angular/material/dialog";
 
 
 @NgModule({
@@ -39,6 +40,7 @@ import {MatPaginatorModule} from "@angular/material/paginator";
     MatTableModule,
     MatButtonToggleModule,
     MatPaginatorModule,
+    MatDialogModule,
   ]
 })
 export class ReservaModule { }
