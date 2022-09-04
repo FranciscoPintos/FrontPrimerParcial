@@ -19,6 +19,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { EditDialogComponent } from './components/edit-dialog/edit-dialog.component';
 import { CategoriaPageComponent } from './pages/categoria-page/categoria-page.component';
 import { SubCategoriaPageComponent } from './pages/sub-categoria-page/sub-categoria-page.component';
+import { BasicDialogComponent } from './components/basic-dialog/basic-dialog.component';
 
 const MATERIAL_MODULES = [
   MatCardModule,
@@ -49,7 +50,8 @@ const FORM_MODULES = [
     AddDialogComponent,
     EditDialogComponent,
     CategoriaPageComponent,
-    SubCategoriaPageComponent
+    SubCategoriaPageComponent,
+    BasicDialogComponent
   ],
   imports: [
     CommonModule,

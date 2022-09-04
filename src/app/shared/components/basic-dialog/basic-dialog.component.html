@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>Cerrar Sesion</h1>
+<div mat-dialog-content>
+  Estas Seguro que deseas cerrar sesion?
+</div>
+<div mat-dialog-actions>
+  <button (click)="close(false)" mat-button mat-dialog-close>No</button>
+  <button (click)="close(true)"mat-button mat-dialog-close cdkFocusInitial>Si</button>
+</div>
