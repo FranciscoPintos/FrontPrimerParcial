@@ -10,6 +10,11 @@ import { CrearModificarServicioComponent } from './crear-modificar-servicio/crea
 
 const routes: Routes = [
   {
+    path: '',
+    redirectTo: '/login',
+    pathMatch: 'full'
+  },
+  {
     path: 'pais',
     component: PaisComponent
   },
