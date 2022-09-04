@@ -20,6 +20,10 @@ import { EditDialogComponent } from './components/edit-dialog/edit-dialog.compon
 import { CategoriaPageComponent } from './pages/categoria-page/categoria-page.component';
 import { SubCategoriaPageComponent } from './pages/sub-categoria-page/sub-categoria-page.component';
 import { BasicDialogComponent } from './components/basic-dialog/basic-dialog.component';
+import { AddCategoriaDialogComponent } from './components/add-categoria-dialog/add-categoria-dialog.component';
+import { AddSubCategoriaDialogComponent } from './components/add-sub-categoria-dialog/add-sub-categoria-dialog.component';
+import { EditSubCategoriaDialogComponent } from './components/edit-sub-categoria-dialog/edit-sub-categoria-dialog.component';
+import { EditCategoriaDialogComponent } from './components/edit-categoria-dialog/edit-categoria-dialog.component';
 
 const MATERIAL_MODULES = [
   MatCardModule,
@@ -51,7 +55,11 @@ const FORM_MODULES = [
     EditDialogComponent,
     CategoriaPageComponent,
     SubCategoriaPageComponent,
-    BasicDialogComponent
+    BasicDialogComponent,
+    AddCategoriaDialogComponent,
+    AddSubCategoriaDialogComponent,
+    EditSubCategoriaDialogComponent,
+    EditCategoriaDialogComponent
   ],
   imports: [
     CommonModule,
