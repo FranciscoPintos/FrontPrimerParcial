@@ -1,4 +1,4 @@
-import { Persona} from "../../shared/models/persona";
+import { Persona} from "../../../shared/models/persona";
 
 export class Reserva {
   idReserva!: number;

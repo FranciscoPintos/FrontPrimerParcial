@@ -5,9 +5,9 @@ import {Usuario} from "../../../features/auth/interfaces/usuario";
 import {MatDialogRef} from "@angular/material/dialog";
 import {LoginService} from "../../../features/auth/services/login.service";
 import {MatTableDataSource} from "@angular/material/table";
-import {Reserva} from "../../../reserva/interface/reserva";
+import {Reserva} from "../../../features/reserva/interface/reserva";
 import Swal from "sweetalert2";
-import {ReservasService} from "../../../reserva/services/reservas.service";
+import {ReservasService} from "../../../features/reserva/services/reservas.service";
 
 @Component({
   selector: 'app-add-reserva',

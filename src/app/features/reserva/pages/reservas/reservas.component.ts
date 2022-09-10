@@ -3,17 +3,17 @@ import {FormBuilder, FormControl,FormGroup, Validators} from "@angular/forms";
 import {MatTable, MatTableDataSource} from '@angular/material/table';
 
 import {Reserva} from "../../interface/reserva";
-import {Usuario} from "../../../features/auth/interfaces/usuario";
+import {Usuario} from "../../../auth/interfaces/usuario";
 import {ReservasService} from "../../services/reservas.service";
 import {MatPaginator, MatPaginatorIntl} from "@angular/material/paginator";
 import {coerceStringArray} from "@angular/cdk/coercion";
-import {LoginService} from "../../../features/auth/services/login.service";
+import {LoginService} from "../../../auth/services/login.service";
 import { MatDialog } from '@angular/material/dialog';
 import Swal from "sweetalert2";
-import {AddReservaComponent} from "../../../shared/components/add-reserva/add-reserva.component";
-import {AddDialogComponent} from "../../../shared/components/add-dialog/add-dialog.component";
-import {EditDialogComponent} from "../../../shared/components/edit-dialog/edit-dialog.component";
-import {FichaClinicaService} from "../../../features/ficha-clinica/services/ficha-clinica.service";
+import {AddReservaComponent} from "../../../../shared/components/add-reserva/add-reserva.component";
+import {AddDialogComponent} from "../../../../shared/components/add-dialog/add-dialog.component";
+import {EditDialogComponent} from "../../../../shared/components/edit-dialog/edit-dialog.component";
+import {FichaClinicaService} from "../../../ficha-clinica/services/ficha-clinica.service";
 
 
 @Component({

@@ -23,7 +23,7 @@ import { MatCardModule } from "@angular/material/card";
 import { CrearModificarServicioComponent } from './crear-modificar-servicio/crear-modificar-servicio.component';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
-import {ReservaModule} from "./reserva/reserva.module";
+import {ReservaModule} from "./features/reserva/reserva.module";
 import { AddReservaComponent } from './shared/components/add-reserva/add-reserva.component';
 import {MatOptionModule} from "@angular/material/core";
 import {MatSelectModule} from "@angular/material/select";

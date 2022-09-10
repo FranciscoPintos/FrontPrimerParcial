@@ -7,7 +7,7 @@ import { LoginComponent } from './features/auth/pages/login/login.component';
 import { CategoriaPageComponent } from './shared/pages/categoria-page/categoria-page.component';
 import { SubCategoriaPageComponent } from './shared/pages/sub-categoria-page/sub-categoria-page.component';
 import { CrearModificarServicioComponent } from './crear-modificar-servicio/crear-modificar-servicio.component';
-import {ReservasComponent} from "./reserva/pages/reservas/reservas.component";
+import {ReservasComponent} from "./features/reserva/pages/reservas/reservas.component";
 
 const routes: Routes = [
   {
