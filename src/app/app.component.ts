@@ -1,5 +1,8 @@
 import { MediaMatcher } from '@angular/cdk/layout';
 import { ChangeDetectorRef, Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { BasicDialogComponent } from './shared/components/basic-dialog/basic-dialog.component';
 
 
 interface NavItem {
@@ -47,7 +50,7 @@ export class AppComponent {
 
   private _mobileQueryListener: () => void;
 
-  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
+  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, public dialog: MatDialog, private router: Router) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
@@ -55,5 +58,20 @@ export class AppComponent {
 
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);
+  }
+
+  openDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
+    const myDialog = this.dialog.open(BasicDialogComponent, {
+      width: '250px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+    });
+
+    myDialog.afterClosed().subscribe((data) => {
+      console.log('The dialog was closed');
+      if (data) {
+        this.router.navigate(['/login']);
+      }
+    });
   }
 }

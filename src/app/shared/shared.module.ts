@@ -21,6 +21,11 @@ import { CategoriaPageComponent } from './pages/categoria-page/categoria-page.co
 import { SubCategoriaPageComponent } from './pages/sub-categoria-page/sub-categoria-page.component';
 import {AddReservaComponent} from "./components/add-reserva/add-reserva.component";
 import {MatCheckboxModule} from "@angular/material/checkbox";
+import { BasicDialogComponent } from './components/basic-dialog/basic-dialog.component';
+import { AddCategoriaDialogComponent } from './components/add-categoria-dialog/add-categoria-dialog.component';
+import { AddSubCategoriaDialogComponent } from './components/add-sub-categoria-dialog/add-sub-categoria-dialog.component';
+import { EditSubCategoriaDialogComponent } from './components/edit-sub-categoria-dialog/edit-sub-categoria-dialog.component';
+import { EditCategoriaDialogComponent } from './components/edit-categoria-dialog/edit-categoria-dialog.component';
 
 const MATERIAL_MODULES = [
   MatCardModule,
@@ -55,6 +60,11 @@ const FORM_MODULES = [
     CategoriaPageComponent,
     SubCategoriaPageComponent,
     AddReservaComponent,
+    BasicDialogComponent,
+    AddCategoriaDialogComponent,
+    AddSubCategoriaDialogComponent,
+    EditSubCategoriaDialogComponent,
+    EditCategoriaDialogComponent
   ],
   imports: [
     CommonModule,

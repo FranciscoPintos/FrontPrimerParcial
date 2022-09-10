@@ -11,6 +11,11 @@ import {ReservasComponent} from "./reserva/pages/reservas/reservas.component";
 
 const routes: Routes = [
   {
+    path: '',
+    redirectTo: '/login',
+    pathMatch: 'full'
+  },
+  {
     path: 'pais',
     component: PaisComponent
   },

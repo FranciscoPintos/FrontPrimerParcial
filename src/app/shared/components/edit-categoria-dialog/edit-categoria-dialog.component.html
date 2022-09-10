@@ -1,0 +1,22 @@
+<h1 mat-dialog-title>Editar Categoria</h1>
+<div mat-dialog-content class="mat-typography">
+  <p>Ingrese los datos</p>
+  <form [formGroup]="myForm">
+    <mat-form-field ngDefaultControl formControlName="id" appearance="fill">
+      <mat-label>ID</mat-label>
+      <input matInput readonly />
+    </mat-form-field>
+    <mat-form-field
+      ngDefaultControl
+      formControlName="descripcion"
+      appearance="fill"
+    >
+      <mat-label>Descripcion</mat-label>
+      <input matInput />
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancelar</button>
+  <button mat-button (click)="addCategoria()" cdkFocusInitial>Agregar</button>
+</div>

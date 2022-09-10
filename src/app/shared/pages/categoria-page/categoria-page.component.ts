@@ -7,7 +7,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Observable } from 'rxjs';
 import { LoginService } from 'src/app/features/auth/services/login.service';
 import { FichaClinicaService } from 'src/app/features/ficha-clinica/services/ficha-clinica.service';
+import { AddCategoriaDialogComponent } from '../../components/add-categoria-dialog/add-categoria-dialog.component';
 import { AddDialogComponent } from '../../components/add-dialog/add-dialog.component';
+import { EditCategoriaDialogComponent } from '../../components/edit-categoria-dialog/edit-categoria-dialog.component';
 import { EditDialogComponent } from '../../components/edit-dialog/edit-dialog.component';
 import { Categoria } from '../../models/categoria';
 import { CategoriaService } from '../../services/categoria.service';
@@ -47,7 +49,7 @@ export class CategoriaPageComponent implements OnInit {
 
   openDialog(isEdit: boolean, ficha_clinica?: any): void {
     if (!isEdit) {
-      const dialogRef = this.dialog.open(AddDialogComponent, {
+      const dialogRef = this.dialog.open(AddCategoriaDialogComponent, {
         width: '100%',
       });
 
@@ -58,7 +60,7 @@ export class CategoriaPageComponent implements OnInit {
         }
       });
     } else {
-      const dialogRef = this.dialog.open(EditDialogComponent, {
+      const dialogRef = this.dialog.open(EditCategoriaDialogComponent, {
         width: '100%',
         data: ficha_clinica
       });

@@ -1,0 +1,23 @@
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { AddCategoriaDialogComponent } from './add-categoria-dialog.component';
+
+describe('AddCategoriaDialogComponent', () => {
+  let component: AddCategoriaDialogComponent;
+  let fixture: ComponentFixture<AddCategoriaDialogComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [ AddCategoriaDialogComponent ]
+    })
+    .compileComponents();
+
+    fixture = TestBed.createComponent(AddCategoriaDialogComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
