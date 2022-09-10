@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PaisComponent } from './shared/components/pais/pais.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { ServicepaisService } from "./shared/services/servicepais.service";
 import { PaisAgregarComponent } from './shared/components/pais/pais-agregar/pais-agregar.component';
-import { FormsModule } from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LoginComponent } from './shared/components/login/login.component';
 import { AuthModule } from './features/auth/auth.module';
 import { BaseUrlInterceptor } from './shared/interceptors/base-url.interceptor';
 import { FichaClinicaModule } from './features/ficha-clinica/ficha-clinica.module';
@@ -21,23 +21,32 @@ import { MatSliderModule } from "@angular/material/slider";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatCardModule } from "@angular/material/card";
 import { CrearModificarServicioComponent } from './crear-modificar-servicio/crear-modificar-servicio.component';
-import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
+import {ReservaModule} from "./reserva/reserva.module";
+import { AddReservaComponent } from './shared/components/add-reserva/add-reserva.component';
+import {MatOptionModule} from "@angular/material/core";
+import {MatSelectModule} from "@angular/material/select";
+import {MatDatepicker, MatDatepickerModule} from "@angular/material/datepicker";
+import {MatTableDataSource, MatTableModule} from "@angular/material/table";
+import {MatButtonToggleModule} from "@angular/material/button-toggle";
+import {MatButtonModule} from "@angular/material/button";
+import {MatCheckboxModule} from "@angular/material/checkbox";
+import {SharedModule} from "./shared/shared.module";
 
 @NgModule({
   declarations: [
     AppComponent,
     PaisComponent,
     PaisAgregarComponent,
-    LoginComponent,
     FiltroComponent,
-    CrearModificarServicioComponent
+    CrearModificarServicioComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule,
     BrowserAnimationsModule,
     FormsModule,
 
@@ -47,16 +56,25 @@ import { MatInputModule } from '@angular/material/input';
     MatIconModule,
     MatFormFieldModule,
     MatCardModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatInputModule,
-    MatFormFieldModule,
     AuthModule,
+    FlexLayoutModule,
+    ReservaModule,
+    MatOptionModule,
+    MatSelectModule,
+    ReactiveFormsModule,
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatTableModule,
+    MatButtonToggleModule,
+    MatButtonModule,
+    MatCheckboxModule,
     FichaClinicaModule,
     MatSidenavModule,
-    MatToolbarModule,
     MatListModule,
-    MatIconModule
+    MatIconModule,
+    MatSidenavModule,
+    SharedModule
 
 
 

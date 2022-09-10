@@ -1,5 +1,5 @@
 import { Persona } from "./persona"
-import { Subcategoria } from "./subcategoria";
+import { Subcategoria} from "./subCategoria";
 
 export class Ficha{
   idFichaClinica!: number;

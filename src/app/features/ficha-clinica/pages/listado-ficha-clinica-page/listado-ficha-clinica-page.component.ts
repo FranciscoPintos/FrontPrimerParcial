@@ -56,6 +56,7 @@ export class ListadoFichaClinicaPageComponent implements OnInit {
     });
 
     this.fichasClinicas$ = this.fichaClinicasService.getFichasClinicas();
+    console.log("Fichas:", this.fichasClinicas$.subscribe(console.log));
     this.usuarios$ = this.userService.getPersonas();
     this.categorias$ = this.categoriaService.getCategorias();
     this.subCategorias$ = this.categoriaService.getSubCategorias();

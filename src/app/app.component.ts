@@ -33,6 +33,11 @@ export class AppComponent {
       title: 'SubCategorias'
     },
     {
+      icon: 'home',
+      route: '/reserva',
+      title: 'Reservas'
+    },
+    {
       icon: 'logout',
       route: '/login',
       title: 'Cerrar Sesion'
