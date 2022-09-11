@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { LocalStorageService } from 'src/app/shared/services/local-storage.service';
+import { UsuarioService } from 'src/app/shared/services/usuario.service';
 import Swal from 'sweetalert2';
+
 import { Usuario } from '../../interfaces/usuario';
-import { LoginService } from '../../services/login.service';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +17,11 @@ export class LoginComponent implements OnInit {
   hide = false;
   user!: Usuario | undefined;
 
-  constructor(private fb: FormBuilder, private loginService: LoginService, private router: Router) { }
+  constructor(private fb: FormBuilder,
+    private usuarioService: UsuarioService,
+    private router: Router,
+    private localStorageService: LocalStorageService
+  ) { }
 
 
   ngOnInit(): void {
@@ -52,49 +58,47 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.router.navigate(['/ficha_clinica']);
-    // const myUserName = this.myForm.value.userName;
-    // const myPassword = this.myForm.value.password;
-    // console.log(this.myForm.value);
-    // console.log(this.userName.valid);
-    // console.log(this.password.valid);
+    //Verificamos si es valido el formulario
+    if (this.myForm.invalid) {
+      this.myForm.markAllAsTouched();
 
-    // if (!this.myForm.valid) {
-    //   Swal.fire({
-    //     title: 'Error',
-    //     text: 'Debes completar todos los campos',
-    //     icon: 'error'
-    //   });
-    //   return;
-    // }
+      Swal.fire({
+        title: 'Advertencia',
+        text: 'Debe completar todos los campos',
+        icon: 'warning',
+      });
 
+      return;
+    }
 
-    // this.loginService.findPersona(myUserName).subscribe(data => {
-    //   const myPersonas = data;
-    //   this.user = myPersonas.find(x => x.nombre === myUserName);
-    //   if (this.user) {
-    //     //Navegar a la pagina de inicio
-    //     console.log(this.user);
-    //   } else {
-    //     Swal.fire({
-    //       title: 'Error!',
-    //       text: 'Usuario no encontrado',
-    //       icon: 'error',
-    //       confirmButtonText: 'Cool'
-    //     })
-    //   }
+    //Obtenemos los datos del formulario
+    const { userName } = this.myForm.value;
 
-    // },
-    //   error => {
-    //     console.log(error);
-    //     Swal.fire({
-    //       title: 'Error Comunicandose con el Servidor',
-    //       text: error.message,
-    //       icon: 'error',
-    //       confirmButtonText: 'Cool'
-    //     })
-    //   }
-    // );
+    //Obtenemos el usuario del sistema
+    this.usuarioService.esUsuarioDelSistema(userName)
+      .subscribe(
+        (esUsuarioDelSistema: boolean) => {
+          if (esUsuarioDelSistema) {
+            this.localStorageService.setItem('usuario', userName);
+            this.router.navigate(['/ficha_clinica']);
+          } else {
+            Swal.fire({
+              title: 'Error',
+              text: 'El usuario no existe en el sistema',
+              icon: 'error',
+            });
+          }
+        },
+        error => {
+          console.log(error);
+          Swal.fire({
+            title: 'Error Comunicandose con el Servidor',
+            text: error.message,
+            icon: 'error',
+            confirmButtonText: 'Cool'
+          })
+        }
+      );
   }
 
 }
