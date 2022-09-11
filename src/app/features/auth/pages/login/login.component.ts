@@ -14,7 +14,7 @@ import { Usuario } from '../../interfaces/usuario';
 })
 export class LoginComponent implements OnInit {
   myForm!: FormGroup;
-  hide = false;
+  hide = true;
   user!: Usuario | undefined;
 
   constructor(private fb: FormBuilder,
@@ -39,23 +39,6 @@ export class LoginComponent implements OnInit {
     return this.myForm.get('password') as FormControl;
   }
 
-  getErrorMessagePassword() {
-
-    if (this.password.hasError('required')) {
-      return 'You must enter a value';
-    }
-
-    return this.password.hasError('email') ? 'Not a valid email' : '';
-
-  }
-  getErrorMessageUserName() {
-    if (this.userName.hasError('required')) {
-      return 'You must enter a value';
-    }
-
-    return this.userName.hasError('email') ? 'Not a valid email' : '';
-
-  }
 
   login() {
     //Verificamos si es valido el formulario
