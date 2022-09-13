@@ -25,6 +25,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -59,8 +62,10 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatListModule,
     MatIconModule,
 	ReactiveFormsModule,
-	MatSelectModule
-
+	MatSelectModule,
+	MatPaginatorModule,
+	MatTableModule,
+	SharedModule
 
   ],
   providers: [ServicepaisService, { provide: HTTP_INTERCEPTORS, useClass: BaseUrlInterceptor, multi: true }],
