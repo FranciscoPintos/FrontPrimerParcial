@@ -6,7 +6,7 @@ import { ListadoFichaClinicaPageComponent } from './features/ficha-clinica/pages
 import { LoginComponent } from './features/auth/pages/login/login.component';
 import { CategoriaPageComponent } from './shared/pages/categoria-page/categoria-page.component';
 import { SubCategoriaPageComponent } from './shared/pages/sub-categoria-page/sub-categoria-page.component';
-import { CrearModificarServicioComponent } from './crear-modificar-servicio/crear-modificar-servicio.component';
+import { CrearModificarServicioComponent } from './features/crear-modificar-servicio/crear-modificar-servicio.component';
 
 const routes: Routes = [
   {
@@ -33,6 +33,7 @@ const routes: Routes = [
     path: 'subcategorias',
     component: SubCategoriaPageComponent
   },
+  {
     path: 'modservicio',
     component: CrearModificarServicioComponent
   },

@@ -1,0 +1,46 @@
+<div style="
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  " class="p-grid">
+	<form class="p-col-12 p-md-12 p-lg-3" [formGroup]="myForm">
+		<section>
+			<mat-form-field appearance="fill" style="padding: 20px;">
+				<mat-label>Fecha</mat-label>
+				<input matInput [matDatepicker]="picker">
+				<mat-hint>MM/DD/YYYY</mat-hint>
+				<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+				<mat-datepicker #picker></mat-datepicker>
+			</mat-form-field>
+		</section>
+		<section>
+				<mat-form-field class="observacion" appearance="fill" style="padding: 20px;">
+					<input matInput placeholder="Observación">
+				</mat-form-field>
+		</section>
+		<section>
+			<mat-form-field style="width: 100%" appearance="fill">
+				<mat-label>Empleado</mat-label>
+				<mat-select formControlName="empleado">
+				  <mat-option
+					*ngFor="let item of usuarios$ | async; let i = index"
+					[value]="item.idPersona"
+				  >
+					{{ item.nombre }} {{ item.apellido }}
+				  </mat-option>
+				</mat-select>
+			  </mat-form-field>
+		
+			  <mat-form-field style="width: 100%" appearance="fill">
+				<mat-label>Cliente</mat-label>
+				<mat-select formControlName="cliente">
+				  <mat-option
+					*ngFor="let item of usuarios$ | async; let i = index"
+					[value]="item.idPersona"
+				  >
+					{{ item.nombre }} {{ item.apellido }}
+				  </mat-option>
+				</mat-select>
+			  </mat-form-field>
+		</section>

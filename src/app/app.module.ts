@@ -6,7 +6,7 @@ import { PaisComponent } from './shared/components/pais/pais.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { ServicepaisService } from "./shared/services/servicepais.service";
 import { PaisAgregarComponent } from './shared/components/pais/pais-agregar/pais-agregar.component';
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './shared/components/login/login.component';
 import { AuthModule } from './features/auth/auth.module';
@@ -20,10 +20,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSliderModule } from "@angular/material/slider";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatCardModule } from "@angular/material/card";
-import { CrearModificarServicioComponent } from './crear-modificar-servicio/crear-modificar-servicio.component';
-import { MatDatepickerModule } from "@angular/material/datepicker";
-import { MatNativeDateModule } from '@angular/material/core';
+import { CrearModificarServicioComponent } from './features/crear-modificar-servicio/crear-modificar-servicio.component';
 import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -56,8 +57,9 @@ import { MatInputModule } from '@angular/material/input';
     MatSidenavModule,
     MatToolbarModule,
     MatListModule,
-    MatIconModule
-
+    MatIconModule,
+	ReactiveFormsModule,
+	MatSelectModule
 
 
   ],
