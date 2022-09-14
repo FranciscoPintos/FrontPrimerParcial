@@ -43,6 +43,11 @@ export class AppComponent {
     },
     {
       icon: 'home',
+      route: '/listar_servicio',
+      title: 'Servicios'
+    },
+    {
+      icon: 'home',
       route: '/reserva',
       title: 'Reservas'
     },

@@ -6,7 +6,8 @@ import { ListadoFichaClinicaPageComponent } from './features/ficha-clinica/pages
 import { LoginComponent } from './features/auth/pages/login/login.component';
 import { CategoriaPageComponent } from './shared/pages/categoria-page/categoria-page.component';
 import { SubCategoriaPageComponent } from './shared/pages/sub-categoria-page/sub-categoria-page.component';
-import { CrearModificarServicioComponent } from './crear-modificar-servicio/crear-modificar-servicio.component';
+import { CrearModificarServicioComponent } from './features/crear-modificar-servicio/crear-modificar-servicio.component';
+import {ListadoServicioComponent} from "./features/servicio/pages/listar-servicio/listado-servicio.component";
 import { ReservasComponent } from "./features/reserva/pages/reservas/reservas.component";
 import { AuthGuard } from './shared/guards/auth.guard';
 
@@ -38,6 +39,10 @@ const routes: Routes = [
     component: ListadoFichaClinicaPageComponent
   },
   {
+    path: 'servicios',
+    component: ListadoServicioComponent
+  },
+  {
     path: 'categorias',
     component: CategoriaPageComponent
   },
@@ -49,6 +54,11 @@ const routes: Routes = [
     path: 'modservicio',
     component: CrearModificarServicioComponent
   },
+  {
+    path: 'listar_servicio',
+    component: ListadoServicioComponent
+  },
+
 ];
 
 
