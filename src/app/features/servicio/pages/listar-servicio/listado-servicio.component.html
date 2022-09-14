@@ -93,31 +93,43 @@
       <ng-container matColumnDef="fecha">
         <th mat-header-cell *matHeaderCellDef>Fecha</th>
         <td mat-cell *matCellDef="let element">
+          {{ element.idFichaClinica.fechaHora | date: "medium" }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="id_ficha">
+        <th mat-header-cell *matHeaderCellDef>Id Ficha</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.idFichaClinica.idFichaClinica }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="fecha_ficha">
+        <th mat-header-cell *matHeaderCellDef>Fecha Ficha</th>
+        <td mat-cell *matCellDef="let element">
           {{ element.fechaHora | date: "medium" }}
         </td>
       </ng-container>
       <ng-container matColumnDef="profesional">
         <th mat-header-cell *matHeaderCellDef>Profesional</th>
         <td mat-cell *matCellDef="let element">
-          {{ element.idEmpleado.nombre }} {{ element.idEmpleado.apellido }}
+          {{ element.idFichaClinica.idEmpleado.nombre }} {{ element.idEmpleado.apellido }}
         </td>
       </ng-container>
       <ng-container matColumnDef="cliente">
         <th mat-header-cell *matHeaderCellDef>Cliente</th>
         <td mat-cell *matCellDef="let element">
-          {{ element.idCliente.nombre }} {{ element.idCliente.apellido }}
+          {{ element.idFichaClinica.idCliente.nombreCompleto }}
         </td>
       </ng-container>
       <ng-container matColumnDef="categoria">
         <th mat-header-cell *matHeaderCellDef>Categoria</th>
         <td mat-cell *matCellDef="let element">
-          {{ element.idTipoProducto.idCategoria.descripcion }}
+          {{ element.idFichaClinica.idTipoProducto.idCategoria.descripcion }}
         </td>
       </ng-container>
       <ng-container matColumnDef="subcategoria">
         <th mat-header-cell *matHeaderCellDef>SubCategoria</th>
         <td mat-cell *matCellDef="let element">
-          {{ element.idTipoProducto.descripcion }}
+          {{ element.idFichaClinica.idTipoProducto.descripcion }}
         </td>
       </ng-container>
       <ng-container matColumnDef="acciones">
@@ -128,12 +140,6 @@
             aria-label="Example home icon"
             fontIcon="edit"
             (click)="openDialog(true, element)"
-          ></mat-icon>
-          <mat-icon
-            aria-hidden="false"
-            aria-label="Example home icon"
-            fontIcon="delete"
-            (click)="deleteElement(element)"
           ></mat-icon>
         </td>
       </ng-container>

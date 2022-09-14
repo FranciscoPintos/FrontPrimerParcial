@@ -12,8 +12,10 @@ import { EditDialogComponent } from 'src/app/shared/components/edit-dialog/edit-
 import { CategoriaService } from 'src/app/shared/services/categoria.service';
 import { Categoria } from '../../interfaces/categoria.interface';
 import { FichaClinica } from '../../interfaces/ficha_clinica.inteface';
+import { ServicioInterface } from '../../interfaces/servicio.interface';
 import { SubCategoria } from '../../interfaces/subcategoria.interface';
 import { ServicioService } from '../../services/servicio.service';
+
 
 @Component({
   selector: 'app-servicios',
@@ -28,9 +30,9 @@ export class ListadoServicioComponent implements OnInit {
   usuarios$!: Observable<Usuario[]>;
 
 
-  fichasClinicas$!: Observable<FichaClinica[]>;
-  matTableDataSource = new MatTableDataSource<FichaClinica>();
-  displayedColumns: string[] = ['fecha', 'profesional', 'cliente', 'categoria', 'subcategoria', 'acciones'];
+  fichasClinicas$!: Observable<ServicioInterface[]>;
+  matTableDataSource = new MatTableDataSource<ServicioInterface>();
+  displayedColumns: string[] = ['fecha','id_ficha','fecha_ficha', 'profesional', 'cliente', 'categoria', 'subcategoria', 'acciones'];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -67,6 +69,7 @@ export class ListadoServicioComponent implements OnInit {
     });
     this.fichasClinicas$.subscribe((data: any) => {
       this.matTableDataSource.data = data;
+      console.log(data);
     });
 
 
@@ -103,6 +106,7 @@ export class ListadoServicioComponent implements OnInit {
     this.myForm.reset();
   }
 
+// En el AddDialogComponent tenes que cambiar a tu modelo de editar
   openDialog(isEdit: boolean, ficha_clinica?: any): void {
     if (!isEdit) {
       const dialogRef = this.dialog.open(AddDialogComponent, {
