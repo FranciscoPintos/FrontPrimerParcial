@@ -14,4 +14,9 @@ export class LocalStorageService {
   getItem(key: string) {
     return localStorage.getItem(key) ?? "";
   }
+
+  removeItem(key: string) {
+    localStorage.removeItem(key);
+  }
+
 }

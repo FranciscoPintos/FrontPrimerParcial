@@ -7,13 +7,14 @@ import { LoginComponent } from './features/auth/pages/login/login.component';
 import { CategoriaPageComponent } from './shared/pages/categoria-page/categoria-page.component';
 import { SubCategoriaPageComponent } from './shared/pages/sub-categoria-page/sub-categoria-page.component';
 import { CrearModificarServicioComponent } from './crear-modificar-servicio/crear-modificar-servicio.component';
-import {ReservasComponent} from "./features/reserva/pages/reservas/reservas.component";
+import { ReservasComponent } from "./features/reserva/pages/reservas/reservas.component";
+import { AuthGuard } from './shared/guards/auth.guard';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/login',
-    pathMatch: 'full'
+    canActivate: [AuthGuard],
+    component: ListadoFichaClinicaPageComponent
   },
   {
     path: 'pais',
@@ -28,7 +29,7 @@ const routes: Routes = [
     component: LoginComponent
   },
   {
-    path:'reserva',
+    path: 'reserva',
     component: ReservasComponent
   },
 

@@ -29,6 +29,8 @@ import { EditCategoriaDialogComponent } from './components/edit-categoria-dialog
 import { MatSliderModule } from '@angular/material/slider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { SideBarComponent } from './components/side-bar/side-bar.component';
+import { RouterModule } from '@angular/router';
 
 const MATERIAL_MODULES = [
   MatCardModule,
@@ -67,18 +69,21 @@ const FORM_MODULES = [
     AddCategoriaDialogComponent,
     AddSubCategoriaDialogComponent,
     EditSubCategoriaDialogComponent,
-    EditCategoriaDialogComponent
+    EditCategoriaDialogComponent,
+    SideBarComponent
   ],
   imports: [
     CommonModule,
     ...FORM_MODULES,
     ...MATERIAL_MODULES,
-    FlexLayoutModule
+    FlexLayoutModule,
+    RouterModule
   ],
   exports: [
     ...FORM_MODULES,
     ...MATERIAL_MODULES,
-    FlexLayoutModule
+    FlexLayoutModule,
+    SideBarComponent
   ]
 })
 export class SharedModule { }
