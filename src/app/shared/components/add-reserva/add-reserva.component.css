@@ -1,0 +1,17 @@
+section {
+  display: table;
+  width: 80%;
+  align-content: center;
+}
+table {
+  width: 100%;
+}
+button{
+  margin: 5px;
+}
+a{
+  margin: 5px;
+}
+ng-container{
+  margin: 10px;
+}

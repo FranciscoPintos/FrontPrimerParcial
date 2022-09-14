@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ListadoFichaClinicaPageComponent } from './pages/listado-ficha-clinica-page/listado-ficha-clinica-page.component';
+import { ListadoServicioComponent } from './pages/listar-servicio/listado-servicio.component';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { SharedModule } from '../../shared/shared.module';
@@ -9,7 +9,7 @@ import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
   declarations: [
-    ListadoFichaClinicaPageComponent
+    ListadoServicioComponent
   ],
   imports: [
     CommonModule,
@@ -20,4 +20,4 @@ import { SharedModule } from '../../shared/shared.module';
     MatDatepickerModule
   ]
 })
-export class FichaClinicaModule { }
+export class ServicioModule { }

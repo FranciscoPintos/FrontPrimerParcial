@@ -28,19 +28,20 @@ export class EditDialogComponent implements OnInit {
   constructor(private fb: FormBuilder, public dialogRef: MatDialogRef<AddDialogComponent>,
     private userService: LoginService,
     private categoriaService: CategoriaService,
-    @Inject(MAT_DIALOG_DATA) public data: Ficha
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
 
   ngOnInit(): void {
-
+    console.log("DATA:")
+    console.log(this.data);
     this.myForm = this.fb.group({
-      motivoConsulta: [this.data.motivoConsulta],
-      diagnostico: [this.data.diagnostico],
-      observacion: [this.data.observacion],
-      idEmpleado: [this.data.idEmpleado.idPersona],
-      idCliente: [this.data.idCliente.idPersona],
-      categoria: [this.data.idTipoProducto.idCategoria.idCategoria],
-      subcategoria: [this.data.idTipoProducto.idTipoProducto],
+      motivoConsulta: [this.data?.motivoConsulta??""],
+      diagnostico: [this.data?.diagnostico??""],
+      observacion: [this.data?.observacion??""],
+      idEmpleado: [this.data?.idEmpleado?.idPersona??""],
+      idCliente: [this.data?.idCliente?.idPersona??""],
+      categoria: [this.data?.idTipoProducto?.idCategoria?.idCategoria??""],
+      subcategoria: [this.data?.idTipoProducto?.idTipoProducto??""],
     });
     console.log("form");
     console.log(this.myForm.value);

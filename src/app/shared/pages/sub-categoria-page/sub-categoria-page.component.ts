@@ -9,7 +9,9 @@ import { LoginService } from 'src/app/features/auth/services/login.service';
 import { SubCategoria } from 'src/app/features/ficha-clinica/interfaces/subcategoria.interface';
 import { FichaClinicaService } from 'src/app/features/ficha-clinica/services/ficha-clinica.service';
 import { AddDialogComponent } from '../../components/add-dialog/add-dialog.component';
+import { AddSubCategoriaDialogComponent } from '../../components/add-sub-categoria-dialog/add-sub-categoria-dialog.component';
 import { EditDialogComponent } from '../../components/edit-dialog/edit-dialog.component';
+import { EditSubCategoriaDialogComponent } from '../../components/edit-sub-categoria-dialog/edit-sub-categoria-dialog.component';
 import { Categoria } from '../../models/categoria';
 import { CategoriaService } from '../../services/categoria.service';
 
@@ -49,7 +51,7 @@ export class SubCategoriaPageComponent implements OnInit {
 
   openDialog(isEdit: boolean, ficha_clinica?: any): void {
     if (!isEdit) {
-      const dialogRef = this.dialog.open(AddDialogComponent, {
+      const dialogRef = this.dialog.open(AddSubCategoriaDialogComponent, {
         width: '100%',
       });
 
@@ -60,7 +62,7 @@ export class SubCategoriaPageComponent implements OnInit {
         }
       });
     } else {
-      const dialogRef = this.dialog.open(EditDialogComponent, {
+      const dialogRef = this.dialog.open(EditSubCategoriaDialogComponent, {
         width: '100%',
         data: ficha_clinica
       });
