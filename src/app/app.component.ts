@@ -34,7 +34,12 @@ export class AppComponent {
       icon: 'home',
       route: '/subcategorias',
       title: 'SubCategorias'
-    }
+    },
+    {
+      icon: 'home',
+      route: '/listar_servicio',
+      title: 'Servicios'
+    },
   ];
 
 

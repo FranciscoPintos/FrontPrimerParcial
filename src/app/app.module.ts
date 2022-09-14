@@ -24,6 +24,7 @@ import { CrearModificarServicioComponent } from './crear-modificar-servicio/crea
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
+import {ServicioModule} from "./features/servicio/servicio.module";
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { MatInputModule } from '@angular/material/input';
     MatFormFieldModule,
     AuthModule,
     FichaClinicaModule,
+    ServicioModule,
     MatSidenavModule,
     MatToolbarModule,
     MatListModule,

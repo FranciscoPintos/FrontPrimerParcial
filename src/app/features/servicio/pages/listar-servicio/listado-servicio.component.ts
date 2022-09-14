@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import {Component, NgModule, OnInit, ViewChild} from '@angular/core';
+import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -13,14 +13,15 @@ import { CategoriaService } from 'src/app/shared/services/categoria.service';
 import { Categoria } from '../../interfaces/categoria.interface';
 import { FichaClinica } from '../../interfaces/ficha_clinica.inteface';
 import { SubCategoria } from '../../interfaces/subcategoria.interface';
-import { FichaClinicaService } from '../../services/ficha-clinica.service';
+import { ServicioService } from '../../services/servicio.service';
 
 @Component({
-  selector: 'app-servicio',
-  templateUrl: './listado-ficha-clinica-page.component.html',
-  styleUrls: ['./listado-ficha-clinica-page.component.css']
+  selector: 'app-servicios',
+  templateUrl: './listado-servicio.component.html',
+  styleUrls: ['./listado-servicio.component.css']
 })
-export class ListadoFichaClinicaPageComponent implements OnInit {
+
+export class ListadoServicioComponent implements OnInit {
   myForm!: FormGroup;
   categorias$!: Observable<Categoria[]>;
   subCategorias$!: Observable<SubCategoria[]>;
@@ -37,7 +38,7 @@ export class ListadoFichaClinicaPageComponent implements OnInit {
   constructor(private fb: FormBuilder,
     private categoriaService: CategoriaService,
     public dialog: MatDialog,
-    private fichaClinicasService: FichaClinicaService,
+    private fichaClinicasService: ServicioService,
     private userService: LoginService) { }
 
   ngAfterViewInit() {
