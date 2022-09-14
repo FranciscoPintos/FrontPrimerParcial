@@ -57,9 +57,6 @@ import { SharedModule } from './shared/shared.module';
     AuthModule,
     ReservaModule,
     FichaClinicaModule,
-<<<<<<< HEAD
-    SharedModule
-=======
     ServicioModule,
     MatSidenavModule,
     MatListModule,
@@ -72,7 +69,6 @@ import { SharedModule } from './shared/shared.module';
     SharedModule
 
 
->>>>>>> develop
   ],
   providers: [ServicepaisService, { provide: HTTP_INTERCEPTORS, useClass: BaseUrlInterceptor, multi: true }],
   bootstrap: [AppComponent],
