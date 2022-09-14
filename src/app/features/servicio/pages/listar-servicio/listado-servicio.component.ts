@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import {Component, NgModule, OnInit, ViewChild} from '@angular/core';
+import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -12,24 +12,27 @@ import { EditDialogComponent } from 'src/app/shared/components/edit-dialog/edit-
 import { CategoriaService } from 'src/app/shared/services/categoria.service';
 import { Categoria } from '../../interfaces/categoria.interface';
 import { FichaClinica } from '../../interfaces/ficha_clinica.inteface';
+import { ServicioInterface } from '../../interfaces/servicio.interface';
 import { SubCategoria } from '../../interfaces/subcategoria.interface';
-import { FichaClinicaService } from '../../services/ficha-clinica.service';
+import { ServicioService } from '../../services/servicio.service';
+
 
 @Component({
-  selector: 'app-servicio',
-  templateUrl: './listado-ficha-clinica-page.component.html',
-  styleUrls: ['./listado-ficha-clinica-page.component.css']
+  selector: 'app-servicios',
+  templateUrl: './listado-servicio.component.html',
+  styleUrls: ['./listado-servicio.component.css']
 })
-export class ListadoFichaClinicaPageComponent implements OnInit {
+
+export class ListadoServicioComponent implements OnInit {
   myForm!: FormGroup;
   categorias$!: Observable<Categoria[]>;
   subCategorias$!: Observable<SubCategoria[]>;
   usuarios$!: Observable<Usuario[]>;
 
 
-  fichasClinicas$!: Observable<FichaClinica[]>;
-  matTableDataSource = new MatTableDataSource<FichaClinica>();
-  displayedColumns: string[] = ['fecha', 'profesional', 'cliente', 'categoria', 'subcategoria', 'acciones'];
+  fichasClinicas$!: Observable<ServicioInterface[]>;
+  matTableDataSource = new MatTableDataSource<ServicioInterface>();
+  displayedColumns: string[] = ['fecha','id_ficha','fecha_ficha', 'profesional', 'cliente', 'categoria', 'subcategoria', 'acciones'];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -37,7 +40,7 @@ export class ListadoFichaClinicaPageComponent implements OnInit {
   constructor(private fb: FormBuilder,
     private categoriaService: CategoriaService,
     public dialog: MatDialog,
-    private fichaClinicasService: FichaClinicaService,
+    private fichaClinicasService: ServicioService,
     private userService: LoginService) { }
 
   ngAfterViewInit() {
@@ -56,7 +59,6 @@ export class ListadoFichaClinicaPageComponent implements OnInit {
     });
 
     this.fichasClinicas$ = this.fichaClinicasService.getFichasClinicas();
-    console.log("Fichas:", this.fichasClinicas$.subscribe(console.log));
     this.usuarios$ = this.userService.getPersonas();
     this.categorias$ = this.categoriaService.getCategorias();
     this.subCategorias$ = this.categoriaService.getSubCategorias();
@@ -67,6 +69,7 @@ export class ListadoFichaClinicaPageComponent implements OnInit {
     });
     this.fichasClinicas$.subscribe((data: any) => {
       this.matTableDataSource.data = data;
+      console.log(data);
     });
 
 
@@ -103,6 +106,7 @@ export class ListadoFichaClinicaPageComponent implements OnInit {
     this.myForm.reset();
   }
 
+// En el AddDialogComponent tenes que cambiar a tu modelo de editar
   openDialog(isEdit: boolean, ficha_clinica?: any): void {
     if (!isEdit) {
       const dialogRef = this.dialog.open(AddDialogComponent, {
