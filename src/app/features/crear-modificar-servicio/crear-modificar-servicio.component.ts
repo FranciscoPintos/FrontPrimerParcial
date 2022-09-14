@@ -13,7 +13,8 @@ import { FichaClinica } from '../ficha-clinica/interfaces/ficha_clinica.inteface
 export class CrearModificarServicioComponent implements OnInit {
 	myForm!: FormGroup;
 	usuarios$!: Observable<Usuario[]>;
-	displayedColumns: string[] = ['fecha', 'profesional', 'cliente', 'categoria', 'subcategoria', 'acciones'];
+	displayedColumnsService: string[] = ['idficha', 'fechacategoria', 'subcategoria', 'acciones'];
+	displayedColumnsDetalle: string[] = ['iddetalle', 'presentacion', 'preciounitario', 'cantidad', 'total', 'acciones'];
 	matTableDataSource = new MatTableDataSource<FichaClinica>();
   constructor() { }
 
