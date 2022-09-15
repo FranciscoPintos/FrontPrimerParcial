@@ -31,6 +31,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { SideBarComponent } from './components/side-bar/side-bar.component';
 import { RouterModule } from '@angular/router';
+import { HomeComponent } from './pages/home/home.component';
 
 const MATERIAL_MODULES = [
   MatCardModule,
@@ -70,7 +71,8 @@ const FORM_MODULES = [
     AddSubCategoriaDialogComponent,
     EditSubCategoriaDialogComponent,
     EditCategoriaDialogComponent,
-    SideBarComponent
+    SideBarComponent,
+    HomeComponent
   ],
   imports: [
     CommonModule,
