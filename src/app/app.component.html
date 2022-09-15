@@ -1,3 +1,3 @@
-<app-side-bar *ngIf="loggedIn | async"></app-side-bar>
+<app-side-bar *ngIf="isLogged()"></app-side-bar>
 
-<router-outlet></router-outlet>
+<router-outlet *ngIf="!isLogged()"></router-outlet>
