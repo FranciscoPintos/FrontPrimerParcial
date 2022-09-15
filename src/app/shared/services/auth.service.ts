@@ -12,4 +12,8 @@ export class AuthService {
     return !!user;
 
   }
+
+  getUsuario(): string {
+    return localStorage.getItem('usuario') ?? '';
+  }
 }

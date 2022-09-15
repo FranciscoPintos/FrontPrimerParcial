@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Observable } from 'rxjs';
+import { filter, Observable } from 'rxjs';
 import { Usuario } from 'src/app/features/auth/interfaces/usuario';
 import { LoginService } from 'src/app/features/auth/services/login.service';
 import { AddDialogComponent } from 'src/app/shared/components/add-dialog/add-dialog.component';
@@ -56,13 +56,12 @@ export class ListadoFichaClinicaPageComponent implements OnInit {
     });
 
     this.fichasClinicas$ = this.fichaClinicasService.getFichasClinicas();
-    console.log("Fichas:", this.fichasClinicas$.subscribe(console.log));
+
     this.usuarios$ = this.userService.getPersonas();
     this.categorias$ = this.categoriaService.getCategorias();
     this.subCategorias$ = this.categoriaService.getSubCategorias();
 
     this.myForm.get('categoria')!.valueChanges.subscribe(idCategoria => {
-      console.log(idCategoria);
       this.subCategorias$ = this.categoriaService.getSubCategoriasByCategoriaId(idCategoria);
     });
     this.fichasClinicas$.subscribe((data: any) => {
@@ -101,6 +100,9 @@ export class ListadoFichaClinicaPageComponent implements OnInit {
 
   reset() {
     this.myForm.reset();
+    this.fichaClinicasService.getFichasClinicas().subscribe((data: any) => {
+      this.matTableDataSource.data = data;
+    });
   }
 
   openDialog(isEdit: boolean, ficha_clinica?: any): void {
@@ -141,10 +143,6 @@ export class ListadoFichaClinicaPageComponent implements OnInit {
 
   applyFilter() {
     const formValue = this.myForm.value;
-    console.log("b4");
-    console.log(formValue);
-
-
 
     const { fromDate, toDate, empleado, cliente, categoria, subcategoria } = formValue;
 
@@ -162,52 +160,50 @@ export class ListadoFichaClinicaPageComponent implements OnInit {
     }
 
     if (empleado) {
-      filtro['idEmpleado'] = { idEmpleado: empleado };
+      filtro['idEmpleado'] = { idPersona: empleado };
     }
 
     if (cliente) {
-      filtro['idCliente'] = { idCliente: cliente };
+      filtro['idCliente'] = { idPersona: cliente };
     }
+
+    // if (categoria) {
+    //   filtro['idTipoProducto'] = { idTipoProducto: { idCategoria: { idCategoria: categoria } } };
+    // }
 
     if (subcategoria) {
       filtro['idTipoProducto'] = { idTipoProducto: subcategoria };
     }
 
-    console.log(filtro);
-
     //Check if filter has at least one key
 
-    this.fichaClinicasService.getFichasClinicas().subscribe((data: any) => {
+    this.fichaClinicasService.getFichasClinicas(filtro).subscribe((data: any) => {
       console.log(data);
-      if (Object.keys(filtro).length > 0) {
-        let filteredData = data.filter((fichaClinica: any) => {
-          let isValid = true;
-          if (filtro.fechaDesdeCadena) {
-            isValid = isValid && fichaClinica.fechaDesdeCadena >= filtro.fechaDesdeCadena;
-          }
-          if (filtro.fechaHastaCadena) {
-            isValid = isValid && fichaClinica.fechaHastaCadena <= filtro.fechaHastaCadena;
-          }
-          if (filtro.idEmpleado) {
-            isValid = isValid && fichaClinica.idEmpleado.idEmpleado === filtro.idEmpleado.idEmpleado;
-          }
-          if (filtro.idCliente) {
-            isValid = isValid && fichaClinica.idCliente.idCliente === filtro.idCliente.idCliente;
-          }
-          if (filtro.idTipoProducto) {
-            console.log("entre");
-            console.log(fichaClinica.idTipoProducto.idTipoProducto);
-            console.log(filtro.idTipoProducto.idTipoProducto);
-            isValid = isValid && fichaClinica.idTipoProducto.idTipoProducto === filtro.idTipoProducto.idTipoProducto;
-          }
-          console.log("isValid");
-          console.log(isValid);
-          return isValid;
-        });
-        console.log(filteredData);
-        this.matTableDataSource.data = filteredData;
-      }
-
+      // if (Object.keys(filtro).length > 0) {
+      //   let filteredData = data.filter((fichaClinica: any) => {
+      //     let isValid = true;
+      //     if (filtro.fechaDesdeCadena) {
+      //       isValid = isValid && fichaClinica.fechaDesdeCadena >= filtro.fechaDesdeCadena;
+      //     }
+      //     if (filtro.fechaHastaCadena) {
+      //       isValid = isValid && fichaClinica.fechaHastaCadena <= filtro.fechaHastaCadena;
+      //     }
+      //     if (filtro.idEmpleado) {
+      //       isValid = isValid && fichaClinica.idEmpleado.idEmpleado === filtro.idEmpleado.idEmpleado;
+      //     }
+      //     if (filtro.idCliente) {
+      //       isValid = isValid && fichaClinica.idCliente.idCliente === filtro.idCliente.idCliente;
+      //     }
+      //     if (filtro.idTipoProducto) {
+      //       console.log("entre");
+      //       console.log(fichaClinica.idTipoProducto.idTipoProducto);
+      //       console.log(filtro.idTipoProducto.idTipoProducto);
+      //       isValid = isValid && fichaClinica.idTipoProducto.idTipoProducto === filtro.idTipoProducto.idTipoProducto;
+      //     }
+      //     return isValid;
+      //   });
+      //   console.log(filteredData);
+      this.matTableDataSource.data = data;
     });
 
 

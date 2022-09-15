@@ -145,8 +145,6 @@ export class ListadoServicioComponent implements OnInit {
 
   applyFilter() {
     const formValue = this.myForm.value;
-    console.log("b4");
-    console.log(formValue);
 
 
 
