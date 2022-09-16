@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 import { LoginService } from 'src/app/features/auth/services/login.service';
 import { SubCategoria } from 'src/app/features/ficha-clinica/interfaces/subcategoria.interface';
 import { FichaClinicaService } from 'src/app/features/ficha-clinica/services/ficha-clinica.service';
+import Swal from 'sweetalert2';
 import { AddDialogComponent } from '../../components/add-dialog/add-dialog.component';
 import { AddSubCategoriaDialogComponent } from '../../components/add-sub-categoria-dialog/add-sub-categoria-dialog.component';
 import { EditDialogComponent } from '../../components/edit-dialog/edit-dialog.component';
@@ -18,10 +19,9 @@ import { CategoriaService } from '../../services/categoria.service';
 @Component({
   selector: 'app-sub-categoria-page',
   templateUrl: './sub-categoria-page.component.html',
-  styleUrls: ['./sub-categoria-page.component.css']
+  styleUrls: ['./sub-categoria-page.component.css'],
 })
 export class SubCategoriaPageComponent implements OnInit {
-
   matTableDataSource = new MatTableDataSource<SubCategoria>();
   subCategorias$!: Observable<SubCategoria[]>;
   displayedColumns: string[] = ['idSubCategoria', 'descripcion', 'acciones'];
@@ -29,11 +29,13 @@ export class SubCategoriaPageComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private fb: FormBuilder,
+  constructor(
+    private fb: FormBuilder,
     private categoriaService: CategoriaService,
     public dialog: MatDialog,
     private fichaClinicasService: FichaClinicaService,
-    private userService: LoginService) { }
+    private userService: LoginService
+  ) {}
 
   ngAfterViewInit() {
     this.matTableDataSource.paginator = this.paginator;
@@ -44,10 +46,8 @@ export class SubCategoriaPageComponent implements OnInit {
     this.subCategorias$ = this.categoriaService.getSubCategorias();
     this.subCategorias$.subscribe((data: any) => {
       this.matTableDataSource.data = data;
-    }
-    );
+    });
   }
-
 
   openDialog(isEdit: boolean, ficha_clinica?: any): void {
     if (!isEdit) {
@@ -58,26 +58,77 @@ export class SubCategoriaPageComponent implements OnInit {
       dialogRef.afterClosed().subscribe((result: any) => {
         console.log('The dialog was closed');
         if (result != null) {
-
+          this.categoriaService.addSubCategoria(result).subscribe(
+            (data: any) => {
+              this.subCategorias$ = this.categoriaService.getSubCategorias();
+              this.subCategorias$.subscribe((data: any) => {
+                this.matTableDataSource.data = data;
+              });
+            },
+            (error: any) => {
+              Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'No se pudo agregar la categoria',
+              });
+            }
+          );
         }
       });
     } else {
       const dialogRef = this.dialog.open(EditSubCategoriaDialogComponent, {
         width: '100%',
-        data: ficha_clinica
+        data: ficha_clinica,
       });
       dialogRef.afterClosed().subscribe((result: any) => {
         console.log('The dialog was closed');
         if (result != null) {
-
+          this.categoriaService.updateSubCategoria(result).subscribe(
+            (data: any) => {
+              this.subCategorias$ = this.categoriaService.getSubCategorias();
+              this.subCategorias$.subscribe((data: any) => {
+                this.matTableDataSource.data = data;
+              });
+            },
+            (error: any) => {
+              Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'No se pudo editar la categoria',
+              });
+            }
+          );
         }
       });
-
     }
-
   }
 
-  deleteElement(element: any) {
+  deleteElement(index: number) {
+    Swal.fire({
+      title: '¿Estas seguro?',
+      text: 'No podras revertir esta acción',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Si, eliminar',
+      cancelButtonText: 'No, cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.categoriaService.deleteSubCategoria(index).subscribe(
+          (data: any) => {
+            this.subCategorias$ = this.categoriaService.getSubCategorias();
+            this.subCategorias$.subscribe((data: any) => {
+              this.matTableDataSource.data = data;
+            });
+          },
+          (error: any) => {
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: 'No se pudo eliminar la categoria',
+            });
+          }
+        );
+      }
+    });
   }
-
 }
