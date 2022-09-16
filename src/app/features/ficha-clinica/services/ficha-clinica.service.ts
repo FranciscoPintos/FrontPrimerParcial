@@ -33,15 +33,10 @@ export class FichaClinicaService {
       throw new Error('No hay usuario logueado');
     }
 
-    return this.httpClient.put(
-      `/stock-nutrinatalia/fichaClinica`,
-      fichaClinica,
-      {
-        headers: {
-          usuario: `${this.authService.getUsuario()}`,
-        },
-      }
-    );
+    return this.httpClient.put(`/stock-nutrinatalia/fichaClinica`, {
+      idFichaClinica: fichaClinica.idFichaClinica,
+      ...fichaClinica,
+    });
   }
 
   addFichaClinica(fichaClinica: any) {
@@ -67,11 +62,13 @@ export class FichaClinicaService {
     };
     return this.httpClient.post(
       `/stock-nutrinatalia/fichaClinica`,
-      fichaClinicaRequest,
+      fichaClinicaRequest
     );
   }
 
   deleteFichaClinica(id: number) {
-    return this.httpClient.delete(`/stock-nutrinatalia/fichaClinica/${id}`).pipe(tap(console.log));
+    return this.httpClient
+      .delete(`/stock-nutrinatalia/fichaClinica/${id}`)
+      .pipe(tap(console.log));
   }
 }

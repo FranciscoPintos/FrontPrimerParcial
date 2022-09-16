@@ -139,6 +139,8 @@ export class ListadoFichaClinicaPageComponent implements OnInit {
         }
       });
     } else {
+      console.log('ficha_clinica');
+      console.log(ficha_clinica);
       const dialogRef = this.dialog.open(EditDialogComponent, {
         width: '100%',
         data: ficha_clinica,
