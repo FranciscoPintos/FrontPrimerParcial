@@ -63,4 +63,19 @@ export class FichaClinicaService {
       }
     });
   }
+  deleteFichaClinica(id: number) {
+    // return this.httpClient.delete(`/stock-nutrinatalia/fichaClinica`, fichaClinicaRequest, {
+    //   headers: {
+    //     'usuario': `${this.authService.getUsuario()}`
+    //   }
+    // });
+
+
+
+
+
+
+
+
+  }
 }

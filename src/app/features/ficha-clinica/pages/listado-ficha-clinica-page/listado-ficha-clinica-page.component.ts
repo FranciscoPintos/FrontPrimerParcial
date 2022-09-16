@@ -138,6 +138,9 @@ export class ListadoFichaClinicaPageComponent implements OnInit {
   }
 
   deleteElement(element: any) {
+    // this.fichaClinicasService.deleteFichaClinica(element).subscribe((data: any) => {
+    //   console.log(data);
+    // });
   }
 
 
