@@ -28,6 +28,11 @@ export class SideBarComponent implements OnInit {
     },
     {
       icon: 'home',
+      route: '/listar_servicio',
+      title: 'Servicios'
+    },
+    {
+      icon: 'home',
       route: '/categorias',
       title: 'Categorias'
     },

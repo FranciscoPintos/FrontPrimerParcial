@@ -11,8 +11,13 @@ export class ServicioService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getFichasClinicas() {
-    return this.httpClient.get(`/stock-nutrinatalia/servicio`).pipe(map((data: any) => data['lista']));
+  getFichasClinicas(filtro?: any) {
+    const url = `/stock-nutrinatalia/servicio`;
+    const filter = { ejemplo: filtro };
+    const finalUrl = filter.ejemplo ? `${url}?ejemplo=${JSON.stringify(filter.ejemplo)}` : url;
+    console.log("finalUrl");
+    console.log(finalUrl);
+    return this.httpClient.get(encodeURI(finalUrl)).pipe(tap(console.log), map((data: any) => data['lista']));
   }
 
   updateFichaClinica(fichaClinica: any) {

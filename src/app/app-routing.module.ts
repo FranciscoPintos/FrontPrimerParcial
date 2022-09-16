@@ -44,11 +44,6 @@ const routes: Routes = [
     component: ListadoFichaClinicaPageComponent
   },
   {
-    path: 'servicios',
-    canActivate: [AuthGuard],
-    component: ListadoServicioComponent
-  },
-  {
     path: 'categorias',
     canActivate: [AuthGuard],
     component: CategoriaPageComponent
