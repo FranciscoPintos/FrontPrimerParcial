@@ -3,36 +3,21 @@
   <p>Modificar los datos</p>
   <form [formGroup]="myForm">
     <section>
-      <mat-form-field
-        style="width: 100%"
-        ngDefaultControl
-        formControlName="motivoConsulta"
-        appearance="fill"
-      >
+      <mat-form-field style="width: 100%" appearance="fill">
         <mat-label>Cual es el motivo de la consulta?</mat-label>
-        <input matInput />
+        <input matInput ngDefaultControl formControlName="motivoConsulta" />
       </mat-form-field>
     </section>
     <section>
-      <mat-form-field
-        style="width: 100%"
-        ngDefaultControl
-        formControlName="diagnostico"
-        appearance="fill"
-      >
+      <mat-form-field style="width: 100%" appearance="fill">
         <mat-label>Cual es el diagnostico?</mat-label>
-        <input matInput />
+        <input matInput ngDefaultControl formControlName="diagnostico" />
       </mat-form-field>
     </section>
     <section>
-      <mat-form-field
-        style="width: 100%"
-        ngDefaultControl
-        formControlName="observacion"
-        appearance="fill"
-      >
+      <mat-form-field style="width: 100%" ngDefaultControl appearance="fill">
         <mat-label>Cual es la observacion?</mat-label>
-        <input matInput />
+        <input matInput ngDefaultControl formControlName="observacion" />
       </mat-form-field>
     </section>
     <section>
