@@ -21,7 +21,7 @@ export class EditCategoriaDialogComponent implements OnInit {
   ngOnInit(): void {
     console.log(this.data);
     this.myForm = this.fb.group({
-      id: [this.data?.idCategoria],
+      id: [Number(this.data.idCategoria)],
       descripcion: [this.data?.descripcion],
     });
   }
