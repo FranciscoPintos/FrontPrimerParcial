@@ -25,16 +25,17 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import {ServicioModule} from "./features/servicio/servicio.module";
+import { ServicioModule } from "./features/servicio/servicio.module";
 import { ReservaModule } from "./features/reserva/reserva.module";
 import { AddReservaComponent } from './shared/components/add-reserva/add-reserva.component';
-import {MatOptionModule} from "@angular/material/core";
-import {MatDatepicker, MatDatepickerModule} from "@angular/material/datepicker";
-import {MatTableDataSource, MatTableModule} from "@angular/material/table";
-import {MatButtonToggleModule} from "@angular/material/button-toggle";
-import {MatButtonModule} from "@angular/material/button";
-import {MatCheckboxModule} from "@angular/material/checkbox";
+import { MatOptionModule } from "@angular/material/core";
+import { MatDatepicker, MatDatepickerModule } from "@angular/material/datepicker";
+import { MatTableDataSource, MatTableModule } from "@angular/material/table";
+import { MatButtonToggleModule } from "@angular/material/button-toggle";
+import { MatButtonModule } from "@angular/material/button";
+import { MatCheckboxModule } from "@angular/material/checkbox";
 import { SharedModule } from './shared/shared.module';
+import { HeaderRequestInterceptor } from './shared/interceptors/header-request.interceptor';
 
 @NgModule({
   declarations: [
@@ -70,7 +71,10 @@ import { SharedModule } from './shared/shared.module';
 
 
   ],
-  providers: [ServicepaisService, { provide: HTTP_INTERCEPTORS, useClass: BaseUrlInterceptor, multi: true }],
+  providers: [ServicepaisService,
+    { provide: HTTP_INTERCEPTORS, useClass: BaseUrlInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: HeaderRequestInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

@@ -10,7 +10,10 @@ export class AuthService {
   isLoggedIn(): boolean {
     const user = localStorage.getItem('usuario');
     return !!user;
+  }
 
+  getUsuario(): string {
+    return localStorage.getItem('usuario') || '';
   }
 
   getUsuario(): string {
