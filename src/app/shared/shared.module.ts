@@ -26,6 +26,9 @@ import { AddCategoriaDialogComponent } from './components/add-categoria-dialog/a
 import { AddSubCategoriaDialogComponent } from './components/add-sub-categoria-dialog/add-sub-categoria-dialog.component';
 import { EditSubCategoriaDialogComponent } from './components/edit-sub-categoria-dialog/edit-sub-categoria-dialog.component';
 import { EditCategoriaDialogComponent } from './components/edit-categoria-dialog/edit-categoria-dialog.component';
+import {ScrollingModule} from "@angular/cdk/scrolling";
+import {MatRadioModule} from "@angular/material/radio";
+import {EditReservaComponent} from "./components/edit-reserva/edit-reserva.component";
 
 const MATERIAL_MODULES = [
   MatCardModule,
@@ -64,13 +67,16 @@ const FORM_MODULES = [
     AddCategoriaDialogComponent,
     AddSubCategoriaDialogComponent,
     EditSubCategoriaDialogComponent,
-    EditCategoriaDialogComponent
+    EditCategoriaDialogComponent,
+    EditReservaComponent,
   ],
   imports: [
     CommonModule,
     ...FORM_MODULES,
     ...MATERIAL_MODULES,
-    FlexLayoutModule
+    FlexLayoutModule,
+    ScrollingModule,
+    MatRadioModule
   ],
   exports: [
     ...FORM_MODULES,

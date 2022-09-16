@@ -29,16 +29,31 @@ export class ReservasService {
     return this.httpClient.get<any>('/stock-nutrinatalia/reserva?ejemplo=' + url).pipe(map(data => data['lista']));
   }
   getAgenda(id:string , fecha:string): Observable<Reserva[]> {
-    return this.httpClient.get<any>('/stock-nutrinatalia/persona/'+id+'/agenda?fecha='+fecha,
-      {
-        headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*',
-        }
-      }).pipe(tap(console.log) ,map(data => data['lista']));
+    return this.httpClient.get<any>('/stock-nutrinatalia/persona/'+id+'/agenda?fecha='+fecha);
   }
   getAgendalibre(id:string , fecha:string): Observable<Reserva[]> {
     return this.httpClient.get<any>('/stock-nutrinatalia/persona/'+id+'/agenda?fecha='+fecha+'&disponible=S');
+  }
+
+  addReserva(reserva: any) {
+    const ReservaRequest = {
+      "fechaCadena": reserva.fechaCadena,
+      "horaInicioCadena": reserva.horaInicioCadena,
+      "horaFinCadena": reserva.horaFinCadena,
+      "idEmpleado":{
+        "idPersona":reserva.idEmpleado.idPersona
+      },
+      "idCliente":{
+        "idPersona":reserva.idCliente
+      },
+    };
+    return this.httpClient.post(`/stock-nutrinatalia/reserva`, ReservaRequest);
+  }
+
+  //hacer delete
+  deleteReserva(id:any){
+    console.log(id)
+    return this.httpClient.delete('/stock-nutrinatalia/reserva/'+id);
   }
 
 ///stock-nutrinatalia/persona/4/agenda?fecha=20190903
