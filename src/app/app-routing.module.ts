@@ -11,7 +11,7 @@ import { ListadoServicioComponent } from './features/servicio/pages/listar-servi
 import { ReservasComponent } from './features/reserva/pages/reservas/reservas.component';
 import { AuthGuard } from './shared/guards/auth.guard';
 import { HomeComponent } from './shared/pages/home/home.component';
-import { ProductosComponent } from './features/adminServicios/pages/productos/productos.component';
+import { ProductosComponent } from './features/admin-servicios/pages/productos/productos.component';
 
 const routes: Routes = [
   {
