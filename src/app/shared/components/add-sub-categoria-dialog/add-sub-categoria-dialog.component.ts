@@ -12,22 +12,21 @@ import { AddDialogComponent } from '../add-dialog/add-dialog.component';
 @Component({
   selector: 'app-add-sub-categoria-dialog',
   templateUrl: './add-sub-categoria-dialog.component.html',
-  styleUrls: ['./add-sub-categoria-dialog.component.css']
+  styleUrls: ['./add-sub-categoria-dialog.component.css'],
 })
 export class AddSubCategoriaDialogComponent implements OnInit {
-
   myForm!: FormGroup;
   categorias$!: Observable<Categoria[]>;
 
-
-  constructor(private fb: FormBuilder, public dialogRef: MatDialogRef<AddSubCategoriaDialogComponent>,
+  constructor(
+    private fb: FormBuilder,
+    public dialogRef: MatDialogRef<AddSubCategoriaDialogComponent>,
 
     private categoriaService: CategoriaService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.myForm = this.fb.group({
-      id: [],
       descripcion: [],
       categoria: [],
     });
@@ -35,12 +34,20 @@ export class AddSubCategoriaDialogComponent implements OnInit {
   }
 
   addCategoria() {
-    this.dialogRef.close(this.myForm.value);
+    //Check if form is valid
+    if (!this.myForm.valid) {
+      this.myForm.markAllAsTouched();
+      return;
+    }
+
+    const form = this.myForm.value;
+    this.dialogRef.close({
+      idCategoria: form.categoria,
+      descripcion: form.descripcion,
+    });
   }
 
   onNoClick(): void {
     this.dialogRef.close();
   }
-
-
 }

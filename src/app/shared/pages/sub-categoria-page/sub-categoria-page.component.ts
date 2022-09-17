@@ -56,23 +56,36 @@ export class SubCategoriaPageComponent implements OnInit {
       });
 
       dialogRef.afterClosed().subscribe((result: any) => {
-        console.log('The dialog was closed');
+        if (!result) return;
+
+        const { idCategoria, descripcion } = result;
+        console.log('result');
+        console.log(result);
         if (result != null) {
-          this.categoriaService.addSubCategoria(result).subscribe(
-            (data: any) => {
-              this.subCategorias$ = this.categoriaService.getSubCategorias();
-              this.subCategorias$.subscribe((data: any) => {
-                this.matTableDataSource.data = data;
-              });
-            },
-            (error: any) => {
-              Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'No se pudo agregar la categoria',
-              });
-            }
-          );
+          this.categoriaService
+            .addSubCategoria(idCategoria, descripcion)
+            .subscribe(
+              (data: any) => {
+                this.subCategorias$ = this.categoriaService.getSubCategorias();
+                this.subCategorias$.subscribe((data: any) => {
+                  this.matTableDataSource.data = data;
+                });
+
+                Swal.fire({
+                  title: 'SubCategoria agregada',
+                  icon: 'success',
+                  showConfirmButton: false,
+                  timer: 1500,
+                });
+              },
+              (error: any) => {
+                Swal.fire({
+                  icon: 'error',
+                  title: 'No se pudo agregar la subcategoria',
+                  text: error.error,
+                });
+              }
+            );
         }
       });
     } else {
@@ -93,8 +106,8 @@ export class SubCategoriaPageComponent implements OnInit {
             (error: any) => {
               Swal.fire({
                 icon: 'error',
-                title: 'Error',
-                text: 'No se pudo editar la categoria',
+                title: 'No se pudo actualizar la subcategoria',
+                text: error.error,
               });
             }
           );

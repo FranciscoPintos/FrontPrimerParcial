@@ -34,11 +34,13 @@ export class CategoriaService {
     });
   }
 
-  addSubCategoria(subCategoria: any) {
-    return this.httpClient.post(
-      `/stock-nutrinatalia/tipoProducto`,
-      subCategoria
-    );
+  addSubCategoria(idCategoria: number, descripcionSubCategoria: string) {
+    return this.httpClient.post(`/stock-nutrinatalia/tipoProducto`, {
+      idCategoria: {
+        idCategoria,
+      },
+      descripcion: descripcionSubCategoria,
+    });
   }
 
   updateCategoria(categoria: any) {
@@ -54,7 +56,7 @@ export class CategoriaService {
 
   deleteCategoria(idCategoria: number) {
     return this.httpClient.delete(
-      `/stock-nutrinatalia/categoria/${idCategoria}`,
+      `/stock-nutrinatalia/categoria/${idCategoria}`
     );
   }
 
