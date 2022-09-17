@@ -49,7 +49,7 @@ export class SubCategoriaPageComponent implements OnInit {
     });
   }
 
-  openDialog(isEdit: boolean, ficha_clinica?: any): void {
+  openDialog(isEdit: boolean, subCategoria?: any): void {
     if (!isEdit) {
       const dialogRef = this.dialog.open(AddSubCategoriaDialogComponent, {
         width: '100%',
@@ -91,7 +91,7 @@ export class SubCategoriaPageComponent implements OnInit {
     } else {
       const dialogRef = this.dialog.open(EditSubCategoriaDialogComponent, {
         width: '100%',
-        data: ficha_clinica,
+        data: subCategoria,
       });
       dialogRef.afterClosed().subscribe((result: any) => {
         console.log('The dialog was closed');
@@ -116,7 +116,7 @@ export class SubCategoriaPageComponent implements OnInit {
     }
   }
 
-  deleteElement(index: number) {
+  deleteElement(subcategoria: Partial<SubCategoria>) {
     Swal.fire({
       title: '¿Estas seguro?',
       text: 'No podras revertir esta acción',
@@ -125,22 +125,33 @@ export class SubCategoriaPageComponent implements OnInit {
       confirmButtonText: 'Si, eliminar',
       cancelButtonText: 'No, cancelar',
     }).then((result) => {
+      console.log(subcategoria);
       if (result.isConfirmed) {
-        this.categoriaService.deleteSubCategoria(index).subscribe(
-          (data: any) => {
-            this.subCategorias$ = this.categoriaService.getSubCategorias();
-            this.subCategorias$.subscribe((data: any) => {
-              this.matTableDataSource.data = data;
-            });
-          },
-          (error: any) => {
-            Swal.fire({
-              icon: 'error',
-              title: 'Error',
-              text: 'No se pudo eliminar la categoria',
-            });
-          }
-        );
+        this.categoriaService
+          .deleteSubCategoria(subcategoria.idTipoProducto!)
+          .subscribe(
+            (data: any) => {
+              this.subCategorias$ = this.categoriaService.getSubCategorias();
+              this.subCategorias$.subscribe((data: any) => {
+                this.matTableDataSource.data = data;
+              });
+
+              Swal.fire({
+                title: `SubCategoria ${subcategoria.idTipoProducto} eliminada`,
+                icon: 'success',
+                showConfirmButton: false,
+                timer: 1500,
+              });
+            },
+            (error: any) => {
+              console.log(error);
+              Swal.fire({
+                icon: 'error',
+                title: 'No se pudo eliminar la subcategoria',
+                text: error.error ?? 'Error desconocido',
+              });
+            }
+          );
       }
     });
   }
