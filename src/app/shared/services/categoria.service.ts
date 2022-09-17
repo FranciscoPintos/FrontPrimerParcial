@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
+import { Categoria } from '../models/categoria';
 
 @Injectable({
   providedIn: 'root',
@@ -27,8 +28,10 @@ export class CategoriaService {
       .pipe(map((data: any) => data['lista']));
   }
 
-  addCategoria(categoria: any) {
-    return this.httpClient.post(`/stock-nutrinatalia/categoria`, categoria);
+  addCategoria(categoria: Partial<Categoria>) {
+    return this.httpClient.post(`/stock-nutrinatalia/categoria`, {
+      descripcion: categoria.descripcion,
+    });
   }
 
   addSubCategoria(subCategoria: any) {
