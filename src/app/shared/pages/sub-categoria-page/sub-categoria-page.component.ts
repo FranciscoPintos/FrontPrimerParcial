@@ -115,7 +115,9 @@ export class SubCategoriaPageComponent implements OnInit {
                 Swal.fire({
                   icon: 'error',
                   title: 'No se pudo actualizar la subcategoria',
-                  text: error.error ?? 'Error Desconocido',
+                  text:
+                    error.error ??
+                    'Error Desconocido: Posiblemente este asociado a una categoria',
                 });
               }
             );
@@ -156,7 +158,9 @@ export class SubCategoriaPageComponent implements OnInit {
               Swal.fire({
                 icon: 'error',
                 title: 'No se pudo eliminar la subcategoria',
-                text: error.error ?? 'Error desconocido',
+                text:
+                  error.error ??
+                  'Error desconocido: Posiblemente este asociado a una categoria',
               });
             }
           );
