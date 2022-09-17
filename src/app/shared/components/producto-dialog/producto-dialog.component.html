@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>Agregar Ficha Clinica</h1>
+<h1 mat-dialog-title>Agregar Producto</h1>
 <div mat-dialog-content class="mat-typography">
   <p>Ingrese los datos</p>
   <form [formGroup]="myForm">
@@ -34,5 +34,7 @@
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">Cancelar</button>
-  <button mat-button (click)="accept()" cdkFocusInitial>Agregar</button>
+  <button mat-button (click)="accept()" cdkFocusInitial>
+    {{ data ? "Modificar" : "Agregar" }}
+  </button>
 </div>

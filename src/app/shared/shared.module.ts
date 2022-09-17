@@ -36,6 +36,7 @@ import { SideBarComponent } from './components/side-bar/side-bar.component';
 import { RouterModule } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { ProductoDialogComponent } from './components/producto-dialog/producto-dialog.component';
+import { PacienteDialogComponent } from './components/paciente-dialog/paciente-dialog.component';
 
 const MATERIAL_MODULES = [
   MatCardModule,
@@ -77,6 +78,7 @@ const FORM_MODULES = [FormsModule, ReactiveFormsModule];
     SideBarComponent,
     HomeComponent,
     ProductoDialogComponent,
+    PacienteDialogComponent,
   ],
   imports: [
     CommonModule,

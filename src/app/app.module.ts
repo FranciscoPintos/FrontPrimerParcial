@@ -37,6 +37,7 @@ import { MatCheckboxModule } from "@angular/material/checkbox";
 import { SharedModule } from './shared/shared.module';
 import { HeaderRequestInterceptor } from './shared/interceptors/header-request.interceptor';
 import { AdminServiciosModule } from './features/admin-servicios/admin-servicios.module';
+import { PacientesModule } from './features/pacientes/pacientes.module';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { AdminServiciosModule } from './features/admin-servicios/admin-servicios
     FichaClinicaModule,
     ServicioModule,
     AdminServiciosModule,
+    PacientesModule,
     SharedModule
 
 

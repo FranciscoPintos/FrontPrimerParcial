@@ -12,6 +12,7 @@ import { ReservasComponent } from './features/reserva/pages/reservas/reservas.co
 import { AuthGuard } from './shared/guards/auth.guard';
 import { HomeComponent } from './shared/pages/home/home.component';
 import { ProductosComponent } from './features/admin-servicios/pages/productos/productos.component';
+import { PacientesPageComponent } from './features/pacientes/pages/pacientes-page/pacientes-page.component';
 
 const routes: Routes = [
   {
@@ -68,6 +69,11 @@ const routes: Routes = [
     path: 'productos',
     canActivate: [AuthGuard],
     component: ProductosComponent,
+  },
+  {
+    path: 'pacientes',
+    canActivate: [AuthGuard],
+    component: PacientesPageComponent,
   },
 ];
 @NgModule({

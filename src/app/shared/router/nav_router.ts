@@ -34,4 +34,9 @@ export const NavRouter = [
     route: '/productos',
     title: 'Productos',
   },
+  {
+    icon: 'home',
+    route: '/pacientes',
+    title: 'Pacientes',
+  },
 ];
