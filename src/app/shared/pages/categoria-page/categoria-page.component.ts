@@ -30,7 +30,7 @@ export class CategoriaPageComponent implements OnInit {
 
   constructor(
     private categoriaService: CategoriaService,
-    public dialog: MatDialog,
+    public dialog: MatDialog
   ) {}
 
   ngAfterViewInit() {
@@ -61,9 +61,7 @@ export class CategoriaPageComponent implements OnInit {
               });
 
               Swal.fire({
-                position: 'top-end',
                 icon: 'success',
-                width: '20%',
                 title: 'Categoria agregada correctamente',
                 showConfirmButton: false,
                 timer: 1500,
@@ -71,11 +69,11 @@ export class CategoriaPageComponent implements OnInit {
             },
             (error) => {
               console.log(error);
-            Swal.fire({
-              icon: 'error',
-              title: 'No se pudo agregar la categoria',
-              text: error.error,
-            });
+              Swal.fire({
+                icon: 'error',
+                title: 'No se pudo agregar la categoria',
+                text: error.error,
+              });
             }
           );
         }
@@ -94,14 +92,21 @@ export class CategoriaPageComponent implements OnInit {
               this.categorias$.subscribe((data: any) => {
                 this.matTableDataSource.data = data;
               });
+
+              Swal.fire({
+                icon: 'success',
+                title: `Se ha actualizado la categoria con id ${result.idCategoria} correctamente`,
+                showConfirmButton: false,
+                timer: 1500,
+              });
             },
             (error) => {
               console.log(error);
-            Swal.fire({
-              icon: 'error',
-              title: 'No se pudo editar la categoria',
-              text: error.error,
-            });
+              Swal.fire({
+                icon: 'error',
+                title: 'No se pudo editar la categoria',
+                text: error.error,
+              });
             }
           );
         }
@@ -127,11 +132,13 @@ export class CategoriaPageComponent implements OnInit {
             this.categorias$.subscribe((data: any) => {
               this.matTableDataSource.data = data;
             });
-            Swal.fire(
-              'Eliminado!',
-              'La categoria ha sido eliminada.',
-              'success'
-            );
+            Swal.fire({
+              icon: 'success',
+              title: `La categoria ${categoria.idCategoria!} ha sido eliminada.`,
+              showConfirmButton: false,
+              timer: 1500,
+            });
+
           },
           (error) => {
             console.log(error);
