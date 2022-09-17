@@ -51,7 +51,7 @@ export class CategoriaPageComponent implements OnInit {
   openDialog(isEdit: boolean, ficha_clinica?: any): void {
     if (!isEdit) {
       const dialogRef = this.dialog.open(AddCategoriaDialogComponent, {
-        width: '100%',
+        width: '40%',
       });
 
       dialogRef.afterClosed().subscribe((result: any) => {
@@ -61,6 +61,15 @@ export class CategoriaPageComponent implements OnInit {
               this.categorias$ = this.categoriaService.getCategorias();
               this.categorias$.subscribe((data: any) => {
                 this.matTableDataSource.data = data;
+              });
+
+              Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                width: '20%',
+                title: 'Categoria agregada correctamente',
+                showConfirmButton: false,
+                timer: 1500,
               });
             },
             (error) => {
