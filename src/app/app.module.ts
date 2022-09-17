@@ -36,6 +36,7 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { SharedModule } from './shared/shared.module';
 import { HeaderRequestInterceptor } from './shared/interceptors/header-request.interceptor';
+import { ProductosComponent } from './features/adminServicios/pages/productos/productos.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { HeaderRequestInterceptor } from './shared/interceptors/header-request.i
     PaisAgregarComponent,
     FiltroComponent,
     CrearModificarServicioComponent,
+    ProductosComponent,
   ],
   imports: [
     BrowserModule,

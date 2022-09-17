@@ -1,16 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { PaisComponent } from "./shared/components/pais/pais.component";
-import { PaisAgregarComponent } from "./shared/components/pais/pais-agregar/pais-agregar.component";
+import { PaisComponent } from './shared/components/pais/pais.component';
+import { PaisAgregarComponent } from './shared/components/pais/pais-agregar/pais-agregar.component';
 import { ListadoFichaClinicaPageComponent } from './features/ficha-clinica/pages/listado-ficha-clinica-page/listado-ficha-clinica-page.component';
 import { LoginComponent } from './features/auth/pages/login/login.component';
 import { CategoriaPageComponent } from './shared/pages/categoria-page/categoria-page.component';
 import { SubCategoriaPageComponent } from './shared/pages/sub-categoria-page/sub-categoria-page.component';
 import { CrearModificarServicioComponent } from './features/crear-modificar-servicio/crear-modificar-servicio.component';
-import { ListadoServicioComponent } from "./features/servicio/pages/listar-servicio/listado-servicio.component";
-import { ReservasComponent } from "./features/reserva/pages/reservas/reservas.component";
+import { ListadoServicioComponent } from './features/servicio/pages/listar-servicio/listado-servicio.component';
+import { ReservasComponent } from './features/reserva/pages/reservas/reservas.component';
 import { AuthGuard } from './shared/guards/auth.guard';
 import { HomeComponent } from './shared/pages/home/home.component';
+import { ProductosComponent } from './features/adminServicios/pages/productos/productos.component';
 
 const routes: Routes = [
   {
@@ -21,52 +22,56 @@ const routes: Routes = [
   {
     path: 'pais',
     canActivate: [AuthGuard],
-    component: PaisComponent
+    component: PaisComponent,
   },
   {
     path: 'nuevopais',
     canActivate: [AuthGuard],
-    component: PaisAgregarComponent
+    component: PaisAgregarComponent,
   },
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
   },
   {
     path: 'reserva',
     canActivate: [AuthGuard],
-    component: ReservasComponent
+    component: ReservasComponent,
   },
 
   {
     path: 'ficha_clinica',
     canActivate: [AuthGuard],
-    component: ListadoFichaClinicaPageComponent
+    component: ListadoFichaClinicaPageComponent,
   },
   {
     path: 'categorias',
     canActivate: [AuthGuard],
-    component: CategoriaPageComponent
+    component: CategoriaPageComponent,
   },
   {
     path: 'subcategorias',
     canActivate: [AuthGuard],
-    component: SubCategoriaPageComponent
+    component: SubCategoriaPageComponent,
   },
   {
     path: 'modservicio',
     canActivate: [AuthGuard],
-    component: CrearModificarServicioComponent
+    component: CrearModificarServicioComponent,
   },
   {
     path: 'listar_servicio',
     canActivate: [AuthGuard],
-    component: ListadoServicioComponent
+    component: ListadoServicioComponent,
   },
-
+  {
+    path: 'productos',
+    canActivate: [AuthGuard],
+    component: ProductosComponent,
+  },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

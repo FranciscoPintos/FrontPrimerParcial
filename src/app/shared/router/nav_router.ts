@@ -29,4 +29,9 @@ export const NavRouter = [
     route: '/reportes',
     title: 'Reportes',
   },
+  {
+    icon: 'home',
+    route: '/productos',
+    title: 'Productos',
+  },
 ];
