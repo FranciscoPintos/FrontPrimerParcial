@@ -54,7 +54,7 @@ export class CategoriaService {
 
   deleteCategoria(idCategoria: number) {
     return this.httpClient.delete(
-      `/stock-nutrinatalia/categoria/${idCategoria}`
+      `/stock-nutrinatalia/categoria/${idCategoria}`,
     );
   }
 

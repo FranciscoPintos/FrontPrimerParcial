@@ -29,11 +29,8 @@ export class CategoriaPageComponent implements OnInit {
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(
-    private fb: FormBuilder,
     private categoriaService: CategoriaService,
     public dialog: MatDialog,
-    private fichaClinicasService: FichaClinicaService,
-    private userService: LoginService
   ) {}
 
   ngAfterViewInit() {
@@ -73,11 +70,12 @@ export class CategoriaPageComponent implements OnInit {
               });
             },
             (error) => {
-              Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'No se pudo agregar la categoria',
-              });
+              console.log(error);
+            Swal.fire({
+              icon: 'error',
+              title: 'No se pudo agregar la categoria',
+              text: error.error,
+            });
             }
           );
         }
@@ -98,11 +96,12 @@ export class CategoriaPageComponent implements OnInit {
               });
             },
             (error) => {
-              Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'No se pudo editar la categoria',
-              });
+              console.log(error);
+            Swal.fire({
+              icon: 'error',
+              title: 'No se pudo editar la categoria',
+              text: error.error,
+            });
             }
           );
         }
@@ -110,21 +109,40 @@ export class CategoriaPageComponent implements OnInit {
     }
   }
 
-  deleteElement(i: number) {
-    this.categoriaService.deleteCategoria(i).subscribe(
-      (data: any) => {
-        this.categorias$ = this.categoriaService.getCategorias();
-        this.categorias$.subscribe((data: any) => {
-          this.matTableDataSource.data = data;
-        });
-      },
-      (error) => {
-        Swal.fire({
-          icon: 'error',
-          title: 'Error',
-          text: 'No se pudo eliminar la categoria',
-        });
+  deleteElement(categoria: Partial<Categoria>) {
+    //Ask for confirmation
+    Swal.fire({
+      title: '¿Está seguro?',
+      text: 'No podrá revertir esta acción',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, eliminar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.categoriaService.deleteCategoria(categoria.idCategoria!).subscribe(
+          (data: any) => {
+            this.categorias$ = this.categoriaService.getCategorias();
+            this.categorias$.subscribe((data: any) => {
+              this.matTableDataSource.data = data;
+            });
+            Swal.fire(
+              'Eliminado!',
+              'La categoria ha sido eliminada.',
+              'success'
+            );
+          },
+          (error) => {
+            console.log(error);
+            Swal.fire({
+              icon: 'error',
+              title: 'No se pudo eliminar la categoria',
+              text: error.error,
+            });
+          }
+        );
       }
-    );
+    });
   }
 }
