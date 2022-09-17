@@ -1,11 +1,9 @@
 import { MediaMatcher } from '@angular/cdk/layout';
-import { ChangeDetectorRef, Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { Observable, Subject } from 'rxjs';
-import { BasicDialogComponent } from './shared/components/basic-dialog/basic-dialog.component';
-import { AuthService } from './shared/services/auth.service';
-
+import { LocalStorageService } from '../../services/local-storage.service';
+import { BasicDialogComponent } from '../basic-dialog/basic-dialog.component';
 
 interface NavItem {
   icon: string;
@@ -14,20 +12,24 @@ interface NavItem {
 }
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: 'app-side-bar',
+  templateUrl: './side-bar.component.html',
+  styleUrls: ['./side-bar.component.css']
 })
-export class AppComponent {
-  mobileQuery!: MediaQueryList;
-  //Add loggedin subject behavior
-  //Add loggedin subject behavior
+export class SideBarComponent implements OnInit {
+
+  mobileQuery: MediaQueryList;
 
   fillerNav: NavItem[] = [
     {
       icon: 'home',
       route: '/ficha_clinica',
       title: 'Fichas de Clinica'
+    },
+    {
+      icon: 'home',
+      route: '/listar_servicio',
+      title: 'Servicios'
     },
     {
       icon: 'home',
@@ -41,39 +43,22 @@ export class AppComponent {
     },
     {
       icon: 'home',
-      route: '/listar_servicio',
-      title: 'Servicios'
-    },
-    {
-      icon: 'home',
       route: '/reserva',
       title: 'Reservas'
-    },
-    {
-      icon: 'logout',
-      route: '/login',
-      title: 'Cerrar Sesion'
-    },
+    }
   ];
-
 
   private _mobileQueryListener: () => void;
 
-  constructor(changeDetectorRef: ChangeDetectorRef,
-    media: MediaMatcher,
-    public dialog: MatDialog,
+  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher,
+    private dialog: MatDialog,
     private router: Router,
-    private authService: AuthService
+    private localStorageService: LocalStorageService
   ) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
   }
-
-  isLogged(): boolean {
-    return this.authService.isLoggedIn();
-  }
-
   ngOnInit(): void {
 
   }
@@ -82,18 +67,24 @@ export class AppComponent {
     this.mobileQuery.removeListener(this._mobileQueryListener);
   }
 
-  openDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
+
+
+  openLogOutDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
     const myDialog = this.dialog.open(BasicDialogComponent, {
       width: '250px',
       enterAnimationDuration,
       exitAnimationDuration,
     });
 
-    myDialog.afterClosed().subscribe((data) => {
+    myDialog.afterClosed().subscribe(async (data) => {
       console.log('The dialog was closed');
       if (data) {
+        this.localStorageService.removeItem('usuario');
         this.router.navigate(['/login']);
       }
     });
+
   }
+
+
 }

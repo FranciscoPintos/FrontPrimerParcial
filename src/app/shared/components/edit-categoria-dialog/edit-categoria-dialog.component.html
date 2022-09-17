@@ -6,13 +6,9 @@
       <mat-label>ID</mat-label>
       <input matInput readonly />
     </mat-form-field>
-    <mat-form-field
-      ngDefaultControl
-      formControlName="descripcion"
-      appearance="fill"
-    >
+    <mat-form-field appearance="fill">
       <mat-label>Descripcion</mat-label>
-      <input matInput />
+      <input matInput ngDefaultControl formControlName="descripcion" />
     </mat-form-field>
   </form>
 </div>

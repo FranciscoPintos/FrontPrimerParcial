@@ -3,12 +3,6 @@
 
 <div>
   <form [formGroup]="myForm">
-    <mat-checkbox class="example-margin"
-                  [checked]="allComplete"
-                  (change)="setCheck($event.checked)"
-                  color="primary">
-      Mostar ya reservados
-    </mat-checkbox>
     <section>
       <mat-form-field style="width: 50%" appearance="fill">
         <mat-label>Fecha</mat-label>
@@ -31,11 +25,16 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-    </section>
-    <section>
-      <button (click)="buscar()" mat-raised-button color="primary">
-        Buscar
-      </button>
+      <mat-form-field style="width: 50%" appearance="fill">
+        <mat-label>Cliente</mat-label>
+        <mat-select formControlName="idCliente">
+          <mat-option
+            *ngFor="let item of usuarios$ | async; let i = index"
+            [value]="item.idPersona">
+            {{ item.nombre }} {{ item.apellido }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
     </section>
   </form>
 </div>
@@ -88,16 +87,7 @@
 </div>
 <div>
   <form [formGroup]="myForm">
-    <mat-form-field style="width: 50%" appearance="fill">
-      <mat-label>Cliente</mat-label>
-      <mat-select formControlName="idCliente">
-        <mat-option
-          *ngFor="let item of usuarios$ | async; let i = index"
-          [value]="item.idPersona">
-          {{ item.nombre }} {{ item.apellido }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+
   </form>
   <button mat-raised-button (click)="onNoClick()">Cancelar</button>
   <button mat-raised-button (click)="addReserva()" cdkFocusInitial>Agregar</button>

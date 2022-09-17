@@ -1,4 +1,4 @@
-import { LOCALE_ID, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AppRoutingModule } from './app-routing.module';
@@ -25,21 +25,17 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import {ServicioModule} from "./features/servicio/servicio.module";
-import {ReservaModule} from "./features/reserva/reserva.module";
+import { ServicioModule } from "./features/servicio/servicio.module";
+import { ReservaModule } from "./features/reserva/reserva.module";
 import { AddReservaComponent } from './shared/components/add-reserva/add-reserva.component';
-import {MatOptionModule} from "@angular/material/core";
-import {MatDatepicker, MatDatepickerModule} from "@angular/material/datepicker";
-import {MatTableDataSource, MatTableModule} from "@angular/material/table";
-import {MatButtonToggleModule} from "@angular/material/button-toggle";
-import {MatButtonModule} from "@angular/material/button";
-import {MatCheckboxModule} from "@angular/material/checkbox";
+import { MatOptionModule } from "@angular/material/core";
+import { MatDatepicker, MatDatepickerModule } from "@angular/material/datepicker";
+import { MatTableDataSource, MatTableModule } from "@angular/material/table";
+import { MatButtonToggleModule } from "@angular/material/button-toggle";
+import { MatButtonModule } from "@angular/material/button";
+import { MatCheckboxModule } from "@angular/material/checkbox";
 import { SharedModule } from './shared/shared.module';
-
-import localeEs from '@angular/common/locales/es';
-import { registerLocaleData } from '@angular/common';
-
-registerLocaleData(localeEs, 'es');
+import { HeaderRequestInterceptor } from './shared/interceptors/header-request.interceptor';
 
 @NgModule({
   declarations: [
@@ -55,27 +51,12 @@ registerLocaleData(localeEs, 'es');
     HttpClientModule,
     FormsModule,
     BrowserAnimationsModule,
-    FormsModule,
+    FlexLayoutModule,
+    ReactiveFormsModule,
 
     //Modulos Propios
-    MatSliderModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatFormFieldModule,
-    MatCardModule,
     AuthModule,
-    FlexLayoutModule,
     ReservaModule,
-    MatOptionModule,
-    MatSelectModule,
-    ReactiveFormsModule,
-    MatDatepickerModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatTableModule,
-    MatButtonToggleModule,
-    MatButtonModule,
-    MatCheckboxModule,
     FichaClinicaModule,
     ServicioModule,
     MatSidenavModule,
@@ -90,7 +71,10 @@ registerLocaleData(localeEs, 'es');
 
 
   ],
-  providers: [ServicepaisService, { provide: HTTP_INTERCEPTORS, useClass: BaseUrlInterceptor, multi: true }, { provide: LOCALE_ID, useValue: 'es' }],
+  providers: [ServicepaisService,
+    { provide: HTTP_INTERCEPTORS, useClass: BaseUrlInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: HeaderRequestInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

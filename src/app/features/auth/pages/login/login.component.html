@@ -16,7 +16,7 @@
         >
           <mat-label>Nombre</mat-label>
           <input required matInput />
-          <mat-error *ngIf="userName.invalid">{{getErrorMessageUserName()}}</mat-error>
+          <!-- <mat-error *ngIf="userName.invalid">{{getErrorMessageUserName()}}</mat-error> -->
         </mat-form-field>
       </section>
 
@@ -34,7 +34,7 @@
           >
           <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
         </button>
-        <mat-error *ngIf="password.invalid">{{getErrorMessagePassword()}}</mat-error>
+        <!-- <mat-error *ngIf="password.invalid">{{getErrorMessagePassword()}}</mat-error> -->
         </mat-form-field>
       </section>
 

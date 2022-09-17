@@ -13,7 +13,7 @@ export class BaseUrlInterceptor implements HttpInterceptor {
   constructor() { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const apiReq = request.clone({ url: `https://equipoyosh.com/${request.url}` });
+    const apiReq = request.clone({ url: `https://equipoyosh.com${request.url}` });
     return next.handle(apiReq);
   }
 }

@@ -1,24 +1,23 @@
-import {ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
+import {ChangeDetectorRef, Component, Inject, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {Observable} from "rxjs";
 import {Usuario} from "../../../features/auth/interfaces/usuario";
-import {MatDialogRef} from "@angular/material/dialog";
-import {LoginService} from "../../../features/auth/services/login.service";
-import {MatTableDataSource} from "@angular/material/table";
 import {Reserva} from "../../../features/reserva/interface/reserva";
-import Swal from "sweetalert2";
-import {ReservasService} from "../../../features/reserva/services/reservas.service";
-import {MatPaginator, MatPaginatorIntl} from "@angular/material/paginator";
-import { ScrollStrategy, ScrollStrategyOptions } from '@angular/cdk/overlay';
 import {SelectionModel} from "@angular/cdk/collections";
-
+import {MatPaginator, MatPaginatorIntl} from "@angular/material/paginator";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {LoginService} from "../../../features/auth/services/login.service";
+import {ReservasService} from "../../../features/reserva/services/reservas.service";
+import {MatTableDataSource} from "@angular/material/table";
+import {formatDate} from "@angular/common";
 
 @Component({
-  selector: 'app-add-reserva',
-  templateUrl: './add-reserva.component.html',
-  styleUrls: ['./add-reserva.component.css']
+  selector: 'app-edit-reserva',
+  templateUrl: './edit-reserva.component.html',
+  styleUrls: ['./edit-reserva.component.css']
 })
-export class AddReservaComponent implements OnInit {
+export class EditReservaComponent implements OnInit {
+
   displayedColumns: string[] = ['horaInicio', 'horaFin', 'idCliente', 'acciones'];
   dataSource: any;
   myForm!: FormGroup;
@@ -34,17 +33,21 @@ export class AddReservaComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator = new MatPaginator(new MatPaginatorIntl(), ChangeDetectorRef.prototype);
 
 
-  constructor(private fb: FormBuilder, public dialogRef: MatDialogRef<AddReservaComponent>,
-              private userService: LoginService, private reservasService: ReservasService) {
-  }
+  constructor(private fb: FormBuilder, public dialogRef: MatDialogRef<EditReservaComponent>,
+              private userService: LoginService, private reservasService: ReservasService,
+              @Inject(MAT_DIALOG_DATA) public data: any
+  ) {}
 
   ngOnInit(): void {
+    console.log(this.data)
+    let fechadata = new Date(formatDate(this.data.fecha, 'MM/dd/yyyy', 'en'));
     this.myForm = this.fb.group({
-      fecha: [],
-      idEmpleado: [],
-      idCliente: []
+      fecha: [fechadata],
+      idEmpleado: [this.data.idEmpleado.idPersona],
+      idCliente: [this.data.idCliente.idPersona]
     });
     this.usuarios$ = this.userService.getPersonas();
+
 
 
     // this.myForm.get('categoria')!.valueChanges.subscribe(idCategoria => {
@@ -55,8 +58,9 @@ export class AddReservaComponent implements OnInit {
   addReserva() {
     this.reserva.idCliente=this.myForm.value.idCliente;
 
+    console.log(this.reserva);
 
-    this.dialogRef.close(this.reserva);
+    // this.dialogRef.close(this.reserva);
   }
 
   onNoClick(): void {
@@ -99,7 +103,7 @@ export class AddReservaComponent implements OnInit {
   }
 
   setHorario(reserva:any){
-      this.reserva=reserva;
+    this.reserva=reserva;
 
   }
 

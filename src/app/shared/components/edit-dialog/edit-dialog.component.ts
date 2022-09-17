@@ -10,13 +10,10 @@ import { Ficha } from '../../models/ficha';
 import { CategoriaService } from '../../services/categoria.service';
 import { AddDialogComponent } from '../add-dialog/add-dialog.component';
 
-
-
-
 @Component({
   selector: 'app-edit-dialog',
   templateUrl: './edit-dialog.component.html',
-  styleUrls: ['./edit-dialog.component.css']
+  styleUrls: ['./edit-dialog.component.css'],
 })
 export class EditDialogComponent implements OnInit {
   myForm!: FormGroup;
@@ -24,42 +21,46 @@ export class EditDialogComponent implements OnInit {
   subCategorias$!: Observable<SubCategoria[]>;
   usuarios$!: Observable<Usuario[]>;
 
-
-  constructor(private fb: FormBuilder, public dialogRef: MatDialogRef<AddDialogComponent>,
+  constructor(
+    private fb: FormBuilder,
+    public dialogRef: MatDialogRef<AddDialogComponent>,
     private userService: LoginService,
     private categoriaService: CategoriaService,
     @Inject(MAT_DIALOG_DATA) public data: any
-  ) { }
+  ) {}
 
   ngOnInit(): void {
-    console.log("DATA:")
+    console.log('DATA:');
     console.log(this.data);
     this.myForm = this.fb.group({
-      motivoConsulta: [this.data?.motivoConsulta??""],
-      diagnostico: [this.data?.diagnostico??""],
-      observacion: [this.data?.observacion??""],
-      idEmpleado: [this.data?.idEmpleado?.idPersona??""],
-      idCliente: [this.data?.idCliente?.idPersona??""],
-      categoria: [this.data?.idTipoProducto?.idCategoria?.idCategoria??""],
-      subcategoria: [this.data?.idTipoProducto?.idTipoProducto??""],
+      motivoConsulta: [this.data?.motivoConsulta ?? ''],
+      diagnostico: [this.data?.diagnostico ?? ''],
+      observacion: [this.data?.observacion ?? ''],
+      idEmpleado: [this.data?.idEmpleado?.idPersona ?? ''],
+      idCliente: [this.data?.idCliente?.idPersona ?? ''],
+      categoria: [this.data?.idTipoProducto?.idCategoria?.idCategoria ?? ''],
+      subcategoria: [this.data?.idTipoProducto?.idTipoProducto ?? ''],
     });
-    console.log("form");
+    console.log('form');
     console.log(this.myForm.value);
     this.usuarios$ = this.userService.getPersonas();
     this.categorias$ = this.categoriaService.getCategorias();
     this.subCategorias$ = this.categoriaService.getSubCategorias();
 
-    this.myForm.get('categoria')!.valueChanges.subscribe(idCategoria => {
-      this.subCategorias$ = this.categoriaService.getSubCategoriasByCategoriaId(idCategoria);
+    this.myForm.get('categoria')!.valueChanges.subscribe((idCategoria) => {
+      this.subCategorias$ =
+        this.categoriaService.getSubCategoriasByCategoriaId(idCategoria);
     });
   }
 
   editFichaClinica() {
-    this.dialogRef.close(this.myForm.value);
+    this.dialogRef.close({
+      ...this.myForm.value,
+      idFichaClinica: this.data.idFichaClinica,
+    });
   }
 
   onNoClick(): void {
     this.dialogRef.close();
   }
-
 }

@@ -1,7 +1,9 @@
 section {
   display: table;
-  width: 80%;
+  width: 100%;
   align-content: center;
+  max-width: 100%;
+  overflow: auto;
 }
 table {
   width: 100%;
@@ -14,4 +16,17 @@ a{
 }
 ng-container{
   margin: 10px;
+}
+.tabla{
+  overflow: auto;
+  pointer-events: auto;
+}
+.mat-table {
+  overflow-y: auto;
+}
+
+.example-container {
+  height: 200px;
+  max-width: 100%;
+  overflow: auto;
 }

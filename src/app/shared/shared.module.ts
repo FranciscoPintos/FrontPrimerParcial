@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
-import {MatNativeDateModule, MatOptionModule} from '@angular/material/core';
+import { MatNativeDateModule, MatOptionModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -19,13 +19,22 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { EditDialogComponent } from './components/edit-dialog/edit-dialog.component';
 import { CategoriaPageComponent } from './pages/categoria-page/categoria-page.component';
 import { SubCategoriaPageComponent } from './pages/sub-categoria-page/sub-categoria-page.component';
-import {AddReservaComponent} from "./components/add-reserva/add-reserva.component";
-import {MatCheckboxModule} from "@angular/material/checkbox";
+import { AddReservaComponent } from "./components/add-reserva/add-reserva.component";
+import { MatCheckboxModule } from "@angular/material/checkbox";
 import { BasicDialogComponent } from './components/basic-dialog/basic-dialog.component';
 import { AddCategoriaDialogComponent } from './components/add-categoria-dialog/add-categoria-dialog.component';
 import { AddSubCategoriaDialogComponent } from './components/add-sub-categoria-dialog/add-sub-categoria-dialog.component';
 import { EditSubCategoriaDialogComponent } from './components/edit-sub-categoria-dialog/edit-sub-categoria-dialog.component';
 import { EditCategoriaDialogComponent } from './components/edit-categoria-dialog/edit-categoria-dialog.component';
+import {ScrollingModule} from "@angular/cdk/scrolling";
+import {MatRadioModule} from "@angular/material/radio";
+import {EditReservaComponent} from "./components/edit-reserva/edit-reserva.component";
+import { MatSliderModule } from '@angular/material/slider';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { SideBarComponent } from './components/side-bar/side-bar.component';
+import { RouterModule } from '@angular/router';
+import { HomeComponent } from './pages/home/home.component';
 
 const MATERIAL_MODULES = [
   MatCardModule,
@@ -36,16 +45,18 @@ const MATERIAL_MODULES = [
   MatButtonModule,
   MatNativeDateModule,
   MatSelectModule,
-  MatInputModule,
+  MatFormFieldModule,
   MatToolbarModule,
+  MatSliderModule,
   MatIconModule,
   MatSidenavModule,
   MatListModule,
   MatTableModule,
   MatPaginatorModule,
+  MatButtonToggleModule,
   MatDialogModule,
   MatOptionModule,
-  MatCheckboxModule
+  MatCheckboxModule,
 ];
 
 const FORM_MODULES = [
@@ -64,18 +75,26 @@ const FORM_MODULES = [
     AddCategoriaDialogComponent,
     AddSubCategoriaDialogComponent,
     EditSubCategoriaDialogComponent,
-    EditCategoriaDialogComponent
+    EditCategoriaDialogComponent,
+    EditReservaComponent,
+    EditCategoriaDialogComponent,
+    SideBarComponent,
+    HomeComponent
   ],
   imports: [
     CommonModule,
     ...FORM_MODULES,
     ...MATERIAL_MODULES,
-    FlexLayoutModule
+    FlexLayoutModule,
+    RouterModule,
+    ScrollingModule,
+    MatRadioModule
   ],
   exports: [
     ...FORM_MODULES,
     ...MATERIAL_MODULES,
-    FlexLayoutModule
+    FlexLayoutModule,
+    SideBarComponent
   ]
 })
 export class SharedModule { }
