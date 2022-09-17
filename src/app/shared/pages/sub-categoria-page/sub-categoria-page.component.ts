@@ -94,23 +94,31 @@ export class SubCategoriaPageComponent implements OnInit {
         data: subCategoria,
       });
       dialogRef.afterClosed().subscribe((result: any) => {
-        console.log('The dialog was closed');
         if (result != null) {
-          this.categoriaService.updateSubCategoria(result).subscribe(
-            (data: any) => {
-              this.subCategorias$ = this.categoriaService.getSubCategorias();
-              this.subCategorias$.subscribe((data: any) => {
-                this.matTableDataSource.data = data;
-              });
-            },
-            (error: any) => {
-              Swal.fire({
-                icon: 'error',
-                title: 'No se pudo actualizar la subcategoria',
-                text: error.error,
-              });
-            }
-          );
+          this.categoriaService
+            .updateSubCategoria(subCategoria.idTipoProducto, result)
+            .subscribe(
+              (data: any) => {
+                this.subCategorias$ = this.categoriaService.getSubCategorias();
+                this.subCategorias$.subscribe((data: any) => {
+                  this.matTableDataSource.data = data;
+                });
+
+                Swal.fire({
+                  title: `SubCategoria ${subCategoria.idTipoProducto} actualizada`,
+                  icon: 'success',
+                  showConfirmButton: false,
+                  timer: 1500,
+                });
+              },
+              (error: any) => {
+                Swal.fire({
+                  icon: 'error',
+                  title: 'No se pudo actualizar la subcategoria',
+                  text: error.error ?? 'Error Desconocido',
+                });
+              }
+            );
         }
       });
     }

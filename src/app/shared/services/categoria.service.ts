@@ -47,9 +47,9 @@ export class CategoriaService {
     return this.httpClient.put(`/stock-nutrinatalia/categoria`, categoria);
   }
 
-  updateSubCategoria(subCategoria: any) {
+  updateSubCategoria(id: number, subCategoria: any) {
     return this.httpClient.put(
-      `/stock-nutrinatalia/tipoProducto`,
+      `/stock-nutrinatalia/tipoProducto/${id}`,
       subCategoria
     );
   }

@@ -4,23 +4,29 @@
   <form [formGroup]="myForm">
     <mat-form-field appearance="fill">
       <mat-label>ID</mat-label>
-      <input matInput ngDefaultControl formControlName="id" />
+      <input matInput ngDefaultControl formControlName="id" readonly />
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>Descripcion</mat-label>
-      <input matInput ngDefaultControl formControlName="descripcion" />
+      <input matInput ngDefaultControl formControlName="descripcion" required />
+      <mat-error *ngIf="myForm.get('descripcion')!.hasError('required')">
+        Descripcion es requerido
+      </mat-error>
     </mat-form-field>
 
     <section>
       <mat-form-field style="width: 100%" appearance="fill">
         <mat-label>Categoria</mat-label>
-        <mat-select formControlName="categoria">
+        <mat-select formControlName="categoria" required>
           <mat-option
             *ngFor="let item of categorias$ | async; let i = index"
             [value]="item.idCategoria"
             >{{ item.descripcion }}</mat-option
           >
         </mat-select>
+        <mat-error *ngIf="myForm.get('categoria')!.hasError('required')">
+          Categoria es requerido
+        </mat-error>
       </mat-form-field>
     </section>
   </form>

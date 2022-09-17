@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { Categoria } from '../../models/categoria';
@@ -10,36 +10,43 @@ import { AddSubCategoriaDialogComponent } from '../add-sub-categoria-dialog/add-
 @Component({
   selector: 'app-edit-sub-categoria-dialog',
   templateUrl: './edit-sub-categoria-dialog.component.html',
-  styleUrls: ['./edit-sub-categoria-dialog.component.css']
+  styleUrls: ['./edit-sub-categoria-dialog.component.css'],
 })
 export class EditSubCategoriaDialogComponent implements OnInit {
-
-
   myForm!: FormGroup;
   categorias$!: Observable<Categoria[]>;
 
-
-  constructor(private fb: FormBuilder, public dialogRef: MatDialogRef<EditSubCategoriaDialogComponent>,
+  constructor(
+    private fb: FormBuilder,
+    public dialogRef: MatDialogRef<EditSubCategoriaDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private categoriaService: CategoriaService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.myForm = this.fb.group({
-      id: [],
-      descripcion: [],
-      categoria: [],
+      id: [Number(this.data.idTipoProducto)],
+      descripcion: [this.data.descripcion, Validators.required],
+      categoria: [this.data.idCategoria.idCategoria, Validators.required],
     });
     this.categorias$ = this.categoriaService.getCategorias();
   }
 
   addCategoria() {
-    this.dialogRef.close(this.myForm.value);
+    if (!this.myForm.valid) {
+      this.myForm.markAllAsTouched();
+      return;
+    }
+    const formValues = this.myForm.value;
+    this.dialogRef.close({
+      idCategoria: {
+        idCategoria: formValues.categoria,
+      },
+      descripcion: formValues.descripcion,
+    });
   }
 
   onNoClick(): void {
     this.dialogRef.close();
   }
-
-
 }
