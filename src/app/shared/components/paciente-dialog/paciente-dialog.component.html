@@ -30,13 +30,14 @@
       <mat-label>Tipo Persona</mat-label>
       <input matInput ngDefaultControl formControlName="tipoPersona" />
     </mat-form-field>
-    <mat-form-field appearance="fill">
-      <mat-label>Tipo Persona</mat-label>
-      <input matInput ngDefaultControl formControlName="tipoPersona" />
-    </mat-form-field>
+
     <mat-form-field style="width: 100%" appearance="fill">
       <mat-label>Seleccionar una fecha final</mat-label>
-      <input formControlName="fechaNacimiento" matInput [matDatepicker]="toDate" />
+      <input
+        formControlName="fechaNacimiento"
+        matInput
+        [matDatepicker]="toDate"
+      />
       <mat-hint>DD/MM/AAAA</mat-hint>
       <mat-datepicker-toggle matSuffix [for]="toDate"></mat-datepicker-toggle>
       <mat-datepicker #toDate></mat-datepicker>

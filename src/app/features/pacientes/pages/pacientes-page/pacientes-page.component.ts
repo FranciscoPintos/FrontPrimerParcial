@@ -32,6 +32,7 @@ export class PacientesPageComponent implements OnInit {
     'telefono',
     'ruc',
     'cedula',
+    'fechaNacimiento',
     'acciones',
   ];
 
@@ -75,15 +76,18 @@ export class PacientesPageComponent implements OnInit {
       cancelButtonText: 'Cancelar',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.personasService
-          .deletePersona(element.idPersona )
-          .subscribe((data: any) => {
+        this.personasService.deletePersona(element.idPersona).subscribe(
+          (data: any) => {
             this.personasService.getPersonas().subscribe((data: any) => {
               this.matTableDataSource.data = data;
             });
 
             Swal.fire('Eliminado', 'El paciente ha sido eliminado', 'success');
-          });
+          },
+          (error) => {
+            Swal.fire('Error', error.error ?? 'Error Desconocido', 'error');
+          }
+        );
       }
     });
   }
@@ -91,11 +95,14 @@ export class PacientesPageComponent implements OnInit {
   applyFilter() {
     console.log(this.myForm.value);
 
-    this.personasService
-      .filterPersonas(this.myForm.value)
-      .subscribe((data: any) => {
+    this.personasService.filterPersonas(this.myForm.value).subscribe(
+      (data: any) => {
         this.matTableDataSource.data = data;
-      });
+      },
+      (error) => {
+        Swal.fire('Error', error.error ?? 'Error Desconocido', 'error');
+      }
+    );
   }
 
   reset() {

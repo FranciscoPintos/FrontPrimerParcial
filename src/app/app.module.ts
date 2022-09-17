@@ -23,7 +23,7 @@ import { MatCardModule } from "@angular/material/card";
 import { CrearModificarServicioComponent } from './features/crear-modificar-servicio/crear-modificar-servicio.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { MatNativeDateModule } from '@angular/material/core';
+import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { ServicioModule } from "./features/servicio/servicio.module";
 import { ReservaModule } from "./features/reserva/reserva.module";
@@ -70,6 +70,7 @@ import { PacientesModule } from './features/pacientes/pacientes.module';
   providers: [ServicepaisService,
     { provide: HTTP_INTERCEPTORS, useClass: BaseUrlInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: HeaderRequestInterceptor, multi: true },
+    {provide: MAT_DATE_LOCALE, useValue: 'es-ES'}
   ],
   bootstrap: [AppComponent],
 })

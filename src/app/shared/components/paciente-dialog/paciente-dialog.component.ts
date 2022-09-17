@@ -24,6 +24,9 @@ export class PacienteDialogComponent implements OnInit {
   ngOnInit(): void {
     console.log(this.data);
     const isEdit = this.data != null;
+    const date = isEdit ? new Date(this.data.fechaNacimiento) : new Date();
+    //Add one day to the date
+    date.setDate(date.getDate() + 1);
     this.myForm = this.fb.group({
       nombre: [this.data?.nombre ?? ''],
       apellido: [this.data?.nombre ?? ''],
@@ -32,12 +35,31 @@ export class PacienteDialogComponent implements OnInit {
       ruc: [this.data?.ruc ?? ''],
       cedula: [this.data?.cedula ?? ''],
       tipoPersona: [this.data?.tipoPersona ?? ''],
-      fechaNacimiento: [this.data?.fechaNacimiento ?? ''],
+      fechaNacimiento: [date],
     });
   }
 
   accept() {
-    this.dialogRef.close(this.myForm.value);
+    console.log(this.myForm.value);
+    const date = this.myForm.value.fechaNacimiento;
+    //convert date to YYYY-MM-DD hh:mm:ss format
+    const dateStr =
+      date.getFullYear() +
+      '-' +
+      (date.getMonth() + 1) +
+      '-' +
+      date.getDate() +
+      ' ' +
+      date.getHours() +
+      ':' +
+      date.getMinutes() +
+      ':' +
+      date.getSeconds();
+
+    this.dialogRef.close({
+      ...this.myForm.value,
+      fechaNacimiento: dateStr,
+    });
   }
 
   onNoClick(): void {
