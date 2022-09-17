@@ -36,6 +36,7 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { SharedModule } from './shared/shared.module';
 import { HeaderRequestInterceptor } from './shared/interceptors/header-request.interceptor';
+import { AdminServiciosModule } from './features/admin-servicios/admin-servicios.module';
 
 @NgModule({
   declarations: [
@@ -59,14 +60,7 @@ import { HeaderRequestInterceptor } from './shared/interceptors/header-request.i
     ReservaModule,
     FichaClinicaModule,
     ServicioModule,
-    MatSidenavModule,
-    MatListModule,
-    MatIconModule,
-    ReactiveFormsModule,
-    MatSelectModule,
-    MatPaginatorModule,
-    MatTableModule,
-    MatSidenavModule,
+    AdminServiciosModule,
     SharedModule
 
 
