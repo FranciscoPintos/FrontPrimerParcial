@@ -12,6 +12,7 @@ import { SubCategoria } from 'src/app/features/ficha-clinica/interfaces/subcateg
 import { FichaClinicaService } from 'src/app/features/ficha-clinica/services/ficha-clinica.service';
 import { AddDialogComponent } from 'src/app/shared/components/add-dialog/add-dialog.component';
 import { EditDialogComponent } from 'src/app/shared/components/edit-dialog/edit-dialog.component';
+import { ProductoDialogComponent } from 'src/app/shared/components/producto-dialog/producto-dialog.component';
 import { Categoria } from 'src/app/shared/models/categoria';
 import { PresentacionProducto } from 'src/app/shared/models/presentacionProducto';
 import { CategoriaService } from 'src/app/shared/services/categoria.service';
@@ -67,7 +68,30 @@ export class ProductosComponent implements OnInit {
     });
   }
 
-  deleteElement(element: any) {}
+  deleteElement(element: any) {
+    Swal.fire({
+      title: '¿Está seguro de eliminar el producto?',
+      text: 'No podrá revertir esta acción',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, eliminar',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.productosService
+          .deleteProducto(element.idPresentacionProducto)
+          .subscribe((data: any) => {
+            this.productosService.getProductos().subscribe((data: any) => {
+              this.matTableDataSource.data = data;
+            });
+
+            Swal.fire('Eliminado', 'El producto ha sido eliminado', 'success');
+          });
+      }
+    });
+  }
 
   applyFilter() {
     console.log(this.myForm.value);
@@ -86,55 +110,47 @@ export class ProductosComponent implements OnInit {
     });
   }
 
-  openDialog(isEdit: boolean, ficha_clinica?: any): void {
-    // if (!isEdit) {
-    //   const dialogRef = this.dialog.open(AddDialogComponent, {
-    //     width: '100%',
-    //   });
-    //   dialogRef.afterClosed().subscribe((result) => {
-    //     if (result != null) {
-    //       this.fichaClinicasService.addFichaClinica(result).subscribe(
-    //         (data: any) => {
-    //           this.fichasClinicas$ =
-    //             this.fichaClinicasService.getFichasClinicas();
-    //           this.fichasClinicas$.subscribe((data: any) => {
-    //             this.matTableDataSource.data = data;
-    //           });
-    //         },
-    //         (error) => {
-    //           Swal.fire({
-    //             icon: 'error',
-    //             title: 'Error',
-    //             text: 'No se pudo crear la ficha clinica',
-    //           });
-    //         }
-    //       );
-    //     }
-    //   });
-    // } else {
-    //   console.log('ficha_clinica');
-    //   console.log(ficha_clinica);
-    //   const dialogRef = this.dialog.open(EditDialogComponent, {
-    //     width: '100%',
-    //     data: ficha_clinica,
-    //   });
-    //   dialogRef.afterClosed().subscribe((result) => {
-    //     console.log('The dialog was closed');
-    //     if (result != null) {
-    //       this.fichaClinicasService.updateFichaClinica(result).subscribe(
-    //         (data: any) => {
-    //           console.log(data);
-    //         },
-    //         (error) => {
-    //           Swal.fire({
-    //             icon: 'error',
-    //             title: 'Error',
-    //             text: 'No se pudo modificar la ficha clinica',
-    //           });
-    //         }
-    //       );
-    //     }
-    //   });
-    // }
+  openDialog(isEdit: boolean, producto?: any): void {
+    const dialogRef = this.dialog.open(ProductoDialogComponent, {
+      width: '500px',
+      data: producto,
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('The dialog was closed');
+      if (result) {
+        if (isEdit) {
+          this.productosService
+            .updateProducto(producto.idPresentacionProducto, result)
+            .subscribe(
+              (data: any) => {
+                this.productosService.getProductos().subscribe((data: any) => {
+                  this.matTableDataSource.data = data;
+                });
+                Swal.fire(
+                  'Actualizado',
+                  'El producto ha sido actualizado',
+                  'success'
+                );
+              },
+              (error) => {
+                Swal.fire('Error', error.error ?? 'Error Desconocido', 'error');
+              }
+            );
+        } else {
+          this.productosService.addProducto(result).subscribe(
+            (data: any) => {
+              this.productosService.getProductos().subscribe((data: any) => {
+                this.matTableDataSource.data = data;
+              });
+              Swal.fire('Agregado', 'El producto ha sido agregado', 'success');
+            },
+            (error) => {
+              Swal.fire('Error', error.error ?? 'Error Desconocido', 'error');
+            }
+          );
+        }
+      }
+    });
   }
 }

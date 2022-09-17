@@ -42,15 +42,37 @@ export class ProductosService {
   addProducto(producto: any) {
     return this.httpClient.post(
       `/stock-nutrinatalia/presentacionProducto`,
-      producto
+      producto,
+      {
+        headers: {
+          usuario: localStorage.getItem('usuario') || '',
+        },
+      }
     );
   }
 
   updateProducto(id: number, producto: any) {
     return this.httpClient.put(
       `/stock-nutrinatalia/presentacionProducto/${id}`,
-      producto
+      producto,
+      {
+        headers: {
+          usuario: localStorage.getItem('usuario') || '',
+        },
+      }
     );
+  }
+
+  getSubCategoriasProductos() {
+    const url = encodeURI(`/stock-nutrinatalia/producto`);
+    return this.httpClient.get(url).pipe(map((data: any) => data['lista']));
+  }
+
+  getSubCategoriasProductosById(id: number) {
+    const url = encodeURI(
+      `/stock-nutrinatalia/producto?ejemplo={"idTipoProducto":{"idTipoProducto":${id}}}`
+    );
+    return this.httpClient.get(url).pipe(map((data: any) => data['lista']));
   }
 
   deleteProducto(id: number) {
