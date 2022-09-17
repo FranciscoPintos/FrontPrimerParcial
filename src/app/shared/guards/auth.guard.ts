@@ -15,11 +15,6 @@ export class AuthGuard implements CanActivate {
     if (this.authService.isLoggedIn()) {
       return true;
     }
-    Swal.fire({
-      title: 'Advertencia',
-      text: 'Debe iniciar sesión',
-      icon: 'warning',
-    });
     this.router.navigate(['/login']);
     return false;
   }
