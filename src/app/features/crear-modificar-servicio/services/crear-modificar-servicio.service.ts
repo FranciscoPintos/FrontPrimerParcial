@@ -13,4 +13,7 @@ export class CrearModificarServicioService {
 	return this.httpClient.get(`/stock-nutrinatalia/servicio`).pipe(map((data: any) => data['lista']));
   }
 
+  getDetallesByIdServicio(idServicio: number) {
+	return this.httpClient.get(`/stock-nutrinatalia/servicio/${idServicio}/detalle`).pipe(map((data: any) => data['lista']));
+  }
 }

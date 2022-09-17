@@ -1,17 +1,20 @@
-<div>
+<h1 mat-dialog-title>Modificar Servicio</h1>
+<div mat-dialog-content class="mat-typography">
 	<form [formGroup]="myForm">
 		<section>
 			<mat-form-field appearance="fill" style="padding: 20px;">
 				<mat-label>Fecha</mat-label>
-				<input matInput [matDatepicker]="picker">
+				<input matInput [matDatepicker]="picker" formControlName="fecha">
 				<mat-hint>MM/DD/YYYY</mat-hint>
 				<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
 				<mat-datepicker #picker></mat-datepicker>
 			</mat-form-field>
 		</section>
 		<section>
+			<mat-label>Observación</mat-label>
 			<mat-form-field class="observacion" appearance="fill" style="padding: 20px;">
-				<input matInput placeholder="Observación">
+				<input readonly formControlName="observacion" ngDefaultControl matInput
+					placeholder={{this.data.observacion}}>
 			</mat-form-field>
 		</section>
 		<section>
@@ -35,7 +38,7 @@
 		</section>
 
 		<section>
-			<div class="mat-elevation-z8 p-col-12 p-md-12 p-lg-9">
+			<div style="width: 100%;" class="mat-elevation-z8 p-col-12 p-md-12 p-lg-9">
 				<table mat-table [dataSource]="matTableDataSource">
 					<ng-container matColumnDef="idficha">
 						<th mat-header-cell *matHeaderCellDef>Id ficha</th>
@@ -73,9 +76,6 @@
 				<mat-paginator [pageSizeOptions]="[5, 10]" showFirstLastButtons
 					aria-label="Select page of periodic elements">
 				</mat-paginator>
-				<button mat-raised-button color="primary">
-					Guardar
-				</button>
 			</div>
 		</section>
 		<section style="padding-top: 20px;">
@@ -84,9 +84,9 @@
 		<section>
 			<mat-form-field style="width: 100%" appearance="fill">
 				<mat-label>Categoria</mat-label>
-				<mat-select formControlName="empleado">
-					<mat-option *ngFor="let item of usuarios$ | async; let i = index" [value]="item.idPersona">
-						{{ item.nombre }} {{ item.apellido }}
+				<mat-select formControlName="categoria">
+					<mat-option *ngFor="let item of categorias$ | async; let i = index" [value]="item.idCategoria">
+						{{ item.descripcion }}
 					</mat-option>
 				</mat-select>
 			</mat-form-field>
@@ -94,9 +94,9 @@
 		<section>
 			<mat-form-field style="width: 100%" appearance="fill">
 				<mat-label>Subcategoría (tipo de producto)</mat-label>
-				<mat-select formControlName="empleado">
-					<mat-option *ngFor="let item of usuarios$ | async; let i = index" [value]="item.idPersona">
-						{{ item.nombre }} {{ item.apellido }}
+				<mat-select formControlName="subcategoria">
+					<mat-option *ngFor="let item of subCategorias$ | async; let i = index" [value]="item.idTipoProducto">
+						{{ item.descripcion }}
 					</mat-option>
 				</mat-select>
 			</mat-form-field>
@@ -114,12 +114,12 @@
 		<section>
 			<mat-form-field appearance="fill">
 				<input matInput disabled value="precio">
-			  </mat-form-field>
+			</mat-form-field>
 		</section>
 		<section>
 			<mat-form-field appearance="fill">
 				<input matInput value="Cantidad">
-			  </mat-form-field>
+			</mat-form-field>
 		</section>
 		<button mat-raised-button color="primary">
 			Agregar detalle
@@ -182,4 +182,8 @@
 			</button>
 		</section>
 	</form>
+</div>
+<div mat-dialog-actions>
+	<button mat-button (click)="onNoClick()">Cancelar</button>
+	<button mat-button (click)="modificarServicio()" cdkFocusInitial>Modificar</button>
 </div>

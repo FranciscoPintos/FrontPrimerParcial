@@ -46,10 +46,10 @@
         <mat-label>Cliente</mat-label>
         <mat-select formControlName="cliente">
           <mat-option
-            *ngFor="let item of usuarios$ | async; let i = index"
-            [value]="item.idPersona"
+            *ngFor="let usuario of usuarios$ | async ; let i = index"
+            [value]="usuario.idPersona"
           >
-            {{ item.nombre }} {{ item.apellido }}
+            {{ usuario.nombre }} {{ usuario.apellido }}
           </mat-option>
         </mat-select>
       </mat-form-field>
