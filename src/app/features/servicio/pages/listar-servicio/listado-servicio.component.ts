@@ -1,5 +1,5 @@
-import {Component, NgModule, OnInit, ViewChild} from '@angular/core';
-import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { Component, NgModule, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -7,9 +7,11 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Observable } from 'rxjs';
 import { Usuario } from 'src/app/features/auth/interfaces/usuario';
 import { LoginService } from 'src/app/features/auth/services/login.service';
+import { CrearModificarServicioComponent } from 'src/app/features/crear-modificar-servicio/crear-modificar-servicio.component';
 import { AddDialogComponent } from 'src/app/shared/components/add-dialog/add-dialog.component';
 import { EditDialogComponent } from 'src/app/shared/components/edit-dialog/edit-dialog.component';
 import { CategoriaService } from 'src/app/shared/services/categoria.service';
+import Swal from 'sweetalert2';
 import { Categoria } from '../../interfaces/categoria.interface';
 import { FichaClinica } from '../../interfaces/ficha_clinica.inteface';
 import { ServicioInterface } from '../../interfaces/servicio.interface';
@@ -24,6 +26,23 @@ import { ServicioService } from '../../services/servicio.service';
 })
 
 export class ListadoServicioComponent implements OnInit {
+deleteServicio(element: any) {
+	this.fichaClinicasService.deleteServicio(element.idServicio).subscribe(
+		data => {
+			console.log(data);
+			this.fichaClinicasService.getFichasClinicas().subscribe(
+				data => {
+					this.matTableDataSource.data = data;
+				}
+			);
+			Swal.fire('Éxito', 'Se eliminó el servicio', 'success');
+		},
+		error => {
+			Swal.fire('Error', error.error, 'error')
+		}
+	);
+	
+}
   myForm!: FormGroup;
   categorias$!: Observable<Categoria[]>;
   subCategorias$!: Observable<SubCategoria[]>;
@@ -32,7 +51,7 @@ export class ListadoServicioComponent implements OnInit {
 
   fichasClinicas$!: Observable<ServicioInterface[]>;
   matTableDataSource = new MatTableDataSource<ServicioInterface>();
-  displayedColumns: string[] = ['fecha','id_ficha','fecha_ficha', 'profesional', 'cliente', 'categoria', 'subcategoria', 'acciones'];
+  displayedColumns: string[] = ['fecha', 'id_ficha', 'fecha_ficha', 'profesional', 'cliente', 'categoria', 'subcategoria', 'acciones'];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -106,38 +125,42 @@ export class ListadoServicioComponent implements OnInit {
     this.myForm.reset();
   }
 
-// En el AddDialogComponent tenes que cambiar a tu modelo de editar
-  openDialog(isEdit: boolean, ficha_clinica?: any): void {
-    if (!isEdit) {
-      const dialogRef = this.dialog.open(AddDialogComponent, {
-        width: '100%',
-      });
 
-      dialogRef.afterClosed().subscribe(result => {
-        console.log('The dialog was closed');
-        if (result != null) {
-          this.fichaClinicasService.addFichaClinica(result).subscribe((data: any) => {
-            console.log(data);
-          });
-        }
-      });
-    } else {
-      const dialogRef = this.dialog.open(EditDialogComponent, {
-        width: '100%',
-        data: ficha_clinica
-      });
-      dialogRef.afterClosed().subscribe(result => {
-        console.log('The dialog was closed');
-        if (result != null) {
-          this.fichaClinicasService.addFichaClinica(result).subscribe((data: any) => {
-            console.log(data);
-          });
-        }
-      });
+  openDialog(isEdit: boolean, servicio?: any): void {
 
-    }
+    const dialogRef = this.dialog.open(CrearModificarServicioComponent, {
+      width: '100%',
+      data: isEdit ? servicio : null
+    });
 
+
+    dialogRef.afterClosed().subscribe(result => {
+
+      if (result != null) {
+        // this.servicioService.updateServicio(result).subscribe((data: any) => {
+        //   console.log(data);
+
+        // });
+      }
+    });
   }
+  // else {
+  //   const dialogRef = this.dialog.open(EditDialogComponent, {
+  //     width: '100%',
+  //     data: ficha_clinica
+  //   });
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     console.log('The dialog was closed');
+  //     if (result != null) {
+  //       this.fichaClinicasService.addFichaClinica(result).subscribe((data: any) => {
+  //         console.log(data);
+  //       });
+  //     }
+  //   });
+
+  // }
+
+  //}
 
   deleteElement(element: any) {
   }

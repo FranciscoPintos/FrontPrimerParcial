@@ -25,22 +25,12 @@ export class ServicioService {
     return this.httpClient.put(`/stock-nutrinatalia/servicio`, fichaClinica);
   }
 
+  deleteServicio(idServicio: any) {
+    return this.httpClient.delete(`/stock-nutrinatalia/servicio/${idServicio}`);
+  }
 
-  addFichaClinica(fichaClinica: any) {
-    const fichaClinicaRequest = {
-      "idCliente": {
-        "idPersona": fichaClinica.idCliente,
-      },
-      "idEmpleado": {
-        "idPersona": fichaClinica.idEmpleado,
-      },
-      "idTipoProducto": {
-        "idTipoProducto": fichaClinica.subcategoria,
-      },
-      "motivoConsulta": fichaClinica.motivoConsulta,
-      "observacion": fichaClinica.observacion,
-      "diagnostico": fichaClinica.diagnostico,
-    };
-    return this.httpClient.post(`/stock-nutrinatalia/servicio`, fichaClinicaRequest);
+
+  addServicio(servicio: any) {
+    return this.httpClient.post(`/stock-nutrinatalia/servicio`, servicio);
   }
 }
