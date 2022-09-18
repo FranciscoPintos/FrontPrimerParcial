@@ -2,7 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Usuario } from 'src/app/features/auth/interfaces/usuario';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Observable } from 'rxjs';
+import { map, Observable, zip } from 'rxjs';
 import { LoginService } from 'src/app/features/auth/services/login.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { ServicioInterface } from '../servicio/interfaces/servicio.interface';
@@ -11,6 +11,7 @@ import { Categoria } from '../ficha-clinica/interfaces/categoria.interface';
 import { SubCategoria } from '../ficha-clinica/interfaces/subcategoria.interface';
 import { CrearModificarServicioService } from './services/crear-modificar-servicio.service';
 import { Detalle } from './interfaces/crear-modificar-servicio.interface';
+import { FichaClinicaService } from '../ficha-clinica/services/ficha-clinica.service';
 
 @Component({
 	selector: 'app-crear-modificar-servicio',
@@ -18,6 +19,8 @@ import { Detalle } from './interfaces/crear-modificar-servicio.interface';
 	styleUrls: ['./crear-modificar-servicio.component.css']
 })
 export class CrearModificarServicioComponent implements OnInit {
+	reseteando = false
+	isEdit = this.data != null;
 	myForm!: FormGroup;
 	usuarios$!: Observable<Usuario[]>;
 	categorias$!: Observable<Categoria[]>;
@@ -26,36 +29,46 @@ export class CrearModificarServicioComponent implements OnInit {
 	displayedColumnsService: string[] = ['idficha', 'fechacategoria', 'subcategoria', 'acciones'];
 	displayedColumnsDetalle: string[] = ['iddetalle', 'presentacion', 'preciounitario', 'cantidad', 'total', 'acciones'];
 	matTableDataSource = new MatTableDataSource<ServicioInterface>();
+	matTableDataSourceDetalle = new MatTableDataSource<Detalle>();
 	constructor(
 		private usuariosService: LoginService,
 		@Inject(MAT_DIALOG_DATA) public data: any, private fb: FormBuilder,
 		private dialogRef: MatDialogRef<CrearModificarServicioComponent>,
 		private categoriaService: CategoriaService,
-		private crearModificarServicioService: CrearModificarServicioService
+		private crearModificarServicioService: CrearModificarServicioService,
+		private fichaService: FichaClinicaService
 	) { }
 
 	ngOnInit(): void {
 		console.log("DATA:")
 		console.log(this.data);
-		const myDate = new Date(this.data.fechaHora);
+		const myDate = new Date(this.data?.fechaHora);
 
-
-		console.log(this.data.idFichaClinica.idTipoProducto.idCategoria.idCategoria);
+		console.log(this.data?.idFichaClinica.idTipoProducto.idCategoria.idCategoria);
 
 		this.categorias$ = this.categoriaService.getCategorias();
-		this.detalles$ = this.crearModificarServicioService.getDetallesByIdServicio(this.data.idServicio);
 		console.log(this.detalles$);
-		let idCat = this.data.idFichaClinica.idTipoProducto.idCategoria.idCategoria;
+		let idCat = this.data?.idFichaClinica.idTipoProducto.idCategoria.idCategoria;
 
+		if (this.isEdit) {
+			this.crearModificarServicioService.getDetallesByIdServicio(this.data?.idServicio).subscribe((data)=>{
+				this.matTableDataSourceDetalle.data = data;
+			})
+			this.matTableDataSource.data = [this.data?.idFichaClinica];
+		}
+		else
+		{
+			this.matTableDataSource.data = [];
+		}
 		
 
 		this.myForm = this.fb.group({
 			fecha: new FormControl({ value: myDate, disabled: this.data }),
-			observacion: [this.data.observacion],
-			empleado: new FormControl({ value: this.data.idEmpleado.idPersona, disabled: this.data }),
-			cliente: new FormControl({ value: this.data.idFichaClinica.idCliente.idPersona, disabled: this.data }),
+			observacion: [this.data?.observacion],
+			empleado: new FormControl({ value: this.data?.idEmpleado.idPersona, disabled: this.data }),
+			cliente: new FormControl({ value: this.data?.idFichaClinica.idCliente.idPersona, disabled: this.data }),
 			categoria: new FormControl({ value: Number(idCat), disabled: false }),
-			subcategoria: new FormControl({ value: this.data.idFichaClinica.idTipoProducto.idTipoProducto, disabled: false }),
+			subcategoria: new FormControl({ value: this.data?.idFichaClinica.idTipoProducto.idTipoProducto, disabled: false }),
 		});
 
 		this.subCategorias$ = this.categoriaService.getSubCategorias();
@@ -68,7 +81,45 @@ export class CrearModificarServicioComponent implements OnInit {
 
 		this.usuarios$ = this.usuariosService.getPersonas();
 
-		this.matTableDataSource.data = [this.data.idFichaClinica];
+		 if (!this.isEdit) {
+			this.myForm.valueChanges.pipe(map((data)=>{
+				return {
+					cliente: data?.cliente,
+					empleado: data?.empleado
+				}
+			})).subscribe(data =>
+				{
+					
+						
+					let cliente = data?.cliente;
+					let empleado = data?.empleado;
+					if(this.reseteando)
+					{
+						console.log( cliente, empleado)
+						this.matTableDataSource.data = [];
+						if (!cliente && !empleado) {
+							this.reseteando=false;
+						}
+						return;
+					}
+					let json = {};
+					if (cliente) {
+						json = {
+							"idCliente":
+								{"idPersona":cliente}
+						}
+					}
+					if (empleado) {
+						json = {
+							...json,
+							"idEmpleado":
+							{"idPersona":empleado}
+						}
+					}
+					this.fichaService.getFichasClinicas(json).subscribe(data => this.matTableDataSource.data = data);
+				}
+			)
+		}
 	}
 
 	modificarServicio() {
@@ -78,5 +129,11 @@ export class CrearModificarServicioComponent implements OnInit {
 	onNoClick() {
 		this.dialogRef.close();
 	}
+
+	reset() {
+		this.reseteando = true
+		this.myForm.controls['empleado']!.reset();
+		this.myForm.controls['cliente']!.reset();
+	  }
 
 }

@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>Modificar Servicio</h1>
+<h1 mat-dialog-title>{{isEdit? "Modificar" : "Agregar"}} Servicio</h1>
 <div mat-dialog-content class="mat-typography">
 	<form [formGroup]="myForm">
 		<section>
@@ -13,8 +13,7 @@
 		<section>
 			<mat-label>Observación</mat-label>
 			<mat-form-field class="observacion" appearance="fill" style="padding: 20px;">
-				<input readonly formControlName="observacion" ngDefaultControl matInput
-					placeholder={{this.data.observacion}}>
+				<input [readonly]="isEdit ? true : false" formControlName="observacion" ngDefaultControl matInput>
 			</mat-form-field>
 		</section>
 		<section>
@@ -35,6 +34,12 @@
 					</mat-option>
 				</mat-select>
 			</mat-form-field>
+		</section>
+
+		<section>
+			<button (click)="reset()" mat-raised-button color="danger">
+				Resetear
+			  </button>
 		</section>
 
 		<section>
@@ -121,12 +126,12 @@
 				<input matInput value="Cantidad">
 			</mat-form-field>
 		</section>
-		<button mat-raised-button color="primary">
+		<button mat-raised-button color="primary" >
 			Agregar detalle
 		</button>
 		<section>
 			<div class="mat-elevation-z8 p-col-12 p-md-12 p-lg-9">
-				<table mat-table [dataSource]="matTableDataSource">
+				<table mat-table [dataSource]="matTableDataSourceDetalle">
 					<ng-container matColumnDef="iddetalle">
 						<th mat-header-cell *matHeaderCellDef>Id detalle</th>
 						<td mat-cell *matCellDef="let element">
@@ -185,5 +190,5 @@
 </div>
 <div mat-dialog-actions>
 	<button mat-button (click)="onNoClick()">Cancelar</button>
-	<button mat-button (click)="modificarServicio()" cdkFocusInitial>Modificar</button>
+	<button mat-button (click)="modificarServicio()" cdkFocusInitial>{{isEdit?"Modificar":"Agregar"}}</button>
 </div>
