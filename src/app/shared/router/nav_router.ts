@@ -19,11 +19,11 @@ export const NavRouter = [
     route: '/subcategorias',
     title: 'SubCategorias',
   },
-  {
-    icon: 'local_offer',
-    route: '/reserva',
-    title: 'Reservas',
-  },
+  // {
+  //   icon: 'local_offer',
+  //   route: '/reserva',
+  //   title: 'Reservas',
+  // },
   {
     icon: 'local_printshop',
     route: '/reportes',
