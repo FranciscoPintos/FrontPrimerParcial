@@ -11,6 +11,7 @@ import { CrearModificarServicioComponent } from 'src/app/features/crear-modifica
 import { AddDialogComponent } from 'src/app/shared/components/add-dialog/add-dialog.component';
 import { EditDialogComponent } from 'src/app/shared/components/edit-dialog/edit-dialog.component';
 import { CategoriaService } from 'src/app/shared/services/categoria.service';
+import Swal from 'sweetalert2';
 import { Categoria } from '../../interfaces/categoria.interface';
 import { FichaClinica } from '../../interfaces/ficha_clinica.inteface';
 import { ServicioInterface } from '../../interfaces/servicio.interface';
@@ -25,6 +26,23 @@ import { ServicioService } from '../../services/servicio.service';
 })
 
 export class ListadoServicioComponent implements OnInit {
+deleteServicio(element: any) {
+	this.fichaClinicasService.deleteServicio(element.idServicio).subscribe(
+		data => {
+			console.log(data);
+			this.fichaClinicasService.getFichasClinicas().subscribe(
+				data => {
+					this.matTableDataSource.data = data;
+				}
+			);
+			Swal.fire('Éxito', 'Se eliminó el servicio', 'success');
+		},
+		error => {
+			Swal.fire('Error', error.error, 'error')
+		}
+	);
+	
+}
   myForm!: FormGroup;
   categorias$!: Observable<Categoria[]>;
   subCategorias$!: Observable<SubCategoria[]>;

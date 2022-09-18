@@ -57,6 +57,7 @@ const MATERIAL_MODULES = [
   MatCheckboxModule,
   MatListModule,
   MatIconModule,
+  MatRadioModule
 ];
 
 const FORM_MODULES = [FormsModule, ReactiveFormsModule];

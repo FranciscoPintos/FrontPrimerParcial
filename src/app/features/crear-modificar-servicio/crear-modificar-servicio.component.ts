@@ -12,6 +12,8 @@ import { SubCategoria } from '../ficha-clinica/interfaces/subcategoria.interface
 import { CrearModificarServicioService } from './services/crear-modificar-servicio.service';
 import { Detalle } from './interfaces/crear-modificar-servicio.interface';
 import { FichaClinicaService } from '../ficha-clinica/services/ficha-clinica.service';
+import { ServicioService } from '../servicio/services/servicio.service';
+import Swal from 'sweetalert2';
 
 @Component({
 	selector: 'app-crear-modificar-servicio',
@@ -30,12 +32,14 @@ export class CrearModificarServicioComponent implements OnInit {
 	displayedColumnsDetalle: string[] = ['iddetalle', 'presentacion', 'preciounitario', 'cantidad', 'total', 'acciones'];
 	matTableDataSource = new MatTableDataSource<ServicioInterface>();
 	matTableDataSourceDetalle = new MatTableDataSource<Detalle>();
+	selectedFicha = ""
 	constructor(
 		private usuariosService: LoginService,
 		@Inject(MAT_DIALOG_DATA) public data: any, private fb: FormBuilder,
 		private dialogRef: MatDialogRef<CrearModificarServicioComponent>,
 		private categoriaService: CategoriaService,
 		private crearModificarServicioService: CrearModificarServicioService,
+		private servicioService: ServicioService,
 		private fichaService: FichaClinicaService
 	) { }
 
@@ -123,7 +127,27 @@ export class CrearModificarServicioComponent implements OnInit {
 	}
 
 	modificarServicio() {
-		this.dialogRef.close(this.myForm.value);
+		this.servicioService.addServicio({
+			idFichaClinica: {
+				idFichaClinica: this.selectedFicha},
+			observacion: this.myForm.get('observacion')?.value
+		}).subscribe(
+			(data: any)=>
+			{
+				Swal.fire(
+					'Éxito', `Se agregó el nuevo servicio n° ${data.idServicio}`, 'success'
+				);
+
+			},
+			(error)=>
+			{
+				Swal.fire(
+					'Error', error.error, 'error'
+				);
+				
+			}
+		)
+		this.dialogRef.close();
 	}
 
 	onNoClick() {
