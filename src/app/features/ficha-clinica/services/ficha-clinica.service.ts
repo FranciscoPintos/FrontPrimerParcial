@@ -34,8 +34,8 @@ export class FichaClinicaService {
     }
 
     return this.httpClient.put(`/stock-nutrinatalia/fichaClinica`, {
+      observacion: fichaClinica.observacion,
       idFichaClinica: fichaClinica.idFichaClinica,
-      ...fichaClinica,
     });
   }
 

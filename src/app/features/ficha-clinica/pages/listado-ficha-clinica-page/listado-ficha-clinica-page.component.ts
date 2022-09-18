@@ -119,19 +119,26 @@ export class ListadoFichaClinicaPageComponent implements OnInit {
 
       dialogRef.afterClosed().subscribe((result) => {
         if (result != null) {
+          console.log(result);
           this.fichaClinicasService.addFichaClinica(result).subscribe(
             (data: any) => {
-              this.fichasClinicas$ =
-                this.fichaClinicasService.getFichasClinicas();
+              this.fichaClinicasService
+                .getFichasClinicas()
+                .subscribe((data: any) => {
+                  this.matTableDataSource.data = data;
+                });
 
-              this.fichasClinicas$.subscribe((data: any) => {
-                this.matTableDataSource.data = data;
+              Swal.fire({
+                title: 'Ficha Clinica',
+                text: 'Ficha Clinica agregada correctamente',
+                icon: 'success',
+                confirmButtonText: 'Aceptar',
               });
             },
             (error) => {
               Swal.fire({
                 icon: 'error',
-                title: 'Error',
+                title: error.error ?? 'Oops...',
                 text: 'No se pudo crear la ficha clinica',
               });
             }
@@ -148,15 +155,26 @@ export class ListadoFichaClinicaPageComponent implements OnInit {
       dialogRef.afterClosed().subscribe((result) => {
         console.log('The dialog was closed');
         if (result != null) {
+          console.log(result);
           this.fichaClinicasService.updateFichaClinica(result).subscribe(
             (data: any) => {
-              console.log(data);
+              this.fichaClinicasService
+                .getFichasClinicas()
+                .subscribe((data: any) => {
+                  this.matTableDataSource.data = data;
+                });
+
+              Swal.fire({
+                icon: 'success',
+                title: 'Ficha clinica actualizada',
+                text: 'La ficha clinica se actualizo correctamente',
+              });
             },
             (error) => {
               Swal.fire({
                 icon: 'error',
                 title: 'Error',
-                text: 'No se pudo modificar la ficha clinica',
+                text: error.error ?? 'Oops...',
               });
             }
           );
@@ -168,14 +186,22 @@ export class ListadoFichaClinicaPageComponent implements OnInit {
   deleteElement(index: number) {
     this.fichaClinicasService.deleteFichaClinica(index).subscribe(
       (data: any) => {
-        console.log(data);
+        this.fichaClinicasService.getFichasClinicas().subscribe((data: any) => {
+          this.matTableDataSource.data = data;
+        });
+
+        Swal.fire({
+          icon: 'success',
+          title: 'Ficha clinica eliminada',
+          text: 'La ficha clinica se ha eliminado correctamente',
+        });
       },
       (error: any) => {
         console.log(error);
         Swal.fire({
           icon: 'error',
           title: 'Error',
-          text: 'No se pudo eliminar la ficha clinica',
+          text: error.error ?? 'Oops...',
         });
       }
     );
