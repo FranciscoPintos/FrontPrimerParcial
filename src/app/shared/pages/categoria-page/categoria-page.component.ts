@@ -29,11 +29,8 @@ export class CategoriaPageComponent implements OnInit {
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(
-    private fb: FormBuilder,
     private categoriaService: CategoriaService,
-    public dialog: MatDialog,
-    private fichaClinicasService: FichaClinicaService,
-    private userService: LoginService
+    public dialog: MatDialog
   ) {}
 
   ngAfterViewInit() {
@@ -51,7 +48,7 @@ export class CategoriaPageComponent implements OnInit {
   openDialog(isEdit: boolean, ficha_clinica?: any): void {
     if (!isEdit) {
       const dialogRef = this.dialog.open(AddCategoriaDialogComponent, {
-        width: '100%',
+        width: '40%',
       });
 
       dialogRef.afterClosed().subscribe((result: any) => {
@@ -62,12 +59,20 @@ export class CategoriaPageComponent implements OnInit {
               this.categorias$.subscribe((data: any) => {
                 this.matTableDataSource.data = data;
               });
+
+              Swal.fire({
+                icon: 'success',
+                title: 'Categoria agregada correctamente',
+                showConfirmButton: false,
+                timer: 1500,
+              });
             },
             (error) => {
+              console.log(error);
               Swal.fire({
                 icon: 'error',
-                title: 'Error',
-                text: 'No se pudo agregar la categoria',
+                title: 'No se pudo agregar la categoria',
+                text: error.error,
               });
             }
           );
@@ -87,12 +92,20 @@ export class CategoriaPageComponent implements OnInit {
               this.categorias$.subscribe((data: any) => {
                 this.matTableDataSource.data = data;
               });
+
+              Swal.fire({
+                icon: 'success',
+                title: `Se ha actualizado la categoria con id ${result.idCategoria} correctamente`,
+                showConfirmButton: false,
+                timer: 1500,
+              });
             },
             (error) => {
+              console.log(error);
               Swal.fire({
                 icon: 'error',
-                title: 'Error',
-                text: 'No se pudo editar la categoria',
+                title: 'No se pudo editar la categoria',
+                text: error.error,
               });
             }
           );
@@ -101,21 +114,42 @@ export class CategoriaPageComponent implements OnInit {
     }
   }
 
-  deleteElement(i: number) {
-    this.categoriaService.deleteCategoria(i).subscribe(
-      (data: any) => {
-        this.categorias$ = this.categoriaService.getCategorias();
-        this.categorias$.subscribe((data: any) => {
-          this.matTableDataSource.data = data;
-        });
-      },
-      (error) => {
-        Swal.fire({
-          icon: 'error',
-          title: 'Error',
-          text: 'No se pudo eliminar la categoria',
-        });
+  deleteElement(categoria: Partial<Categoria>) {
+    //Ask for confirmation
+    Swal.fire({
+      title: '¿Está seguro?',
+      text: 'No podrá revertir esta acción',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, eliminar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.categoriaService.deleteCategoria(categoria.idCategoria!).subscribe(
+          (data: any) => {
+            this.categorias$ = this.categoriaService.getCategorias();
+            this.categorias$.subscribe((data: any) => {
+              this.matTableDataSource.data = data;
+            });
+            Swal.fire({
+              icon: 'success',
+              title: `La categoria ${categoria.idCategoria!} ha sido eliminada.`,
+              showConfirmButton: false,
+              timer: 1500,
+            });
+
+          },
+          (error) => {
+            console.log(error);
+            Swal.fire({
+              icon: 'error',
+              title: 'No se pudo eliminar la categoria',
+              text: error.error,
+            });
+          }
+        );
       }
-    );
+    });
   }
 }

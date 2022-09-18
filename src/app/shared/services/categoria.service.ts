@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
+import { Categoria } from '../models/categoria';
 
 @Injectable({
   providedIn: 'root',
@@ -27,24 +28,28 @@ export class CategoriaService {
       .pipe(map((data: any) => data['lista']));
   }
 
-  addCategoria(categoria: any) {
-    return this.httpClient.post(`/stock-nutrinatalia/categoria`, categoria);
+  addCategoria(categoria: Partial<Categoria>) {
+    return this.httpClient.post(`/stock-nutrinatalia/categoria`, {
+      descripcion: categoria.descripcion,
+    });
   }
 
-  addSubCategoria(subCategoria: any) {
-    return this.httpClient.post(
-      `/stock-nutrinatalia/tipoProducto`,
-      subCategoria
-    );
+  addSubCategoria(idCategoria: number, descripcionSubCategoria: string) {
+    return this.httpClient.post(`/stock-nutrinatalia/tipoProducto`, {
+      idCategoria: {
+        idCategoria,
+      },
+      descripcion: descripcionSubCategoria,
+    });
   }
 
   updateCategoria(categoria: any) {
     return this.httpClient.put(`/stock-nutrinatalia/categoria`, categoria);
   }
 
-  updateSubCategoria(subCategoria: any) {
+  updateSubCategoria(id: number, subCategoria: any) {
     return this.httpClient.put(
-      `/stock-nutrinatalia/tipoProducto`,
+      `/stock-nutrinatalia/tipoProducto/${id}`,
       subCategoria
     );
   }

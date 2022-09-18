@@ -1,0 +1,40 @@
+<h1 mat-dialog-title>Agregar Producto</h1>
+<div mat-dialog-content class="mat-typography">
+  <p>Ingrese los datos</p>
+  <form [formGroup]="myForm">
+    <mat-form-field appearance="fill">
+      <mat-label>Codigo</mat-label>
+      <input matInput formControlName="codigo" ngDefaultControl />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Flag Servicio</mat-label>
+      <input matInput formControlName="flagServicio" ngDefaultControl />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Nombre</mat-label>
+      <input matInput ngDefaultControl formControlName="nombre" />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Precio venta</mat-label>
+      <input matInput ngDefaultControl formControlName="precioVenta" />
+    </mat-form-field>
+
+    <mat-form-field style="width: 100%" appearance="fill">
+      <mat-label>Producto</mat-label>
+      <mat-select formControlName="idProducto">
+        <mat-option
+          *ngFor="let item of subCategorias$ | async; let i = index"
+          [value]="item.idProducto"
+        >
+          {{ item.descripcionGeneral }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancelar</button>
+  <button mat-button (click)="accept()" cdkFocusInitial>
+    {{ data ? "Modificar" : "Agregar" }}
+  </button>
+</div>

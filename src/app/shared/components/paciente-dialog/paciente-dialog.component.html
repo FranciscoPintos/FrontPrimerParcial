@@ -1,0 +1,52 @@
+<h1 mat-dialog-title>Agregar Paciente</h1>
+<div mat-dialog-content class="mat-typography">
+  <p>Ingrese los datos</p>
+  <form [formGroup]="myForm">
+    <mat-form-field appearance="fill">
+      <mat-label>Nombre</mat-label>
+      <input matInput formControlName="nombre" ngDefaultControl />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Apellido</mat-label>
+      <input matInput formControlName="apellido" ngDefaultControl />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Email</mat-label>
+      <input matInput ngDefaultControl formControlName="email" />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Telefono</mat-label>
+      <input matInput ngDefaultControl formControlName="telefono" />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>ruc</mat-label>
+      <input matInput ngDefaultControl formControlName="ruc" />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>cedula</mat-label>
+      <input matInput ngDefaultControl formControlName="cedula" />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Tipo Persona</mat-label>
+      <input matInput ngDefaultControl formControlName="tipoPersona" />
+    </mat-form-field>
+
+    <mat-form-field style="width: 100%" appearance="fill">
+      <mat-label>Seleccionar una fecha final</mat-label>
+      <input
+        formControlName="fechaNacimiento"
+        matInput
+        [matDatepicker]="toDate"
+      />
+      <mat-hint>DD/MM/AAAA</mat-hint>
+      <mat-datepicker-toggle matSuffix [for]="toDate"></mat-datepicker-toggle>
+      <mat-datepicker #toDate></mat-datepicker>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancelar</button>
+  <button mat-button (click)="accept()" cdkFocusInitial>
+    {{ data ? "Modificar" : "Agregar" }}
+  </button>
+</div>

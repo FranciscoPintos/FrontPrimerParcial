@@ -23,7 +23,7 @@ import { MatCardModule } from "@angular/material/card";
 import { CrearModificarServicioComponent } from './features/crear-modificar-servicio/crear-modificar-servicio.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { MatNativeDateModule } from '@angular/material/core';
+import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { ServicioModule } from "./features/servicio/servicio.module";
 import { ReservaModule } from "./features/reserva/reserva.module";
@@ -36,6 +36,8 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { SharedModule } from './shared/shared.module';
 import { HeaderRequestInterceptor } from './shared/interceptors/header-request.interceptor';
+import { AdminServiciosModule } from './features/admin-servicios/admin-servicios.module';
+import { PacientesModule } from './features/pacientes/pacientes.module';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,7 @@ import { HeaderRequestInterceptor } from './shared/interceptors/header-request.i
     PaisComponent,
     PaisAgregarComponent,
     FiltroComponent,
-    CrearModificarServicioComponent,
+    CrearModificarServicioComponent
   ],
   imports: [
     BrowserModule,
@@ -59,14 +61,8 @@ import { HeaderRequestInterceptor } from './shared/interceptors/header-request.i
     ReservaModule,
     FichaClinicaModule,
     ServicioModule,
-    MatSidenavModule,
-    MatListModule,
-    MatIconModule,
-    ReactiveFormsModule,
-    MatSelectModule,
-    MatPaginatorModule,
-    MatTableModule,
-    MatSidenavModule,
+    AdminServiciosModule,
+    PacientesModule,
     SharedModule
 
 
@@ -74,6 +70,7 @@ import { HeaderRequestInterceptor } from './shared/interceptors/header-request.i
   providers: [ServicepaisService,
     { provide: HTTP_INTERCEPTORS, useClass: BaseUrlInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: HeaderRequestInterceptor, multi: true },
+    {provide: MAT_DATE_LOCALE, useValue: 'es-ES'}
   ],
   bootstrap: [AppComponent],
 })

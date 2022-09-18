@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { Usuario } from 'src/app/features/auth/interfaces/usuario';
@@ -12,30 +12,31 @@ import { AddDialogComponent } from '../add-dialog/add-dialog.component';
 @Component({
   selector: 'app-add-categoria-dialog',
   templateUrl: './add-categoria-dialog.component.html',
-  styleUrls: ['./add-categoria-dialog.component.css']
+  styleUrls: ['./add-categoria-dialog.component.css'],
 })
 export class AddCategoriaDialogComponent implements OnInit {
   myForm!: FormGroup;
 
-
-  constructor(private fb: FormBuilder, public dialogRef: MatDialogRef<AddCategoriaDialogComponent>,
-
-  ) { }
+  constructor(
+    private fb: FormBuilder,
+    public dialogRef: MatDialogRef<AddCategoriaDialogComponent>
+  ) {}
 
   ngOnInit(): void {
     this.myForm = this.fb.group({
-      id: [],
-      descripcion: [],
+      descripcion: ["",Validators.required],
     });
   }
 
   addCategoria() {
+    if (!this.myForm.valid) {
+      this.myForm.markAllAsTouched();
+      return;
+    }
     this.dialogRef.close(this.myForm.value);
   }
 
   onNoClick(): void {
     this.dialogRef.close();
   }
-
-
 }
