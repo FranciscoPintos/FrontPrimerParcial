@@ -38,6 +38,7 @@ import { SharedModule } from './shared/shared.module';
 import { HeaderRequestInterceptor } from './shared/interceptors/header-request.interceptor';
 import { AdminServiciosModule } from './features/admin-servicios/admin-servicios.module';
 import { PacientesModule } from './features/pacientes/pacientes.module';
+import {HorarioExeptionsModule} from "./features/horario-exeptions/horario-exeptions.module";
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { PacientesModule } from './features/pacientes/pacientes.module';
     ServicioModule,
     AdminServiciosModule,
     PacientesModule,
-    SharedModule
+    SharedModule,
+    HorarioExeptionsModule
 
 
   ],

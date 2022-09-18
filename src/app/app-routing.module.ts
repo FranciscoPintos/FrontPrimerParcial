@@ -13,6 +13,7 @@ import { AuthGuard } from './shared/guards/auth.guard';
 import { HomeComponent } from './shared/pages/home/home.component';
 import { ProductosComponent } from './features/admin-servicios/pages/productos/productos.component';
 import { PacientesPageComponent } from './features/pacientes/pages/pacientes-page/pacientes-page.component';
+import {HorarioExeptionComponent} from "./features/horario-exeptions/page/horario-exeption/horario-exeption.component";
 
 const routes: Routes = [
   {
@@ -74,6 +75,11 @@ const routes: Routes = [
     path: 'pacientes',
     canActivate: [AuthGuard],
     component: PacientesPageComponent,
+  },
+  {
+    path: 'horarioExeption',
+    canActivate: [AuthGuard],
+    component: HorarioExeptionComponent,
   },
 ];
 @NgModule({

@@ -1,42 +1,47 @@
 export const NavRouter = [
   {
-    icon: 'home',
+    icon: 'library_books',
     route: '/ficha_clinica',
     title: 'Fichas de Clinica',
   },
   {
-    icon: 'home',
+    icon: 'layers',
     route: '/listar_servicio',
     title: 'Servicios',
   },
   {
-    icon: 'home',
+    icon: 'category',
     route: '/categorias',
     title: 'Categorias',
   },
   {
-    icon: 'home',
+    icon: 'category',
     route: '/subcategorias',
     title: 'SubCategorias',
   },
   {
-    icon: 'home',
+    icon: 'local_offer',
     route: '/reserva',
     title: 'Reservas',
   },
   {
-    icon: 'home',
+    icon: 'local_printshop',
     route: '/reportes',
     title: 'Reportes',
   },
   {
-    icon: 'home',
+    icon: 'beenhere',
     route: '/productos',
     title: 'Productos',
   },
   {
-    icon: 'home',
+    icon: 'streetview',
     route: '/pacientes',
     title: 'Pacientes',
+  },
+  {
+    icon: 'flag',
+    route: '/horarioExeption',
+    title: 'Horario de excepción',
   },
 ];

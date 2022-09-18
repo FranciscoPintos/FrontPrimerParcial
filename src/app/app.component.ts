@@ -50,6 +50,11 @@ export class AppComponent {
       title: 'Reservas'
     },
     {
+      icon: 'home',
+      route: '/horarioExeption',
+      title: 'Horario de excepción'
+    },
+    {
       icon: 'logout',
       route: '/login',
       title: 'Cerrar Sesion'
